@@ -241,93 +241,308 @@
                     { front: "[Ch. 4 - FC] Formule de Karvonen (FC Réserve)", back: "% FCmax = (FC exercice - FCrep) / (FCmax - FCrep). Plus pertinente pour individualiser l'intensité car elle prend en compte la FC utile[cite: 12]." }
                 ],
                 qcms: [
-                    // CHAPITRE 1
+                    // CHAPITRE 1 : THERMORÉGULATION
                     {
-                        question: "[Ch. 1 - Énergie] Lors de la contraction musculaire, quelle enzyme située sur la tête de myosine permet l'hydrolyse de l'ATP ?",
+                        question: "[Ch. 1 - Thermorégulation] Lors d'un exercice, quelle proportion de l'énergie chimique est transformée en chaleur endogène (énergie thermique) ?",
+                        options: ["25%", "50%", "75%", "100%"],
+                        correct: 2,
+                        explanation: "Le principe de la thermodynamique stipule que 100% d'NRJ Chimique = 25% NRJ mécanique + 75% NRJ thermique (chaleur endogène)."
+                    },
+                    {
+                        question: "[Ch. 1 - Thermorégulation] Quel processus d'échange de chaleur représente environ 80% des pertes thermiques lors d'un exercice physique ?",
+                        options: ["Le rayonnement", "La conduction", "La convection", "L'évaporation"],
+                        correct: 3,
+                        explanation: "En exercice près de 80% des pertes de chaleurs sont dues à l’évaporation (sudation)."
+                    },
+                    {
+                        question: "[Ch. 1 - Thermorégulation] Combien de fois l'échange de chaleur par convection est-il plus important dans l'eau que dans l'air ?",
+                        options: ["5 fois", "10 fois", "25 fois", "50 fois"],
+                        correct: 2,
+                        explanation: "L’échange de chaleur est 25 fois plus important dans l’eau que dans l’air."
+                    },
+                    {
+                        question: "[Ch. 1 - Thermorégulation] Quel est l'effet principal d'une hygrométrie supérieure à 70% sur la performance sportive ?",
+                        options: ["Elle favorise l'évaporation", "Chaque palier de 5% d'humidité enlève 5% de performance", "Elle améliore la conduction nerveuse", "Elle réduit la fréquence cardiaque"],
+                        correct: 1,
+                        explanation: "Pour un air sec au-delà de 70% d’humidité dans l’air, pour chaque palier supplémentaire de 5%, il faut enlever 5% de performance."
+                    },
+                    {
+                        question: "[Ch. 1 - Thermorégulation] Quelle proportion d'énergie le frisson thermique convertit-il en chaleur ?",
+                        options: ["25%", "50%", "75%", "100%"],
+                        correct: 3,
+                        explanation: "Le frisson thermique convertit 100% d’énergie chimique en énergie thermique pour réchauffer l'organisme."
+                    },
+                    {
+                        question: "[Ch. 1 - Thermorégulation] Pourquoi la performance baisse-t-elle fortement dans un milieu chaud au niveau cardio-vasculaire ?",
+                        options: ["Le sang devient trop visqueux", "Le cœur ralentit par sécurité", "L'organisme privilégie la vasodilatation cutanée au détriment des muscles"],
+                        correct: 2,
+                        explanation: "Le système circulatoire donne la priorité à la thermorégulation, créant une vasodilatation cutanée au détriment des muscles actifs."
+                    },
+                    {
+                        question: "[Ch. 1 - Thermorégulation] Si la température cutanée de l'athlète baisse (froid), l'organisme met en place une thermogenèse sans frisson qui est :",
+                        options: ["Une hyperventilation", "Une vasodilatation", "Une vasoconstriction des vaisseaux sanguins"],
+                        correct: 2,
+                        explanation: "La thermogenèse sans frisson correspond à la vasoconstriction des vaisseaux sanguins diminuant le flux sanguin cutané."
+                    },
+                    {
+                        question: "[Ch. 1 - Thermorégulation] Quel organe est responsable du contrôle central de la température corporelle (le thermostat) ?",
+                        options: ["Le cœur", "Le thalamus", "L'hypothalamus"],
+                        correct: 2,
+                        explanation: "Pour réguler l’augmentation de chaleur, le corps utilise l’hypothalamus pour jouer un rôle de thermostat (37°)."
+                    },
+
+                    // CHAPITRE 2 : ÉNERGIE ET CONTRACTION MUSCULAIRE
+                    {
+                        question: "[Ch. 2 - Énergie] Quelle est la résistance du tendon par rapport au muscle ?",
+                        options: ["Égale", "2 fois supérieure", "4 fois supérieure"],
+                        correct: 2,
+                        explanation: "La résistance du tendon est bien supérieure au muscle (avec le tendon 4x supérieur au muscle)."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] Comment nomme-t-on la membrane qui entoure un faisceau musculaire ?",
+                        options: ["Épimysium", "Endomysium", "Périmysium"],
+                        correct: 2,
+                        explanation: "Le périmysium correspond à la membrane qui entoure un faisceau musculaire."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] Quelles sont les caractéristiques des fibres de Type I (Lentes) ?",
+                        options: ["Métabolisme anaérobie, forte puissance, grande taille", "Métabolisme aérobie, riches en mitochondries, innervées par de petits motoneurones", "Pauvres en mitochondries, forte fatigabilité"],
+                        correct: 1,
+                        explanation: "Les fibres lentes (Type I) sont riches en glycogène et en enzymes du métabolisme aérobie (mitochondries ++)."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] Dans le sarcomère, quel élément masque initialement le site actif de l'actine ?",
+                        options: ["La myosine", "Le Calcium", "La troponine"],
+                        correct: 2,
+                        explanation: "Le site actif de réception sur l'actine est masqué par la troponine, jusqu'à ce que le Ca2+ l'active."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] Lors de la contraction musculaire, quelle enzyme située sur la tête de myosine permet l'hydrolyse de l'ATP ?",
                         options: ["La créatine phosphokinase", "La myosine ATPase", "La myokinase", "L'acétylcholine"],
                         correct: 1,
-                        explanation: "La transformation d’énergie chimique en mécanique se déroule sur la tête de myosine car elle possède l’enzyme myosine ATPase permettant l’hydrolyse de l’ATP[cite: 12]."
+                        explanation: "La transformation d’énergie chimique en mécanique se déroule sur la tête de myosine car elle possède l’enzyme myosine ATPase permettant l’hydrolyse de l’ATP."
                     },
                     {
-                        question: "[Ch. 1 - Énergie] Quelle est la principale caractéristique d'un effort Anaérobie Alactique en termes de puissance ?",
+                        question: "[Ch. 2 - Énergie] Quelle est la principale caractéristique d'un effort Anaérobie Alactique en termes de puissance ?",
                         options: ["Il permet un travail en puissance de 40 à 45 secondes", "Il permet un travail en puissance de 3 à 5 secondes", "Il produit beaucoup de lactate"],
                         correct: 1,
-                        explanation: "La phosphorylation immédiate Anaérobie Alactique permet un travail en puissance de 3 à 5s, et en capacité inférieur à 20/30s[cite: 12]."
+                        explanation: "La phosphorylation immédiate Anaérobie Alactique permet un travail en puissance de 3 à 5s, et en capacité inférieur à 20/30s."
                     },
                     {
-                        question: "[Ch. 1 - Énergie] Quel est le rendement de la glycolyse anaérobie (dégradation d'une mole de glycogène) ?",
+                        question: "[Ch. 2 - Énergie] Quel est le rendement de la glycolyse anaérobie (dégradation d'une mole de glycogène) ?",
                         options: ["38 ATP et de l'eau", "3 ATP et 2 moles de lactate", "130 ATP", "1 ATP et libération de CO2"],
                         correct: 1,
-                        explanation: "Une mole de glycogène permet la synthèse de 3 ATP et s’accompagne de la formation de 2 moles de lactate[cite: 12]."
+                        explanation: "Une mole de glycogène permet la synthèse de 3 ATP et s’accompagne de la formation de 2 moles de lactate."
                     },
                     {
-                        question: "[Ch. 1 - Énergie] En récupération passive après un effort, combien de temps faut-il pour éliminer 100% du lactate sanguin ?",
+                        question: "[Ch. 2 - Énergie] Quel est le devenir du lactate ? À quelle molécule s'associent les ions H+ ?",
+                        options: ["Au Carbone", "Au transporteur NAD", "À l'Oxygène de l'eau"],
+                        correct: 1,
+                        explanation: "L'acide lactique est transformé en Lactate par des transporteurs (Navette NAD) qui prennent en charge les H+."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] Combien d'ATP sont synthétisés lors de la lipolyse aérobie d'un triglycéride ?",
+                        options: ["3 ATP", "38 ATP", "130 ATP"],
+                        correct: 2,
+                        explanation: "Dans le système aérobie, la dégradation des triglycérides produit 130 ATP."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] En combien de temps l'épuisement total des réserves en glycogène est-il atteint à 80% de VMA ?",
+                        options: ["30 minutes", "1 heure", "2 heures"],
+                        correct: 1,
+                        explanation: "L’épuisement total des réserves en glycogène est réalisé en 1h de travail musculaire à 80% de VMA."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] Combien de temps faut-il pour une reconstitution totale (100%) des réserves de glycogène ?",
+                        options: ["5 heures", "24 heures", "46 heures"],
+                        correct: 2,
+                        explanation: "La reconstitution totale (concentration initiale) en glycogène est complète en 46h."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] À quelle concentration de lactate sanguin situe-t-on classiquement le Seuil Anaérobie (SL2) ?",
+                        options: ["2 mmol/L", "4 mmol/L", "8 mmol/L"],
+                        correct: 1,
+                        explanation: "Le seuil Anaérobie ou Seuil Lactique 2 (SL2) est ciblé à 4 mmol/L de sang."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] Le Seuil Ventilatoire 1 (SV1) correspond à un ratio de la ventilation où :",
+                        options: ["Le CO2 devient dominant", "L'O2 reste dominant (VE/VO2)", "L'O2 et le CO2 s'annulent"],
+                        correct: 1,
+                        explanation: "Le seuil ventilatoire 1 (SV1) correspond à un ratio où l’O2 reste dominant (VE/VO2)."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] Qu'est-ce qu'une contracture (ou élongation) musculaire ?",
+                        options: ["Une rupture totale du tendon", "Un dépassement des limites physiologiques sans déchirure majeure", "Un hématome intramusculaire"],
+                        correct: 1,
+                        explanation: "L'élongation (contracture) est le dépassement des limites physiologiques des fibres musculaires sans déchirure anatomique majeure."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] Qu'est-ce qu'une contusion musculaire (béquille) ?",
+                        options: ["Déchirure d'un faisceau", "Lésion traumatique directe provoquant un écrasement des fibres et un hématome", "Désinsertion du tendon"],
+                        correct: 1,
+                        explanation: "La myosite / contusion (béquille) est une lésion traumatique directe provoquant un écrasement des fibres musculaires et un hématome."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] En récupération passive après un effort, combien de temps faut-il pour éliminer 100% du lactate sanguin ?",
                         options: ["20 minutes", "1 heure", "1h30", "46 heures"],
                         correct: 2,
-                        explanation: "En récupération passive, 100% du lactate est éliminé en 1h30 (contre 20 minutes en récupération active)[cite: 12]."
+                        explanation: "En récupération passive, 100% du lactate est éliminé en 1h30 (contre 20 minutes en récupération active)."
                     },
                     {
-                        question: "[Ch. 1 - Énergie] Selon votre cours, à quelle concentration de lactate sanguin situe-t-on le Seuil Lactique 2 (SL2) ?",
-                        options: ["2 mmol/L", "3 mmol/L", "4 mmol/L", "8 mmol/L"],
-                        correct: 2,
-                        explanation: "Le seuil Anaérobie ou Seuil Lactique 2 (SL2) est ciblé à 4 mmol/L de sang[cite: 12]."
+                        question: "[Ch. 2 - Énergie] Quel type de récupération permet d'éliminer 50% du lactate en seulement 6 minutes ?",
+                        options: ["Récupération passive", "Récupération active", "Massage profond"],
+                        correct: 1,
+                        explanation: "En récupération active, 50% du lactate est éliminé en 6min."
                     },
-                    // CHAPITRE 2
                     {
-                        question: "[Ch. 2 - Le Cœur] Quel est le trajet du sang veineux vicié (riche en CO2) à son arrivée dans le cœur ?",
+                        question: "[Ch. 2 - Énergie] Combien d'énergie libère 1 gramme de lactate ?",
+                        options: ["0.26 kcal", "1 kcal", "23.5 kcal"],
+                        correct: 0,
+                        explanation: "1 mole de lactate = 23,5 kcal, et 1g de lactate = 0,26 kcal."
+                    },
+                    {
+                        question: "[Ch. 2 - Énergie] Quel est le but d'un entraînement ciblant la Puissance Anaérobie Lactique (PAL) ?",
+                        options: ["Produire le moins d'acide possible", "Produire le plus d'acide métabolique possible pour générer un max d'énergie", "Développer le système aérobie exclusivement"],
+                        correct: 1,
+                        explanation: "L'entraînement vise à produire le plus possible d’acide métabolique pour produire le plus d’énergie possible (augmenter sa PAL)."
+                    },
+
+                    // CHAPITRE 3 : LE CŒUR
+                    {
+                        question: "[Ch. 3 - Le Cœur] Quel est le trajet du sang veineux vicié (riche en CO2) à son arrivée dans le cœur ?",
                         options: ["Veines pulmonaires → Oreillette Gauche → Ventricule Gauche", "Veines caves → Oreillette Droite → Ventricule Droit → Artère pulmonaire", "Artère aorte → Ventricule Droit → Poumons"],
                         correct: 1,
-                        explanation: "Le sang vicié arrive par les veines caves dans l'OD, est éjecté dans le VD (valves tricuspides), puis expulsé dans l'artère pulmonaire[cite: 12]."
+                        explanation: "Le sang vicié arrive par les veines caves dans l'OD, est éjecté dans le VD (valves tricuspides), puis expulsé dans l'artère pulmonaire."
                     },
                     {
-                        question: "[Ch. 2 - Le Cœur] Quel élément agit comme le pacemaker physiologique du cœur ?",
+                        question: "[Ch. 3 - Le Cœur] Par quelle valve le sang passe-t-il de l'oreillette droite au ventricule droit ?",
+                        options: ["Valve aortique", "Valve mitrale", "Valve tricuspide"],
+                        correct: 2,
+                        explanation: "Le cœur droit a deux cavités reliées par l’orifice tricuspidien géré par les valves tricuspides."
+                    },
+                    {
+                        question: "[Ch. 3 - Le Cœur] Quel élément agit comme le pacemaker physiologique du cœur ?",
                         options: ["Le nœud auriculo-ventriculaire (NAV)", "Le réseau de Purkinje", "Le nœud sinusal", "Le faisceau de His"],
                         correct: 2,
-                        explanation: "Le siège de ce courant électrique est situé sur l'oreillette droite : c'est le Nœud Sinusal, pacemaker physiologique[cite: 12]."
+                        explanation: "Le siège de ce courant électrique est situé sur l'oreillette droite : c'est le Nœud Sinusal, pacemaker physiologique."
                     },
                     {
-                        question: "[Ch. 2 - Le Cœur] Sur le tracé ECG, à quoi correspond l'onde P ?",
+                        question: "[Ch. 3 - Le Cœur] Sur le tracé ECG, à quoi correspond l'onde P ?",
                         options: ["Au temps de repolarisation des ventricules (diastole)", "Au temps de la dépolarisation, soit la contraction des oreillettes (systole)", "Au temps de repolarisation du ventricule droit et gauche"],
                         correct: 1,
-                        explanation: "L'onde P correspond au temps de la dépolarisation = contraction de l’oreillette droite et gauche (systole)[cite: 12]."
+                        explanation: "L'onde P correspond au temps de la dépolarisation = contraction de l’oreillette droite et gauche (systole)."
                     },
-                    // CHAPITRE 3
                     {
-                        question: "[Ch. 3 - SNA] Quelle est l'action principale du système Parasympathique sur la fréquence cardiaque ?",
+                        question: "[Ch. 3 - Le Cœur] Sur un ECG, que représente le complexe QRS ?",
+                        options: ["Dépolarisation des oreillettes", "Dépolarisation des ventricules", "Repolarisation des ventricules"],
+                        correct: 1,
+                        explanation: "L'onde QRS correspond au temps de dépolarisation du ventricule droit et gauche (systole ventriculaire)."
+                    },
+                    {
+                        question: "[Ch. 3 - Le Cœur] Qu'indique l'onde T sur un tracé ECG ?",
+                        options: ["La contraction des oreillettes", "La dépolarisation des ventricules", "La repolarisation des ventricules"],
+                        correct: 2,
+                        explanation: "L'onde T correspond au temps de repolarisation des ventricules (diastole)."
+                    },
+                    {
+                        question: "[Ch. 3 - Le Cœur] Que se passe-t-il pendant la repolarisation cardiaque ?",
+                        options: ["Les ventricules se contractent", "Le cœur retourne à son niveau électrique initial (diastole)", "Les valves se ferment toutes en même temps"],
+                        correct: 1,
+                        explanation: "Le temps de repolarisation correspond au retour au niveau initial (diastole) des oreillettes ou ventricules."
+                    },
+
+                    // CHAPITRE 4 : LE SYSTÈME NERVEUX AUTONOME
+                    {
+                        question: "[Ch. 4 - SNA] Quelle est l'action principale du système Parasympathique sur la fréquence cardiaque ?",
                         options: ["Il a un rôle ergotrope, il l'accélère", "Il a un rôle trophotrope, il la diminue (effet freinateur)", "Il n'a aucun effet sur la FC"],
                         correct: 1,
-                        explanation: "Le système Parasympathique est dit TROPHOTROPE. Il a un rôle de modérateur et agit sur la diminution du rythme cardiaque[cite: 12]."
+                        explanation: "Le système Parasympathique est dit TROPHOTROPE. Il a un rôle de modérateur et agit sur la diminution du rythme cardiaque."
                     },
                     {
-                        question: "[Ch. 3 - SNA] Quel neurotransmetteur est spécifiquement utilisé par le système Sympathique ?",
+                        question: "[Ch. 4 - SNA] Quel neurotransmetteur est spécifiquement utilisé par le système Sympathique ?",
                         options: ["L'acétylcholine", "La dopamine", "Les catécholamines (noradrénaline et adrénaline)"],
                         correct: 2,
-                        explanation: "Le système Sympathique agit grâce à l’activation des catécholamines : noradrénaline et adrénaline[cite: 12]."
+                        explanation: "Le système Sympathique agit grâce à l’activation des catécholamines : noradrénaline et adrénaline."
                     },
                     {
-                        question: "[Ch. 3 - SNA] Que mesure exactement la Variabilité de la Fréquence Cardiaque (VFC) ?",
+                        question: "[Ch. 4 - SNA] Que provoque le système sympathique sur les vaisseaux sanguins ?",
+                        options: ["Une vasodilatation", "Une vasoconstriction", "Aucun effet"],
+                        correct: 1,
+                        explanation: "Le système sympathique accélère le rythme cardiaque conjointement à une vasoconstriction de l’appareil sanguin."
+                    },
+                    {
+                        question: "[Ch. 4 - SNA] Que mesure exactement la Variabilité de la Fréquence Cardiaque (VFC) ?",
                         options: ["La différence entre la FCmax et la FC de repos", "La variation des intervalles R-R séparant deux contractions cardiaques", "Le volume de sang éjecté par minute"],
                         correct: 1,
-                        explanation: "La VFC est le fruit des variations des intervalles entre chaque R-R, reflétant l'activité du système sympatho-vagal[cite: 12]."
+                        explanation: "La VFC est le fruit des variations des intervalles entre chaque R-R, reflétant l'activité du système sympatho-vagal."
                     },
-                    // CHAPITRE 4
                     {
-                        question: "[Ch. 4 - FC] Qu'est-ce que la 'dérive cardiaque' observée lors d'un effort de longue durée à intensité constante ?",
+                        question: "[Ch. 4 - SNA] Comment évolue le métabolisme global sous l'influence du système parasympathique ?",
+                        options: ["Il augmente", "Il diminue", "Il se stabilise à son maximum"],
+                        correct: 1,
+                        explanation: "Le système parasympathique agit sur la diminution du métabolisme et de la fréquence respiratoire."
+                    },
+                    {
+                        question: "[Ch. 4 - SNA] À quelle vitesse le système nerveux autonome réagit-il face à une perturbation ?",
+                        options: ["En quelques heures", "En quelques minutes", "De l'ordre de la milliseconde"],
+                        correct: 2,
+                        explanation: "La voie nerveuse du SNA donne des réponses très rapides voire immédiates (de l’ordre de la milliseconde)."
+                    },
+
+                    // CHAPITRE 5 : FRÉQUENCE CARDIAQUE ET ALTITUDE
+                    {
+                        question: "[Ch. 5 - FC] Qu'est-ce que la 'dérive cardiaque' observée lors d'un effort de longue durée à intensité constante ?",
                         options: ["Une chute brutale de la FC due à l'épuisement du glycogène", "Une variabilité ascendante de la FC due à la thermorégulation et la sudation", "Une arythmie due au nœud sinusal"],
                         correct: 1,
-                        explanation: "Durant un effort prolongé à intensité constante, la dérive sanguine vers la peau (thermorégulation) provoque l'augmentation de la FC, appelée dérive cardiaque[cite: 12]."
+                        explanation: "Durant un effort prolongé à intensité constante, la dérive sanguine vers la peau (thermorégulation) provoque l'augmentation de la FC, appelée dérive cardiaque."
                     },
                     {
-                        question: "[Ch. 4 - FC] Comment évolue la Fréquence Cardiaque de repos (FCrep) en hypoxie aiguë (arrivée brutale en altitude à 2500m) ?",
-                        options: ["Elle diminue progressivement", "Elle reste stable", "Elle augmente de façon proportionnelle au degré d'hypoxie"],
-                        correct: 2,
-                        explanation: "En hypoxie aiguë (quelques jours), la fréquence cardiaque de repos augmente de façon proportionnelle au degré d’hypoxie[cite: 12]."
+                        question: "[Ch. 5 - FC] Selon Gellish (2007), quelle est la formule de la FCmax théorique ?",
+                        options: ["220 - âge", "206,9 - (0.67 x âge)", "FCres + FCrep"],
+                        correct: 1,
+                        explanation: "La formule de Gellish et Coll (2007) est : FCmax Théorique = 206,9 - (0.67 x âge)."
                     },
                     {
-                        question: "[Ch. 4 - FC] Un athlète a une FCmax de 200 et une FCrep de 50. Quelle sera sa fréquence cardiaque cible pour un travail à 80% selon la formule de Karvonen ?",
+                        question: "[Ch. 5 - FC] Laquelle de ces formules correspond au pourcentage de FCmax de réserve selon Karvonen ?",
+                        options: ["(FCexe - FCrep) / (FCmax - FCrep)", "FCexe / FCmax", "(FCmax - FCrep) x 0.8"],
+                        correct: 0,
+                        explanation: "Karvonen mesure le pourcentage de FCmax selon : % FCmax = (Fcexe - FCrep) / (FCmax - FCrep)."
+                    },
+                    {
+                        question: "[Ch. 5 - FC] Un athlète a une FCmax de 200 et une FCrep de 50. Quelle sera sa fréquence cardiaque cible pour un travail à 80% selon la formule de Karvonen ?",
                         options: ["160 bpm", "170 bpm", "180 bpm"],
                         correct: 1,
-                        explanation: "Calcul de Karvonen : FCcible = FCrep + 0,8 x (FCmax - FCrep) = 50 + 0,8 x (200 - 50) = 50 + 120 = 170 bpm[cite: 12]."
+                        explanation: "Calcul de Karvonen : FCcible = FCrep + 0,8 x (FCmax - FCrep) = 50 + 0,8 x (200 - 50) = 50 + 120 = 170 bpm."
+                    },
+                    {
+                        question: "[Ch. 5 - FC] Un athlète a une FCrep de 60 et une FCmax de 200. À quelle FC correspond un effort à 80% selon la formule de Karvonen ?",
+                        options: ["160 bpm", "172 bpm", "180 bpm"],
+                        correct: 1,
+                        explanation: "Calcul: 60 + 0,8 x (200 - 60) = 60 + (0.8 x 140) = 60 + 112 = 172 bpm."
+                    },
+                    {
+                        question: "[Ch. 5 - FC] Comment évolue la Fréquence Cardiaque de repos (FCrep) en hypoxie aiguë (arrivée brutale en altitude à 2500m) ?",
+                        options: ["Elle diminue progressivement", "Elle reste stable", "Elle augmente de façon proportionnelle au degré d'hypoxie"],
+                        correct: 2,
+                        explanation: "En hypoxie aiguë (quelques jours), la fréquence cardiaque de repos augmente de façon proportionnelle au degré d’hypoxie."
+                    },
+                    {
+                        question: "[Ch. 5 - FC] Comment varie la fréquence cardiaque de repos avec un surentraînement prononcé ?",
+                        options: ["Elle diminue", "Elle augmente massivement", "Elle reste inchangée"],
+                        correct: 0,
+                        explanation: "L’analyse montre que la FCrep diminue lors d’un sur-entraînement (potentiellement lié à un surmenage du parasympathique)."
+                    },
+                    {
+                        question: "[Ch. 5 - FC] La méthode d'entraînement LHTL consiste à :",
+                        options: ["Vivre à 2500m et s'entraîner à 2500m", "Vivre à 2500m et s'entraîner à moins de 1500m", "Vivre en plaine et s'entraîner à 2500m"],
+                        correct: 1,
+                        explanation: "LHTL = S’entraîner bas et vivre haut. On vit entre 2000m et 3000m et on s'entraîne à une altitude inférieure à 1500m."
+                    },
+                    {
+                        question: "[Ch. 5 - FC] Quelle méthode d'entraînement en altitude s'est avérée globalement inefficace selon les études récentes ?",
+                        options: ["LHTH", "LHTL", "IHE (Exposition intermittente hypoxique au repos)"],
+                        correct: 2,
+                        explanation: "Les études récentes ont montré l’inefficacité de la méthode d’exposition intermittente hypoxique (IHE) sur l'adaptation physiologique."
                     }
                 ],
                 schemas: []
