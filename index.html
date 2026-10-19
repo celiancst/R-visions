@@ -179,7 +179,7 @@
         }
 
         // ==========================================
-        // BASE DE DONNÉES STAPS (65 FLASHCARDS)
+        // BASE DE DONNÉES STAPS
         // ==========================================
         const appData = {
             anatomie: {
@@ -189,27 +189,7 @@
                     { front: "Contre-nutation", back: "Bascule du sacrum où le promontoire sacré s'élève et la pointe du coccyx part en bas et en avant." },
                     { front: "Flexion de hanche", back: "Mouvement dans le plan sagittal qui réduit l'angle entre la cuisse et le tronc." },
                     { front: "Rotation Médiale (RM)", back: "Mouvement dans le plan horizontal où la face antérieure du membre regarde vers l'intérieur." },
-                    { front: "Voûte plantaire", back: "La structure arquée sous le pied qui agit comme un amortisseur." },
-                    { front: "Os Coxal", back: "Os plat et pair du bassin, formé par la soudure de l'ilion, l'ischion et le pubis." },
-                    { front: "Fémur", back: "Os de la cuisse, c'est l'os le plus long, le plus lourd et le plus résistant du corps humain." },
-                    { front: "Patella (Rotule)", back: "Os sésamoïde volumineux situé à la partie antérieure du genou." },
-                    { front: "Tibia", back: "Os long, volumineux et médial de la jambe, qui supporte le poids du corps." },
-                    { front: "Fibula (Péroné)", back: "Os long, fin et latéral de la jambe, servant principalement d'insertion musculaire." },
-                    { front: "Talus (Astragale)", back: "Os supérieur du tarse qui s'articule avec le tibia et la fibula pour former la cheville." },
-                    { front: "Calcanéus", back: "Os du talon, c'est le plus volumineux des os du tarse." },
-                    { front: "Quadriceps fémoral", back: "Groupe musculaire antérieur de la cuisse (4 chefs) : principal extenseur du genou." },
-                    { front: "Ischio-jambiers", back: "Groupe musculaire postérieur de la cuisse (3 muscles) : fléchisseurs du genou et extenseurs de la hanche." },
-                    { front: "Triceps sural", back: "Muscles postérieurs du mollet (gastrocnémiens + soléaire) : principal fléchisseur plantaire de la cheville." },
-                    { front: "Grand glutéal (Fessier)", back: "Le plus puissant muscle extenseur et rotateur latéral de la hanche." },
-                    { front: "Moyen glutéal", back: "Principal muscle abducteur de la hanche, indispensable à la stabilisation du bassin à la marche." },
-                    { front: "Sartorius", back: "Muscle le plus long du corps, fléchisseur, abducteur et rotateur latéral de la hanche (muscle du tailleur)." },
-                    { front: "Gracile", back: "Muscle long et fin logé à la face médiale de la cuisse, appartient aux adducteurs." },
-                    { front: "Ilio-psoas", back: "Puissant fléchisseur de la hanche, s'insérant sur le petit trochanter du fémur." },
-                    { front: "Tenseur du Fascia Lata (TFL)", back: "Muscle abducteur et rotateur médial de la hanche, stabilisateur latéral du genou." },
-                    { front: "Articulation Coxo-fémorale", back: "Articulation de la hanche, de type énarthrose (sphéroïde), très stable." },
-                    { front: "Articulation Fémoro-tibiale", back: "Articulation principale du genou, de type bicondylaire." },
-                    { front: "Articulation Talocrurale", back: "Articulation de la cheville, de type ginglyme (trochléenne)." },
-                    { front: "Ligaments Croisés", back: "Ligaments du genou (LCA et LCP) assurant la stabilité antéro-postérieure de l'articulation." }
+                    { front: "Voûte plantaire", back: "La structure arquée sous le pied qui agit comme un amortisseur." }
                 ],
                 qcms: [
                     {
@@ -217,12 +197,6 @@
                         options: ["Plan frontal, axe antéropostérieur.", "Plan sagittal, axe transversal.", "Plan transversal, axe longitudinal."],
                         correct: 1,
                         explanation: "Le mouvement de Flexion / Extension s'effectue toujours dans le plan sagittal (la vue de profil) et s'articule autour d'un axe transversal."
-                    },
-                    {
-                        question: "Lequel de ces muscles est un moteur principal de la flexion de hanche ?",
-                        options: ["Le grand glutéal (grand fessier).", "Le droit du fémur.", "Le piriforme."],
-                        correct: 1,
-                        explanation: "Le muscle droit du fémur est l'un des moteurs principaux de la flexion de hanche, avec l'ilio-psoas, le sartorius et le TFL."
                     }
                 ],
                 schemas: []
@@ -230,59 +204,130 @@
             physiologie: {
                 nom: "Physiologie", icon: "fa-heartbeat", couleur: "text-pink-500",
                 flashcards: [
-                    { front: "Physiologie", back: "Étude du fonctionnement normal d’un organisme vivant et de ses processus chimiques et physiques." },
-                    { front: "Homéostasie", back: "Capacité d’un organisme à maintenir son environnement interne stable face à la variabilité extérieure." },
-                    { front: "Principe de la thermodynamique", back: "100% Énergie Chimique = 25% Énergie mécanique + 75% Énergie thermique (chaleur endogène)." },
-                    { front: "Gradient thermique", back: "Échange de chaleur réalisé selon une différence de température allant toujours du plus chaud au moins chaud." },
-                    { front: "Rayonnement", back: "Perte de chaleur sans contact direct (ex: infrarouge). Représente 60% de la perte de chaleur au repos à 21°C." },
-                    { front: "Convection", back: "Échange de chaleur avec un fluide (air, eau). L’échange est 25 fois plus important dans l’eau que dans l’air." },
-                    { front: "Évaporation", back: "Passage de l'état liquide à gazeux (sudation). Représente 80% des pertes de chaleur à l'exercice." },
-                    { front: "Déshydratation et Performance", back: "Une perte de 2% d'eau entraîne une perte de 20% de performance sur un exercice de plus de 30 min." },
-                    { front: "Frisson thermique", back: "Contractions musculaires involontaires convertissant 100% de l'énergie chimique en chaleur." },
-                    { front: "LHTH (Live High Train High)", back: "Vivre et s'entraîner en altitude (1500m-2500m) pendant 2 à 4 semaines." },
-                    { front: "LHTL (Live High Train Low)", back: "Vivre à 2500m (pour l'EPO) et s'entraîner à moins de 1500m pour conserver l'intensité." },
-                    { front: "Tendon", back: "Structure reliant l'os au muscle, d'une résistance 4 fois supérieure à celle du muscle." },
-                    { front: "Épimysium", back: "Membrane entourant le muscle entier, dans le prolongement du tissu tendineux." },
-                    { front: "Périmysium", back: "Membrane qui entoure spécifiquement un faisceau musculaire." },
-                    { front: "Endomysium", back: "Membrane qui entoure individuellement la fibre musculaire (cellule)." },
-                    { front: "Unité Motrice", back: "Un nerf moteur (motoneurone) et l'ensemble des fibres musculaires qu'il innerve." },
-                    { front: "Fibres Lentes (Type I)", back: "Fibres aérobies, rouges, riches en mitochondries et glycogène, innervées par de petits motoneurones." },
-                    { front: "Fibres Rapides (Type II)", back: "Fibres anaérobies, pour les sports de force, riches en composés phosphate, innervées par de gros motoneurones." },
-                    { front: "Rôle du Calcium (Ca2+)", back: "Il se fixe sur la troponine pour démasquer le site actif de l'actine et permettre l'accroche de la myosine." },
-                    { front: "Rôles de l'ATP", back: "1. Libérer la myosine. 2. Déplacer la myosine. 3. Fournir l'énergie (hydrolyse) pour tracter l'actine." },
-                    { front: "Anaérobie Alactique (Durée)", back: "Travail en puissance de 3 à 5s, travail en capacité inférieur à 20-30s. Utilise la phosphocréatine." },
-                    { front: "Anaérobie Lactique (Rendement)", back: "Dégradation d'1 mole de glycogène = 3 ATP + 2 moles de lactate." },
-                    { front: "Filière Aérobie (Rendement ATP)", back: "Glucose = 38 ATP. Lipides > 45 ATP. Triglycérides = 130 ATP." },
-                    { front: "Épuisement du glycogène", back: "Épuisement total en 1h à 80% de VMA, ou 1h30 à 2h à 75% de VMA." },
-                    { front: "Reconstitution du glycogène", back: "50% reconstitués dès la 5ème heure. Reconstitution totale complète en 46h." },
-                    { front: "Seuil Lactique 1 (SL1)", back: "Seuil aérobie ciblé à 2 mmol/L de sang." },
-                    { front: "Seuil Lactique 2 (SL2)", back: "Seuil anaérobie ciblé à 4 mmol/L de sang. Accumulation d'acide métabolique." },
-                    { front: "Cœur Droit", back: "Gère la petite circulation (pulmonaire). Reçoit le sang vicié par les veines caves et l'éjecte via l'artère pulmonaire." },
-                    { front: "Cœur Gauche", back: "Gère la grande circulation (systémique). Reçoit le sang oxygéné et l'éjecte via l'aorte." },
-                    { front: "Nœud Sinusal", back: "Le pacemaker physiologique du cœur, situé sur l'oreillette droite." },
-                    { front: "Onde P (ECG)", back: "Correspond à la dépolarisation et la contraction (systole) des oreillettes." },
-                    { front: "Complexe QRS (ECG)", back: "Correspond à la dépolarisation des ventricules via le réseau de Purkinje." },
-                    { front: "Onde T (ECG)", back: "Correspond à la repolarisation des ventricules (diastole)." },
-                    { front: "VFC (Variabilité FC)", back: "Variation des intervalles R-R, reflet de l'activité antagoniste du système sympatho-vagal." },
-                    { front: "Système Parasympathique", back: "Système Trophotrope : modérateur, freinateur, diminue la FC, utilise l'acétylcholine." },
-                    { front: "Système Sympathique", back: "Système Ergotrope : accélérateur, augmente la FC, prépare à l'action, utilise les catécholamines." },
-                    { front: "Dérive cardiaque", back: "Augmentation de la FC à intensité constante due à la thermorégulation (vasodilatation cutanée)." },
-                    { front: "FC Max Théorique (Astrand)", back: "Formule théorique : FCmax T = 220 - âge du sujet." },
-                    { front: "FC Max Théorique (Gellish)", back: "Formule théorique révisée : FCmax = 206,9 - (0.67 x âge)." },
-                    { front: "Formule de Karvonen", back: "% FCmax = (FC exercice - FCrepos) / (FCmax - FCrepos)." }
+                    // CHAPITRE 1
+                    { front: "[Ch. 1 - Énergie] L'Unité Motrice", back: "C'est le nerf moteur (motoneurone) et l'ensemble des fibres musculaires qu'il innerve (ex: 3000 fibres/motoneurone)[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Rôle du Calcium (Ca2+)", back: "Il entre grâce à l'influx nerveux et démasque le site actif de réception sur l'actine (masqué par la troponine) pour permettre l'accroche de la myosine[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Rôles de l'ATP", back: "1. Libérer la tête de myosine. 2. Déplacer la tête de myosine. 3. Fournir l'énergie (hydrolyse) pour faire basculer la myosine et tracter l'actine[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Anaérobie Alactique (Durée)", back: "Travail en puissance de 3 à 5s. Travail en capacité inférieur à 20/30s. Utilise la phosphorylcréatine[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Acide Lactique", back: "L'acide lactique « n’existe pas » réellement dans le muscle, c'est une congestion en Acide Métabolique (Pyruvate + H+ qui donne du Lactate)[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Rendement de la Glycolyse (Anaérobie Lactique)", back: "Une mole de glycogène permet la synthèse de 3 ATP et s’accompagne de la formation de 2 moles de lactate[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Élimination du Lactate (Récupération Active)", back: "50% en 6 min, 75% en 12 min, 100% en 20 min[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Élimination du Lactate (Récupération Passive)", back: "50% en 25 min, 75% en 50 min, 100% en 1h30[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Rendement Aérobie", back: "Glucose = 38 ATP. Lipides = >45 ATP. Triglycérides = 130 ATP[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Épuisement du Glycogène", back: "Épuisement total en 1h à 80% de VMA, ou en 1h30 à 2h à 75% de VMA. Reconstitution totale en 46h[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Seuil Lactique 1 (SL1)", back: "Le système aérobie ne produit pas de lactate entravant son système. Ciblé à 2 mmol/L de sang[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Seuil Lactique 2 (SL2)", back: "Le système aérobie n’arrive plus à convertir la lactatémie en ATP (accumulation). Ciblé à > 4 mmol/L de sang[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] Seuils Ventilatoires (SV1 et SV2)", back: "SV1 : l'O2 reste dominant (VE/VO2). SV2 : le CO2 devient dominant (VE/VCO2)[cite: 12]." },
+                    
+                    // CHAPITRE 2
+                    { front: "[Ch. 2 - Le Cœur] Rôle du Cœur Droit", back: "Gère la petite circulation (pulmonaire). Reçoit le sang veineux vicié (riche en CO2) par les veines caves et l'éjecte dans l'artère pulmonaire[cite: 12]." },
+                    { front: "[Ch. 2 - Le Cœur] Valves du Cœur Droit", back: "Valves tricuspides (entre oreillette et ventricule droits) et valve pulmonaire[cite: 12]." },
+                    { front: "[Ch. 2 - Le Cœur] Rôle du Cœur Gauche", back: "Gère la grande circulation (systémique). Reçoit le sang oxygéné par les 4 veines pulmonaires et l'expulse via l'aorte[cite: 12]." },
+                    { front: "[Ch. 2 - Le Cœur] Nœud Sinusal", back: "Situé sur l'oreillette droite, c'est le pace maker physiologique du cœur[cite: 12]." },
+                    { front: "[Ch. 2 - Le Cœur] Onde P (ECG)", back: "Correspond au temps de la dépolarisation, c'est-à-dire la contraction (systole) de l’oreillette droite et gauche[cite: 12]." },
+                    { front: "[Ch. 2 - Le Cœur] Onde QRS (ECG)", back: "Correspond au temps de repolarisation du ventricule droit et gauche via le réseau de Purkinje[cite: 12]." },
+                    { front: "[Ch. 2 - Le Cœur] Onde T (ECG)", back: "Correspond au temps de repolarisation des ventricules (diastole)[cite: 12]." },
+                    
+                    // CHAPITRE 3
+                    { front: "[Ch. 3 - SNA] Système Parasympathique", back: "Système TROPHOTROPE. Modérateur, freinateur, restaure l'énergie. Diminue la FC et la ventilation, utilise l'acétylcholine[cite: 12]." },
+                    { front: "[Ch. 3 - SNA] Système Sympathique", back: "Système ERGOTROPE. Accélérateur, prépare à l'action. Augmente la FC et le métabolisme, utilise les catécholamines (noradrénaline/adrénaline)[cite: 12]." },
+                    { front: "[Ch. 3 - SNA] Variabilité de la Fréquence Cardiaque (VFC)", back: "Traduit la variation des intervalles R-R séparant deux contractions cardiaques, reflet de l'activité antagoniste du système sympatho-vagal[cite: 12]." },
+                    { front: "[Ch. 3 - SNA] Lecture VFC (Lf et Hl)", back: "Lf = travail sympathique (dominante si la FC augmente). Hl = travail parasympathique (dominante si la FC diminue)[cite: 12]." },
+                    
+                    // CHAPITRE 4
+                    { front: "[Ch. 4 - FC] Dérive Cardiaque", back: "Variabilité ascendante de la FC durant un effort à intensité constante, due à la thermorégulation et la dérive du débit sanguin vers la peau[cite: 12]." },
+                    { front: "[Ch. 4 - FC] FC Max Théorique (Formules)", back: "Astrand: 220 - âge. Gellish (2007): 206,9 - (0.67 x âge)[cite: 12]." },
+                    { front: "[Ch. 4 - FC] FC de Repos (FCrep) en Hypoxie", back: "En hypoxie aiguë (altitude, ex: 2500m), la FCrep augmente de façon proportionnelle au degré d'hypoxie[cite: 12]." },
+                    { front: "[Ch. 4 - FC] Formule de Karvonen (FC Réserve)", back: "% FCmax = (FC exercice - FCrep) / (FCmax - FCrep). Plus pertinente pour individualiser l'intensité car elle prend en compte la FC utile[cite: 12]." }
                 ],
                 qcms: [
+                    // CHAPITRE 1
                     {
-                        question: "Combien de fois l'échange de chaleur par convection est-il plus important dans l'eau que dans l'air ?",
-                        options: ["5 fois", "10 fois", "25 fois", "50 fois"],
-                        correct: 2,
-                        explanation: "L’échange de chaleur est 25 fois plus important dans l’eau que dans l’air."
+                        question: "[Ch. 1 - Énergie] Lors de la contraction musculaire, quelle enzyme située sur la tête de myosine permet l'hydrolyse de l'ATP ?",
+                        options: ["La créatine phosphokinase", "La myosine ATPase", "La myokinase", "L'acétylcholine"],
+                        correct: 1,
+                        explanation: "La transformation d’énergie chimique en mécanique se déroule sur la tête de myosine car elle possède l’enzyme myosine ATPase permettant l’hydrolyse de l’ATP[cite: 12]."
                     },
                     {
-                        question: "Quelle enzyme présente sur la tête de myosine permet l'hydrolyse de l'ATP ?",
-                        options: ["La myokinase", "La myosine ATPase", "La créatine phosphokinase"],
+                        question: "[Ch. 1 - Énergie] Quelle est la principale caractéristique d'un effort Anaérobie Alactique en termes de puissance ?",
+                        options: ["Il permet un travail en puissance de 40 à 45 secondes", "Il permet un travail en puissance de 3 à 5 secondes", "Il produit beaucoup de lactate"],
                         correct: 1,
-                        explanation: "La myosine ATPase permet l’hydrolyse de l’ATP."
+                        explanation: "La phosphorylation immédiate Anaérobie Alactique permet un travail en puissance de 3 à 5s, et en capacité inférieur à 20/30s[cite: 12]."
+                    },
+                    {
+                        question: "[Ch. 1 - Énergie] Quel est le rendement de la glycolyse anaérobie (dégradation d'une mole de glycogène) ?",
+                        options: ["38 ATP et de l'eau", "3 ATP et 2 moles de lactate", "130 ATP", "1 ATP et libération de CO2"],
+                        correct: 1,
+                        explanation: "Une mole de glycogène permet la synthèse de 3 ATP et s’accompagne de la formation de 2 moles de lactate[cite: 12]."
+                    },
+                    {
+                        question: "[Ch. 1 - Énergie] En récupération passive après un effort, combien de temps faut-il pour éliminer 100% du lactate sanguin ?",
+                        options: ["20 minutes", "1 heure", "1h30", "46 heures"],
+                        correct: 2,
+                        explanation: "En récupération passive, 100% du lactate est éliminé en 1h30 (contre 20 minutes en récupération active)[cite: 12]."
+                    },
+                    {
+                        question: "[Ch. 1 - Énergie] Selon votre cours, à quelle concentration de lactate sanguin situe-t-on le Seuil Lactique 2 (SL2) ?",
+                        options: ["2 mmol/L", "3 mmol/L", "4 mmol/L", "8 mmol/L"],
+                        correct: 2,
+                        explanation: "Le seuil Anaérobie ou Seuil Lactique 2 (SL2) est ciblé à 4 mmol/L de sang[cite: 12]."
+                    },
+                    // CHAPITRE 2
+                    {
+                        question: "[Ch. 2 - Le Cœur] Quel est le trajet du sang veineux vicié (riche en CO2) à son arrivée dans le cœur ?",
+                        options: ["Veines pulmonaires → Oreillette Gauche → Ventricule Gauche", "Veines caves → Oreillette Droite → Ventricule Droit → Artère pulmonaire", "Artère aorte → Ventricule Droit → Poumons"],
+                        correct: 1,
+                        explanation: "Le sang vicié arrive par les veines caves dans l'OD, est éjecté dans le VD (valves tricuspides), puis expulsé dans l'artère pulmonaire[cite: 12]."
+                    },
+                    {
+                        question: "[Ch. 2 - Le Cœur] Quel élément agit comme le pacemaker physiologique du cœur ?",
+                        options: ["Le nœud auriculo-ventriculaire (NAV)", "Le réseau de Purkinje", "Le nœud sinusal", "Le faisceau de His"],
+                        correct: 2,
+                        explanation: "Le siège de ce courant électrique est situé sur l'oreillette droite : c'est le Nœud Sinusal, pacemaker physiologique[cite: 12]."
+                    },
+                    {
+                        question: "[Ch. 2 - Le Cœur] Sur le tracé ECG, à quoi correspond l'onde P ?",
+                        options: ["Au temps de repolarisation des ventricules (diastole)", "Au temps de la dépolarisation, soit la contraction des oreillettes (systole)", "Au temps de repolarisation du ventricule droit et gauche"],
+                        correct: 1,
+                        explanation: "L'onde P correspond au temps de la dépolarisation = contraction de l’oreillette droite et gauche (systole)[cite: 12]."
+                    },
+                    // CHAPITRE 3
+                    {
+                        question: "[Ch. 3 - SNA] Quelle est l'action principale du système Parasympathique sur la fréquence cardiaque ?",
+                        options: ["Il a un rôle ergotrope, il l'accélère", "Il a un rôle trophotrope, il la diminue (effet freinateur)", "Il n'a aucun effet sur la FC"],
+                        correct: 1,
+                        explanation: "Le système Parasympathique est dit TROPHOTROPE. Il a un rôle de modérateur et agit sur la diminution du rythme cardiaque[cite: 12]."
+                    },
+                    {
+                        question: "[Ch. 3 - SNA] Quel neurotransmetteur est spécifiquement utilisé par le système Sympathique ?",
+                        options: ["L'acétylcholine", "La dopamine", "Les catécholamines (noradrénaline et adrénaline)"],
+                        correct: 2,
+                        explanation: "Le système Sympathique agit grâce à l’activation des catécholamines : noradrénaline et adrénaline[cite: 12]."
+                    },
+                    {
+                        question: "[Ch. 3 - SNA] Que mesure exactement la Variabilité de la Fréquence Cardiaque (VFC) ?",
+                        options: ["La différence entre la FCmax et la FC de repos", "La variation des intervalles R-R séparant deux contractions cardiaques", "Le volume de sang éjecté par minute"],
+                        correct: 1,
+                        explanation: "La VFC est le fruit des variations des intervalles entre chaque R-R, reflétant l'activité du système sympatho-vagal[cite: 12]."
+                    },
+                    // CHAPITRE 4
+                    {
+                        question: "[Ch. 4 - FC] Qu'est-ce que la 'dérive cardiaque' observée lors d'un effort de longue durée à intensité constante ?",
+                        options: ["Une chute brutale de la FC due à l'épuisement du glycogène", "Une variabilité ascendante de la FC due à la thermorégulation et la sudation", "Une arythmie due au nœud sinusal"],
+                        correct: 1,
+                        explanation: "Durant un effort prolongé à intensité constante, la dérive sanguine vers la peau (thermorégulation) provoque l'augmentation de la FC, appelée dérive cardiaque[cite: 12]."
+                    },
+                    {
+                        question: "[Ch. 4 - FC] Comment évolue la Fréquence Cardiaque de repos (FCrep) en hypoxie aiguë (arrivée brutale en altitude à 2500m) ?",
+                        options: ["Elle diminue progressivement", "Elle reste stable", "Elle augmente de façon proportionnelle au degré d'hypoxie"],
+                        correct: 2,
+                        explanation: "En hypoxie aiguë (quelques jours), la fréquence cardiaque de repos augmente de façon proportionnelle au degré d’hypoxie[cite: 12]."
+                    },
+                    {
+                        question: "[Ch. 4 - FC] Un athlète a une FCmax de 200 et une FCrep de 50. Quelle sera sa fréquence cardiaque cible pour un travail à 80% selon la formule de Karvonen ?",
+                        options: ["160 bpm", "170 bpm", "180 bpm"],
+                        correct: 1,
+                        explanation: "Calcul de Karvonen : FCcible = FCrep + 0,8 x (FCmax - FCrep) = 50 + 0,8 x (200 - 50) = 50 + 120 = 170 bpm[cite: 12]."
                     }
                 ],
                 schemas: []
@@ -395,7 +440,7 @@
 
             // Création des options pour le menu déroulant
             let optionsMenu = matiere.flashcards.map((carte, index) => 
-                `<option value="${index}">Carte ${index + 1} : ${carte.front}</option>`
+                `<option value="${index}">${index + 1}. ${carte.front}</option>`
             ).join('');
 
             // Création de l'interface complète (Menu + Carte + Boutons)
@@ -405,7 +450,7 @@
                     <!-- MENU DÉROULANT POUR CHOISIR SA CARTE -->
                     <div class="flex flex-col sm:flex-row sm:items-center gap-3 bg-gray-50 dark:bg-gray-900 p-3 rounded-xl border border-gray-200 dark:border-gray-700">
                         <label for="menu-flashcards" class="text-sm font-bold text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                            <i class="fa-solid fa-bars text-indigo-500 mr-2"></i>Navigation :
+                            <i class="fa-solid fa-bars text-indigo-500 mr-2"></i>Sujet :
                         </label>
                         <select id="menu-flashcards" onchange="allerAFlashcard(this.value)" class="w-full bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200 font-medium rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500 transition">
                             ${optionsMenu}
@@ -418,15 +463,15 @@
                             
                             <!-- RECTO -->
                             <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-800 border-2 border-indigo-100 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-500 rounded-2xl text-center transition-colors">
-                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-500 mb-4">Terme / Question</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-500 mb-4">Question</span>
                                 <h4 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white" id="fc-front-text"></h4>
                                 <p class="text-gray-400 text-sm mt-8 animate-pulse"><i class="fa-solid fa-hand-pointer mr-1"></i> Cliquez pour retourner</p>
                             </div>
                             
                             <!-- VERSO -->
-                            <div class="absolute w-full h-full backface-hidden rotate-y-180 flex flex-col items-center justify-center p-6 bg-indigo-50 dark:bg-indigo-900/40 border-2 border-indigo-500 rounded-2xl text-center">
-                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-4">Définition / Réponse</span>
-                                <p class="text-lg sm:text-xl font-medium text-indigo-900 dark:text-indigo-200 leading-relaxed" id="fc-back-text"></p>
+                            <div class="absolute w-full h-full backface-hidden rotate-y-180 flex flex-col items-center justify-center p-6 bg-indigo-50 dark:bg-indigo-900/40 border-2 border-indigo-500 rounded-2xl text-center overflow-y-auto">
+                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-4">Réponse</span>
+                                <p class="text-base sm:text-lg font-medium text-indigo-900 dark:text-indigo-200 leading-relaxed" id="fc-back-text"></p>
                             </div>
                             
                         </div>
