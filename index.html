@@ -106,7 +106,7 @@
                     
                     <div class="flex flex-col md:flex-row gap-8">
                         <!-- Zone Image -->
-                        <div class="md:w-1/2 flex justify-center items-start border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl p-2 bg-gray-50 dark:bg-gray-900 min-h-[300px]">
+                        <div class="md:w-1/2 flex justify-center items-start border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl p-2 bg-gray-50 dark:bg-gray-900 min-h-[300px] md:sticky md:top-4 self-start">
                             <img id="schema-image" src="" alt="Schéma" class="max-w-full h-auto rounded-lg shadow-sm hidden">
                             <div id="schema-placeholder" class="text-gray-400 flex flex-col items-center justify-center h-full w-full py-20">
                                 <i class="fa-regular fa-image text-4xl mb-2"></i>
@@ -116,7 +116,12 @@
                         
                         <!-- Zone des réponses numérotées -->
                         <div class="md:w-1/2">
-                            <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm"><i class="fa-solid fa-circle-info mr-2"></i>Remplissez les légendes correspondant aux numéros sur le schéma.</p>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                                <p class="text-gray-500 dark:text-gray-400 text-sm"><i class="fa-solid fa-circle-info mr-2"></i>Remplissez les légendes correspondant aux numéros sur le schéma.</p>
+                                <button onclick="toggleReponsesSchema()" id="btn-reponses-schema-top" class="hidden text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/40 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 px-3 py-1.5 rounded-lg border border-indigo-200 dark:border-indigo-800 transition flex items-center gap-1.5 self-start sm:self-auto whitespace-nowrap">
+                                    <i class="fa-solid fa-eye" id="icone-btn-reponses-top"></i> <span id="texte-btn-reponses-top">Afficher les réponses</span>
+                                </button>
+                            </div>
                             
                             <div id="schema-legendes-container" class="space-y-3 mb-6"></div>
                             
@@ -124,8 +129,8 @@
                                 <button onclick="validerSchema()" id="btn-valider-schema" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition shadow-md flex justify-center items-center gap-2 hidden">
                                     <i class="fa-solid fa-check-circle"></i> Valider mes réponses
                                 </button>
-                                <button onclick="afficherReponses()" id="btn-afficher-reponses" class="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold py-3 px-4 rounded-xl transition shadow-sm flex justify-center items-center gap-2 hidden">
-                                    <i class="fa-solid fa-eye text-indigo-600 dark:text-indigo-400"></i> Afficher les réponses
+                                <button onclick="toggleReponsesSchema()" id="btn-reponses-schema" class="flex-1 bg-white dark:bg-gray-800 hover:bg-indigo-50 dark:hover:bg-gray-700 text-indigo-600 dark:text-indigo-400 border-2 border-indigo-600 dark:border-indigo-500 font-bold py-3 px-4 rounded-xl transition shadow-sm flex justify-center items-center gap-2 hidden">
+                                    <i class="fa-solid fa-eye" id="icone-btn-reponses"></i> <span id="texte-btn-reponses">Afficher les réponses</span>
                                 </button>
                             </div>
                             <div id="schema-resultat" class="mt-4 text-center font-bold text-lg hidden p-3 rounded-lg"></div>
@@ -427,7 +432,7 @@
                             { numero: 8, reponsesValides: ["m. petit fessier", "muscle petit fessier", "petit fessier"] },
                             { numero: 9, reponsesValides: ["grand trochanter"] },
                             { numero: 10, reponsesValides: ["m. moyen fessier", "muscle moyen fessier", "moyen fessier"] },
-                            { numero: 11, reponsesValides: ["fosse trochantérique et m. obturateur ext.", "fosse trochantérique", "muscle obturateur externe"] },
+                            { numero: 11, reponsesValides: ["fosse trochantérique et m. obturateur ext.", "fosse trochantérique", "muscle obturateur interne"] },
                             { numero: 12, reponsesValides: ["petit trochanter et m. grand psoas", "petit trochanter", "muscle grand psoas"] }
                         ]
                     },
@@ -485,354 +490,354 @@
                     }
                 ]
             },
-           physiologie: {
-    nom: "Physiologie", icon: "fa-heartbeat", couleur: "text-pink-500",
-    flashcards: [
-        { front: "Physiologie", back: "Étude du fonctionnement normal d’un organisme vivant et de ses processus chimiques et physiques.[cite: 13]" },
-        { front: "Homéostasie", back: "Capacité d’un organisme à maintenir son environnement interne stable face à la variabilité extérieure.[cite: 13]" },
-        { front: "Principe de la thermodynamique (Effort)", back: "100% Énergie Chimique = 25% Énergie mécanique + 75% Énergie thermique (chaleur endogène).[cite: 13]" },
-        { front: "Gradient thermique", back: "Échange de chaleur réalisé selon une différence de température allant toujours du plus chaud au moins chaud.[cite: 13]" },
-        { front: "Rayonnement", back: "Perte de chaleur sans contact direct (ex: infrarouge). Représente 60% de la perte de chaleur au repos à 21°C.[cite: 13]" },
-        { front: "Convection", back: "Échange de chaleur avec un fluide (air, eau). L’échange est 25 fois plus important dans l’eau que dans l’air.[cite: 13]" },
-        { front: "Évaporation", back: "Passage de l'état liquide à gazeux (sudation). Représente 80% des pertes de chaleur à l'exercice.[cite: 13]" },
-        { front: "Déshydratation et Performance", back: "Une perte de 2% d'eau entraîne une perte de 20% de performance sur un exercice de plus de 30 min.[cite: 14]" },
-        { front: "Frisson thermique", back: "Contractions musculaires involontaires commandées par l'hypothalamus convertissant 100% de l'énergie chimique en chaleur.[cite: 13]" },
-        { front: "LHTH (Live High Train High)", back: "Vivre et s'entraîner en altitude (1500m-2500m) pendant 2 à 4 semaines.[cite: 14]" },
-        { front: "LHTL (Live High Train Low)", back: "Vivre à 2500m (pour l'EPO) et s'entraîner à moins de 1500m pour conserver l'intensité.[cite: 14]" },
-        { front: "Tendon", back: "Structure reliant l'os au muscle, d'une résistance 4 fois supérieure à celle du muscle.[cite: 15]" },
-        { front: "Épimysium", back: "Membrane entourant le muscle entier, dans le prolongement du tissu tendineux.[cite: 15]" },
-        { front: "Périmysium", back: "Membrane qui entoure spécifiquement un faisceau musculaire.[cite: 15]" },
-        { front: "Endomysium", back: "Membrane qui entoure individuellement la fibre musculaire (cellule).[cite: 15]" },
-        { front: "Unité Motrice", back: "Un nerf moteur (motoneurone) et l'ensemble des fibres musculaires qu'il innerve (ex: 3000 fibres).[cite: 12]" },
-        { front: "Fibres Lentes (Type I)", back: "Fibres aérobies, rouges, riches en mitochondries et glycogène, innervées par de petits motoneurones.[cite: 15]" },
-        { front: "Fibres Rapides (Type II)", back: "Fibres anaérobies, pour les sports de force, riches en composés phosphate, innervées par de gros motoneurones.[cite: 15]" },
-        { front: "Rôle du Calcium (Ca2+)", back: "Il se fixe sur la troponine pour démasquer le site actif de l'actine et permettre l'accroche de la myosine.[cite: 12]" },
-        { front: "Rôles de l'ATP", back: "1. Libérer la myosine. 2. Déplacer la myosine. 3. Fournir l'énergie (hydrolyse) pour tracter l'actine.[cite: 12]" },
-        { front: "Anaérobie Alactique (Durée)", back: "Travail en puissance de 3 à 5s, travail en capacité inférieur à 20-30s. Utilise la phosphocréatine.[cite: 12]" },
-        { front: "Anaérobie Lactique (Rendement)", back: "Dégradation d'1 mole de glycogène = 3 ATP + 2 moles de lactate.[cite: 12]" },
-        { front: "Filière Aérobie (Rendement ATP)", back: "Glucose = 38 ATP. Lipides > 45 ATP. Triglycérides = 130 ATP.[cite: 12]" },
-        { front: "Épuisement du glycogène", back: "Épuisement total en 1h à 80% de VMA, ou 1h30 à 2h à 75% de VMA.[cite: 12]" },
-        { front: "Reconstitution du glycogène", back: "50% reconstitués dès la 5ème heure. Reconstitution totale complète en 46h.[cite: 12]" },
-        { front: "Seuil Lactique 1 (SL1)", back: "Seuil aérobie ciblé à 2 mmol/L de sang.[cite: 12]" },
-        { front: "Seuil Lactique 2 (SL2)", back: "Seuil anaérobie ciblé à 4 mmol/L de sang. Accumulation d'acide métabolique.[cite: 12]" },
-        { front: "Cœur Droit", back: "Gère la petite circulation (pulmonaire). Reçoit le sang vicié par les veines caves et l'éjecte via l'artère pulmonaire.[cite: 12]" },
-        { front: "Cœur Gauche", back: "Gère la grande circulation (systémique). Reçoit le sang oxygéné et l'éjecte via l'aorte.[cite: 12]" },
-        { front: "Nœud Sinusal", back: "Le pacemaker physiologique du cœur, situé sur l'oreillette droite.[cite: 12]" },
-        { front: "Onde P (ECG)", back: "Correspond à la dépolarisation et la contraction (systole) des oreillettes.[cite: 12]" },
-        { front: "Complexe QRS (ECG)", back: "Correspond à la dépolarisation des ventricules via le réseau de Purkinje.[cite: 12]" },
-        { front: "Onde T (ECG)", back: "Correspond à la repolarisation des ventricules (diastole).[cite: 12]" },
-        { front: "VFC (Variabilité FC)", back: "Variation des intervalles R-R, reflet de l'activité antagoniste du système sympatho-vagal.[cite: 12]" },
-        { front: "Système Parasympathique", back: "Système Trophotrope : modérateur, freinateur, diminue la FC, utilise l'acétylcholine.[cite: 12]" },
-        { front: "Système Sympathique", back: "Système Ergotrope : accélérateur, augmente la FC, prépare à l'action, utilise les catécholamines.[cite: 12]" },
-        { front: "Dérive cardiaque", back: "Augmentation de la FC à intensité constante due à la thermorégulation (vasodilatation cutanée).[cite: 12]" },
-        { front: "FC Max Théorique (Astrand)", back: "Formule théorique : FCmax T = 220 - âge du sujet.[cite: 12]" },
-        { front: "FC Max Théorique (Gellish)", back: "Formule théorique révisée : FCmax = 206,9 - (0.67 x âge).[cite: 12]" },
-        { front: "Formule de Karvonen", back: "% FCmax = (FC exercice - FCrepos) / (FCmax - FCrepos).[cite: 12]" }
-    ],
-    qcms: [
-        {
-            question: "Lors d'un exercice, quelle proportion de l'énergie chimique est transformée en chaleur endogène (énergie thermique) ?",
-            options: ["25%", "50%", "75%", "100%"],
-            correct: 2,
-            explanation: "Le principe de la thermodynamique stipule que 100% d'NRJ Chimique = 25% NRJ mécanique + 75% NRJ thermique (chaleur endogène).[cite: 13]"
-        },
-        {
-            question: "Quel processus d'échange de chaleur représente environ 80% des pertes thermiques lors d'un exercice physique ?",
-            options: ["Le rayonnement", "La conduction", "La convection", "L'évaporation"],
-            correct: 3,
-            explanation: "En exercice près de 80% des pertes de chaleurs sont dues à l’évaporation (sudation).[cite: 13]"
-        },
-        {
-            question: "Combien de fois l'échange de chaleur par convection est-il plus important dans l'eau que dans l'air ?",
-            options: ["5 fois", "10 fois", "25 fois", "50 fois"],
-            correct: 2,
-            explanation: "L’échange de chaleur est 25 fois plus important dans l’eau que dans l’air.[cite: 13]"
-        },
-        {
-            question: "Quel est l'effet principal d'une hygrométrie supérieure à 70% sur la performance sportive ?",
-            options: ["Elle favorise l'évaporation", "Chaque palier de 5% d'humidité enlève 5% de performance", "Elle améliore la conduction nerveuse", "Elle réduit la fréquence cardiaque"],
-            correct: 1,
-            explanation: "Pour un air sec au-delà de 70% d’humidité dans l’air, pour chaque palier supplémentaire de 5%, il faut enlever 5% de performance.[cite: 14]"
-        },
-        {
-            question: "Quelle proportion d'énergie le frisson thermique convertit-il en chaleur ?",
-            options: ["25%", "50%", "75%", "100%"],
-            correct: 3,
-            explanation: "Le frisson thermique convertit 100% d’énergie chimique en énergie thermique pour réchauffer l'organisme.[cite: 13]"
-        },
-        {
-            question: "Pourquoi la performance baisse-t-elle fortement dans un milieu chaud au niveau cardio-vasculaire ?",
-            options: ["Le sang devient trop visqueux", "Le cœur ralentit par sécurité", "L'organisme privilégie la vasodilatation cutanée au détriment des muscles"],
-            correct: 2,
-            explanation: "Le système circulatoire donne la priorité à la thermorégulation, créant une vasodilatation cutanée au détriment des muscles actifs.[cite: 14]"
-        },
-        {
-            question: "La méthode d'entraînement LHTL consiste à :",
-            options: ["Vivre à 2500m et s'entraîner à 2500m", "Vivre à 2500m et s'entraîner à moins de 1500m", "Vivre en plaine et s'entraîner à 2500m"],
-            correct: 1,
-            explanation: "LHTL = S’entraîner bas et vivre haut. On vit entre 2000m et 3000m et on s'entraîne à une altitude inférieure à 1500m.[cite: 14]"
-        },
-        {
-            question: "Quelle est la résistance du tendon par rapport au muscle ?",
-            options: ["Égale", "2 fois supérieure", "4 fois supérieure"],
-            correct: 2,
-            explanation: "La résistance du tendon est bien supérieure au muscle (avec le tendon 4x supérieur au muscle).[cite: 15]"
-        },
-        {
-            question: "Comment nomme-t-on la membrane qui entoure un faisceau musculaire ?",
-            options: ["Épimysium", "Endomysium", "Périmysium"],
-            correct: 2,
-            explanation: "Le périmysium correspond à la membrane qui entoure un faisceau musculaire.[cite: 15]"
-        },
-        {
-            question: "Quelles sont les caractéristiques des fibres de Type I (Lentes) ?",
-            options: ["Métabolisme anaérobie, forte puissance, grande taille", "Métabolisme aérobie, riches en mitochondries, innervées par de petits motoneurones", "Pauvres en mitochondries, forte fatigabilité"],
-            correct: 1,
-            explanation: "Les fibres lentes (Type I) sont riches en glycogène et en enzymes du métabolisme aérobie (mitochondries ++), innervées par de petits motoneurones.[cite: 15]"
-        },
-        {
-            question: "Dans le sarcomère, quel élément masque initialement le site actif de l'actine ?",
-            options: ["La myosine", "Le Calcium", "La troponine"],
-            correct: 2,
-            explanation: "Le site actif de réception sur l'actine est masqué par la troponine, jusqu'à ce que le Ca2+ l'active.[cite: 12]"
-        },
-        {
-            question: "Quelle enzyme présente sur la tête de myosine permet l'hydrolyse de l'ATP ?",
-            options: ["La myokinase", "La myosine ATPase", "La créatine phosphokinase"],
-            correct: 1,
-            explanation: "La transformation énergétique se déroule sur la tête de myosine car elle possède l’enzyme myosine ATPase permettant l’hydrolyse de l’ATP.[cite: 12]"
-        },
-        {
-            question: "Pour un effort de 3 à 5 secondes (puissance maximale), quel système énergétique est principalement utilisé ?",
-            options: ["Anaérobie lactique", "Aérobie", "Anaérobie Alactique (Phosphocréatine)"],
-            correct: 2,
-            explanation: "La phosphorylation immédiate Anaérobie Alactique permet un travail en puissance de 3 à 5s en utilisant la phosphocréatine.[cite: 12]"
-        },
-        {
-            question: "Lors de la glycolyse anaérobie, la dégradation d'une mole de glycogène produit :",
-            options: ["38 ATP", "2 ATP et 1 lactate", "3 ATP et 2 moles de lactate"],
-            correct: 2,
-            explanation: "Une mole de glycogène permet la synthèse de 3 ATP et s’accompagne de la formation de 2 moles de lactate.[cite: 12]"
-        },
-        {
-            question: "Quel est le devenir du lactate ? À quelle molécule s'associent les ions H+ ?",
-            options: ["Au Carbone", "Au transporteur NAD", "À l'Oxygène de l'eau"],
-            correct: 1,
-            explanation: "L'acide lactique est transformé en Lactate par des transporteurs (Navette NAD) qui prennent en charge les H+.[cite: 12]"
-        },
-        {
-            question: "Combien d'ATP sont synthétisés lors de la lipolyse aérobie d'un triglycéride ?",
-            options: ["3 ATP", "38 ATP", "130 ATP"],
-            correct: 2,
-            explanation: "Dans le système aérobie, la dégradation des triglycérides produit 130 ATP.[cite: 12]"
-        },
-        {
-            question: "En combien de temps l'épuisement total des réserves en glycogène est-il atteint à 80% de VMA ?",
-            options: ["30 minutes", "1 heure", "2 heures"],
-            correct: 1,
-            explanation: "L’épuisement total des réserves en glycogène est réalisé en 1h de travail musculaire à 80% de VMA.[cite: 12]"
-        },
-        {
-            question: "Combien de temps faut-il pour une reconstitution totale (100%) des réserves de glycogène ?",
-            options: ["5 heures", "24 heures", "46 heures"],
-            correct: 2,
-            explanation: "La reconstitution totale (concentration initiale) en glycogène est complète en 46h.[cite: 12]"
-        },
-        {
-            question: "À quelle concentration de lactate sanguin situe-t-on classiquement le Seuil Anaérobie (SL2) ?",
-            options: ["2 mmol/L", "4 mmol/L", "8 mmol/L"],
-            correct: 1,
-            explanation: "Le seuil Anaérobie ou Seuil Lactique 2 (SL2) est ciblé à 4 mmol.l de sang.[cite: 12]"
-        },
-        {
-            question: "Le Seuil Ventilatoire 1 (SV1) correspond à un ratio de la ventilation où :",
-            options: ["Le CO2 devient dominant", "L'O2 reste dominant (VE/VO2)", "L'O2 et le CO2 s'annulent"],
-            correct: 1,
-            explanation: "Le seuil ventilatoire 1 (SV1) correspond à un ratio où l’O2 reste dominant (VE/VO2).[cite: 12]"
-        },
-        {
-            question: "Quelle cavité cardiaque reçoit le sang veineux vicié riche en CO2 ?",
-            options: ["Ventricule gauche", "Oreillette gauche", "Oreillette droite"],
-            correct: 2,
-            explanation: "L’oreillette droite reçoit à sa base la veine cave inférieure et supérieure, ramenant le sang veineux vicié.[cite: 12]"
-        },
-        {
-            question: "Par quelle valve le sang passe-t-il de l'oreillette droite au ventricule droit ?",
-            options: ["Valve aortique", "Valve mitrale", "Valve tricuspide"],
-            correct: 2,
-            explanation: "Le cœur droit a deux cavités reliées par l’orifice tricuspidien géré par les valves tricuspides.[cite: 12]"
-        },
-        {
-            question: "Quel nœud agit comme le pacemaker physiologique du cœur ?",
-            options: ["Nœud atrio-ventriculaire (NAV)", "Nœud sinusal", "Réseau de Purkinje"],
-            correct: 1,
-            explanation: "Le siège de ce courant électrique est situé sur l'oreillette droite : le Nœud Sinusal, pacemaker physiologique.[cite: 12]"
-        },
-        {
-            question: "Sur un ECG, que représente le complexe QRS ?",
-            options: ["Dépolarisation des oreillettes", "Dépolarisation des ventricules", "Repolarisation des ventricules"],
-            correct: 1,
-            explanation: "L'onde QRS correspond au temps de dépolarisation du ventricule droit et gauche (systole ventriculaire).[cite: 12]"
-        },
-        {
-            question: "Quelle est la fonction globale du système parasympathique ?",
-            options: ["Ergotrope (accélérateur)", "Trophotrope (modérateur et régénérateur)", "Uniquement le contrôle de la respiration"],
-            correct: 1,
-            explanation: "Le système Parasympathique est dit TROPHOTROPE : il a un rôle de modérateur avec des fonctions de régénération.[cite: 12]"
-        },
-        {
-            question: "Quel neurotransmetteur est principalement utilisé par le système sympathique (ergotrope) ?",
-            options: ["Acétylcholine", "Catécholamines (noradrénaline/adrénaline)", "Sérotonine"],
-            correct: 1,
-            explanation: "Le système Sympathique agit grâce à l’activation des catécholamines : noradrénaline et adrénaline.[cite: 12]"
-        },
-        {
-            question: "Que provoque le système sympathique sur les vaisseaux sanguins ?",
-            options: ["Une vasodilatation", "Une vasoconstriction", "Aucun effet"],
-            correct: 1,
-            explanation: "Le système sympathique accélère le rythme cardiaque conjointement à une vasoconstriction de l’appareil sanguin.[cite: 12]"
-        },
-        {
-            question: "Comment s'appelle l'augmentation de la FC à intensité d'exercice constante pour compenser l'augmentation de température ?",
-            options: ["Bradycardie", "Tachycardie", "Dérive cardiaque"],
-            correct: 2,
-            explanation: "Durant un effort de longue durée à intensité constante, la variabilité ascendante de la FC due à la thermorégulation est appelée dérive Cardiaque.[cite: 12]"
-        },
-        {
-            question: "Selon Gellish (2007), quelle est la formule de la FCmax théorique ?",
-            options: ["220 - âge", "206,9 - (0.67 x âge)", "FCres + FCrep"],
-            correct: 1,
-            explanation: "La formule de Gellish et Coll (2007) est : FCmax Théorique = 206,9 - (0.67 x âge).[cite: 12]"
-        },
-        {
-            question: "Laquelle de ces formules correspond au pourcentage de FCmax de réserve selon Karvonen ?",
-            options: ["(FCexe - FCrep) / (FCmax - FCrep)", "FCexe / FCmax", "(FCmax - FCrep) x 0.8"],
-            correct: 0,
-            explanation: "Karvonen mesure le pourcentage de FCmax selon : % FCmax = (Fcexe - FCrep) / (FCmax - FCrep).[cite: 12]"
-        },
-        {
-            question: "Comment évolue la FC de repos (FCrep) en hypoxie aiguë (altitude sans acclimatation) ?",
-            options: ["Elle diminue fortement", "Elle reste stable", "Elle augmente"],
-            correct: 2,
-            explanation: "En hypoxie aiguë la fréquence cardiaque de repos augmente de façon proportionnelle au degré d’hypoxie.[cite: 12]"
-        },
-        {
-            question: "Quelle méthode d'entraînement en altitude s'est avérée globalement inefficace selon les études récentes ?",
-            options: ["LHTH", "LHTL", "IHE (Exposition intermittente hypoxique au repos)"],
-            correct: 2,
-            explanation: "Les études récentes ont montré l’inefficacité de la méthode d’exposition intermittente hypoxique (IHE) sur l'adaptation physiologique.[cite: 14]"
-        },
-        {
-            question: "Qu'est-ce qu'une contracture (ou élongation) musculaire ?",
-            options: ["Une rupture totale du tendon", "Un dépassement des limites physiologiques sans déchirure majeure", "Un hématome intramusculaire"],
-            correct: 1,
-            explanation: "L'élongation (contracture) est le dépassement des limites physiologiques des fibres musculaires sans déchirure anatomique majeure.[cite: 15]"
-        },
-        {
-            question: "Lors d'une récupération passive après un exercice lactique épuisant, à quel moment le lactate est-il éliminé à 100% ?",
-            options: ["20 minutes", "50 minutes", "1h30"],
-            correct: 2,
-            explanation: "En récupération passive, 100% du lactate est éliminé en 1h30min (contre 20min en récupération active).[cite: 12]"
-        },
-        {
-            question: "Qu'indique l'onde T sur un tracé ECG ?",
-            options: ["La contraction des oreillettes", "La dépolarisation des ventricules", "La repolarisation des ventricules"],
-            correct: 2,
-            explanation: "L'onde T correspond au temps de repolarisation des ventricules (diastole).[cite: 12]"
-        },
-        {
-            question: "Combien d'énergie libère 1 gramme de lactate ?",
-            options: ["0.26 kcal", "1 kcal", "23.5 kcal"],
-            correct: 0,
-            explanation: "1 mole de lactate = 23,5 kcal, et 1g de lactate = 0,26 kcal.[cite: 12]"
-        },
-        {
-            question: "Quel est l'inconvénient majeur de la phosphorylation Anaérobie Alactique ?",
-            options: ["Rendement très faible", "Très faible durée d'exercice (20 à 30s max)", "Produit massivement de l'acide métabolique"],
-            correct: 1,
-            explanation: "Inconvénients de la phosphorylation Anaérobie Alactique : Très faible durée de l’exercice musculaire < 20 à 30s.[cite: 12]"
-        },
-        {
-            question: "L'acide lactique est composé de :",
-            options: ["Lactate et ATP", "Pyruvate et ions H+", "Glycogène et O2"],
-            correct: 1,
-            explanation: "L’Acide Lactique = Pyruvate + H+ qui donne ensuite le Lactate.[cite: 12]"
-        },
-        {
-            question: "Où se fait l'oxydation énergétique à l'intérieur de la fibre musculaire ?",
-            options: ["Dans l'endomysium", "Dans le réticulum endoplasmique", "Dans les mitochondries"],
-            correct: 2,
-            explanation: "La fibre musculaire possède des mitochondries qui agissent comme transformateur énergétique (oxydation).[cite: 15]"
-        },
-        {
-            question: "Si la température cutanée de l'athlète baisse (froid), l'organisme met en place une thermogenèse sans frisson qui est :",
-            options: ["Une hyperventilation", "Une vasodilatation", "Une vasoconstriction des vaisseaux sanguins"],
-            correct: 2,
-            explanation: "La thermogenèse sans frisson correspond à la vasoconstriction des vaisseaux sanguins diminuant le flux sanguin cutané.[cite: 13]"
-        },
-        {
-            question: "Un athlète a une FCrep de 60 et une FCmax de 200. À quelle FC correspond un effort à 80% selon la formule de Karvonen ?",
-            options: ["160 bpm", "172 bpm", "180 bpm"],
-            correct: 1,
-            explanation: "Calcul: 60 + 0,8 x (200 - 60) = 60 + (0.8 x 140) = 60 + 112 = 172 bpm.[cite: 12]"
-        },
-        {
-            question: "Quel est le but d'un entraînement ciblant la Puissance Anaérobie Lactique (PAL) ?",
-            options: ["Produire le moins d'acide possible", "Produire le plus d'acide métabolique possible pour générer un max d'énergie", "Développer le système aérobie exclusivement"],
-            correct: 1,
-            explanation: "L'entraînement vise à produire le plus possible d’acide métabolique pour produire le plus d’énergie possible (augmenter sa PAL).[cite: 12]"
-        },
-        {
-            question: "À quelle valeur est situé le Seuil Aérobie (SL1) ?",
-            options: ["2 mmol/L de sang", "4 mmol/L de sang", "8 mmol/L de sang"],
-            correct: 0,
-            explanation: "Le seuil Aérobie ou encore seuil lactique (SL1) est ciblé à 2mmol/L de sang.[cite: 12]"
-        },
-        {
-            question: "Comment varie la fréquence cardiaque de repos avec un surentraînement prononcé ?",
-            options: ["Elle diminue", "Elle augmente massivement", "Elle reste inchangée"],
-            correct: 0,
-            explanation: "L’analyse montre que la FCrep diminue lors d’un sur-entraînement (potentiellement lié à un surmenage du parasympathique).[cite: 12]"
-        },
-        {
-            question: "Qu'est-ce qu'une contusion musculaire (béquille) ?",
-            options: ["Déchirure d'un faisceau", "Lésion traumatique directe provoquant un écrasement des fibres et un hématome", "Désinsertion du tendon"],
-            correct: 1,
-            explanation: "La myosite / contusion (béquille) est une lésion traumatique directe provoquant un écrasement des fibres musculaires et un hématome.[cite: 15]"
-        },
-        {
-            question: "Quel type de récupération permet d'éliminer 50% du lactate en seulement 6 minutes ?",
-            options: ["Récupération passive", "Récupération active", "Massage profond"],
-            correct: 1,
-            explanation: "En récupération active, 50% du lactate est éliminé en 6min.[cite: 12]"
-        },
-        {
-            question: "À quelle vitesse le système nerveux autonome réagit-il face à une perturbation ?",
-            options: ["En quelques heures", "En quelques minutes", "De l'ordre de la milliseconde"],
-            correct: 2,
-            explanation: "La voie nerveuse du SNA donne des réponses très rapides voire immédiates (de l’ordre de la milliseconde).[cite: 12]"
-        },
-        {
-            question: "Que se passe-t-il pendant la repolarisation cardiaque ?",
-            options: ["Les ventricules se contractent", "Le cœur retourne à son niveau électrique initial (diastole)", "Les valves se ferment toutes en même temps"],
-            correct: 1,
-            explanation: "Le temps de repolarisation correspond au retour au niveau initial (diastole) des oreillettes ou ventricules.[cite: 12]"
-        },
-        {
-            question: "Quel organe est responsable du contrôle central de la température corporelle (le thermostat) ?",
-            options: ["Le cœur", "Le thalamus", "L'hypothalamus"],
-            correct: 2,
-            explanation: "Pour réguler l’augmentation de chaleur, le corps utilise l’hypothalamus pour jouer un rôle de thermostat (37°).[cite: 13]"
-        },
-        {
-            question: "Comment évolue le métabolisme global sous l'influence du système parasympathique ?",
-            options: ["Il augmente", "Il diminue", "Il se stabilise à son maximum"],
-            correct: 1,
-            explanation: "Le système parasympathique agit sur la diminution du métabolisme et de la fréquence respiratoire.[cite: 12]"
-        }
-    ],
-    schemas: []
-}
+            physiologie: {
+                nom: "Physiologie", icon: "fa-heartbeat", couleur: "text-pink-500",
+                flashcards: [
+                    { front: "Physiologie", back: "Étude du fonctionnement normal d’un organisme vivant et de ses processus chimiques et physiques.[cite: 13]" },
+                    { front: "Homéostasie", back: "Capacité d’un organisme à maintenir son environnement interne stable face à la variabilité extérieure.[cite: 13]" },
+                    { front: "Principe de la thermodynamique (Effort)", back: "100% Énergie Chimique = 25% Énergie mécanique + 75% Énergie thermique (chaleur endogène).[cite: 13]" },
+                    { front: "Gradient thermique", back: "Échange de chaleur réalisé selon une différence de température allant toujours du plus chaud au moins chaud.[cite: 13]" },
+                    { front: "Rayonnement", back: "Perte de chaleur sans contact direct (ex: infrarouge). Représente 60% de la perte de chaleur au repos à 21°C.[cite: 13]" },
+                    { front: "Convection", back: "Échange de chaleur avec un fluide (air, eau). L’échange est 25 fois plus important dans l’eau que dans l’air.[cite: 13]" },
+                    { front: "Évaporation", back: "Passage de l'état liquide à gazeux (sudation). Représente 80% des pertes de chaleur à l'exercice.[cite: 13]" },
+                    { front: "Déshydratation et Performance", back: "Une perte de 2% d'eau entraîne une perte de 20% de performance sur un exercice de plus de 30 min.[cite: 14]" },
+                    { front: "Frisson thermique", back: "Contractions musculaires involontaires commandées par l'hypothalamus convertissant 100% de l'énergie chimique en chaleur.[cite: 13]" },
+                    { front: "LHTH (Live High Train High)", back: "Vivre et s'entraîner en altitude (1500m-2500m) pendant 2 à 4 semaines.[cite: 14]" },
+                    { front: "LHTL (Live High Train Low)", back: "Vivre à 2500m (pour l'EPO) et s'entraîner à moins de 1500m pour conserver l'intensité.[cite: 14]" },
+                    { front: "Tendon", back: "Structure reliant l'os au muscle, d'une résistance 4 fois supérieure à celle du muscle.[cite: 15]" },
+                    { front: "Épimysium", back: "Membrane entourant le muscle entier, dans le prolongement du tissu tendineux.[cite: 15]" },
+                    { front: "Périmysium", back: "Membrane qui entoure spécifiquement un faisceau musculaire.[cite: 15]" },
+                    { front: "Endomysium", back: "Membrane qui entoure individuellement la fibre musculaire (cellule).[cite: 15]" },
+                    { front: "Unité Motrice", back: "Un nerf moteur (motoneurone) et l'ensemble des fibres musculaires qu'il innerve (ex: 3000 fibres).[cite: 12]" },
+                    { front: "Fibres Lentes (Type I)", back: "Fibres aérobies, rouges, riches en mitochondries et glycogène, innervées par de petits motoneurones.[cite: 15]" },
+                    { front: "Fibres Rapides (Type II)", back: "Fibres anaérobies, pour les sports de force, riches en composés phosphate, innervées par de gros motoneurones.[cite: 15]" },
+                    { front: "Rôle du Calcium (Ca2+)", back: "Il se fixe sur la troponine pour démasquer le site actif de l'actine et permettre l'accroche de la myosine.[cite: 12]" },
+                    { front: "Rôles de l'ATP", back: "1. Libérer la myosine. 2. Déplacer la myosine. 3. Fournir l'énergie (hydrolyse) pour tracter l'actine.[cite: 12]" },
+                    { front: "Anaérobie Alactique (Durée)", back: "Travail en puissance de 3 à 5s, travail en capacité inférieur à 20-30s. Utilise la phosphocréatine.[cite: 12]" },
+                    { front: "Anaérobie Lactique (Rendement)", back: "Dégradation d'1 mole de glycogène = 3 ATP + 2 moles de lactate.[cite: 12]" },
+                    { front: "Filière Aérobie (Rendement ATP)", back: "Glucose = 38 ATP. Lipides > 45 ATP. Triglycérides = 130 ATP.[cite: 12]" },
+                    { front: "Épuisement du glycogène", back: "Épuisement total en 1h à 80% de VMA, ou 1h30 à 2h à 75% de VMA.[cite: 12]" },
+                    { front: "Reconstitution du glycogène", back: "50% reconstitués dès la 5ème heure. Reconstitution totale complète en 46h.[cite: 12]" },
+                    { front: "Seuil Lactique 1 (SL1)", back: "Seuil aérobie ciblé à 2 mmol/L de sang.[cite: 12]" },
+                    { front: "Seuil Lactique 2 (SL2)", back: "Seuil anaérobie ciblé à 4 mmol/L de sang. Accumulation d'acide métabolique.[cite: 12]" },
+                    { front: "Cœur Droit", back: "Gère la petite circulation (pulmonaire). Reçoit le sang vicié par les veines caves et l'éjecte via l'artère pulmonaire.[cite: 12]" },
+                    { front: "Cœur Gauche", back: "Gère la grande circulation (systémique). Reçoit le sang oxygéné et l'éjecte via l'aorte.[cite: 12]" },
+                    { front: "Nœud Sinusal", back: "Le pacemaker physiologique du cœur, situé sur l'oreillette droite.[cite: 12]" },
+                    { front: "Onde P (ECG)", back: "Correspond à la dépolarisation et la contraction (systole) des oreillettes.[cite: 12]" },
+                    { front: "Complexe QRS (ECG)", back: "Correspond à la dépolarisation des ventricules via le réseau de Purkinje.[cite: 12]" },
+                    { front: "Onde T (ECG)", back: "Correspond à la repolarisation des ventricules (diastole).[cite: 12]" },
+                    { front: "VFC (Variabilité FC)", back: "Variation des intervalles R-R, reflet de l'activité antagoniste du système sympatho-vagal.[cite: 12]" },
+                    { front: "Système Parasympathique", back: "Système Trophotrope : modérateur, freinateur, diminue la FC, utilise l'acétylcholine.[cite: 12]" },
+                    { front: "Système Sympathique", back: "Système Ergotrope : accélérateur, augmente la FC, prépare à l'action, utilise les catécholamines.[cite: 12]" },
+                    { front: "Dérive cardiaque", back: "Augmentation de la FC à intensité constante due à la thermorégulation (vasodilatation cutanée).[cite: 12]" },
+                    { front: "FC Max Théorique (Astrand)", back: "Formule théorique : FCmax T = 220 - âge du sujet.[cite: 12]" },
+                    { front: "FC Max Théorique (Gellish)", back: "Formule théorique révisée : FCmax = 206,9 - (0.67 x âge).[cite: 12]" },
+                    { front: "Formule de Karvonen", back: "% FCmax = (FC exercice - FCrepos) / (FCmax - FCrepos).[cite: 12]" }
+                ],
+                qcms: [
+                    {
+                        question: "Lors d'un exercice, quelle proportion de l'énergie chimique est transformée en chaleur endogène (énergie thermique) ?",
+                        options: ["25%", "50%", "75%", "100%"],
+                        correct: 2,
+                        explanation: "Le principe de la thermodynamique stipule que 100% d'NRJ Chimique = 25% NRJ mécanique + 75% NRJ thermique (chaleur endogène).[cite: 13]"
+                    },
+                    {
+                        question: "Quel processus d'échange de chaleur représente environ 80% des pertes thermiques lors d'un exercice physique ?",
+                        options: ["Le rayonnement", "La conduction", "La convection", "L'évaporation"],
+                        correct: 3,
+                        explanation: "En exercice près de 80% des pertes de chaleurs sont dues à l’évaporation (sudation).[cite: 13]"
+                    },
+                    {
+                        question: "Combien de fois l'échange de chaleur par convection est-il plus important dans l'eau que dans l'air ?",
+                        options: ["5 fois", "10 fois", "25 fois", "50 fois"],
+                        correct: 2,
+                        explanation: "L’échange de chaleur est 25 fois plus important dans l’eau que dans l’air.[cite: 13]"
+                    },
+                    {
+                        question: "Quel est l'effet principal d'une hygrométrie supérieure à 70% sur la performance sportive ?",
+                        options: ["Elle favorise l'évaporation", "Chaque palier de 5% d'humidité enlève 5% de performance", "Elle améliore la conduction nerveuse", "Elle réduit la fréquence cardiaque"],
+                        correct: 1,
+                        explanation: "Pour un air sec au-delà de 70% d’humidité dans l’air, pour chaque palier supplémentaire de 5%, il faut enlever 5% de performance.[cite: 14]"
+                    },
+                    {
+                        question: "Quelle proportion d'énergie le frisson thermique convertit-il en chaleur ?",
+                        options: ["25%", "50%", "75%", "100%"],
+                        correct: 3,
+                        explanation: "Le frisson thermique convertit 100% d’énergie chimique en énergie thermique pour réchauffer l'organisme.[cite: 13]"
+                    },
+                    {
+                        question: "Pourquoi la performance baisse-t-elle fortement dans un milieu chaud au niveau cardio-vasculaire ?",
+                        options: ["Le sang devient trop visqueux", "Le cœur ralentit par sécurité", "L'organisme privilégie la vasodilatation cutanée au détriment des muscles"],
+                        correct: 2,
+                        explanation: "Le système circulatoire donne la priorité à la thermorégulation, créant une vasodilatation cutanée au détriment des muscles actifs.[cite: 14]"
+                    },
+                    {
+                        question: "La méthode d'entraînement LHTL consiste à :",
+                        options: ["Vivre à 2500m et s'entraîner à 2500m", "Vivre à 2500m et s'entraîner à moins de 1500m", "Vivre en plaine et s'entraîner à 2500m"],
+                        correct: 1,
+                        explanation: "LHTL = S’entraîner bas et vivre haut. On vit entre 2000m et 3000m et on s'entraîne à une altitude inférieure à 1500m.[cite: 14]"
+                    },
+                    {
+                        question: "Quelle est la résistance du tendon par rapport au muscle ?",
+                        options: ["Égale", "2 fois supérieure", "4 fois supérieure"],
+                        correct: 2,
+                        explanation: "La résistance du tendon est bien supérieure au muscle (avec le tendon 4x supérieur au muscle).[cite: 15]"
+                    },
+                    {
+                        question: "Comment nomme-t-on la membrane qui entoure un faisceau musculaire ?",
+                        options: ["Épimysium", "Endomysium", "Périmysium"],
+                        correct: 2,
+                        explanation: "Le périmysium correspond à la membrane qui entoure un faisceau musculaire.[cite: 15]"
+                    },
+                    {
+                        question: "Quelles sont les caractéristiques des fibres de Type I (Lentes) ?",
+                        options: ["Métabolisme anaérobie, forte puissance, grande taille", "Métabolisme aérobie, riches en mitochondries, innervées par de petits motoneurones", "Pauvres en mitochondries, forte fatigabilité"],
+                        correct: 1,
+                        explanation: "Les fibres lentes (Type I) sont riches en glycogène et en enzymes du métabolisme aérobie (mitochondries ++), innervées par de petits motoneurones.[cite: 15]"
+                    },
+                    {
+                        question: "Dans le sarcomère, quel élément masque initialement le site actif de l'actine ?",
+                        options: ["La myosine", "Le Calcium", "La troponine"],
+                        correct: 2,
+                        explanation: "Le site actif de réception sur l'actine est masqué par la troponine, jusqu'à ce que le Ca2+ l'active.[cite: 12]"
+                    },
+                    {
+                        question: "Quelle enzyme présente sur la tête de myosine permet l'hydrolyse de l'ATP ?",
+                        options: ["La myokinase", "La myosine ATPase", "La créatine phosphokinase"],
+                        correct: 1,
+                        explanation: "La transformation énergétique se déroule sur la tête de myosine car elle possède l’enzyme myosine ATPase permettant l’hydrolyse de l’ATP.[cite: 12]"
+                    },
+                    {
+                        question: "Pour un effort de 3 à 5 secondes (puissance maximale), quel système énergétique est principalement utilisé ?",
+                        options: ["Anaérobie lactique", "Aérobie", "Anaérobie Alactique (Phosphocréatine)"],
+                        correct: 2,
+                        explanation: "La phosphorylation immédiate Anaérobie Alactique permet un travail en puissance de 3 à 5s en utilisant la phosphocréatine.[cite: 12]"
+                    },
+                    {
+                        question: "Lors de la glycolyse anaérobie, la dégradation d'une mole de glycogène produit :",
+                        options: ["38 ATP", "2 ATP et 1 lactate", "3 ATP et 2 moles de lactate"],
+                        correct: 2,
+                        explanation: "Une mole de glycogène permet la synthèse de 3 ATP et s’accompagne de la formation de 2 moles de lactate.[cite: 12]"
+                    },
+                    {
+                        question: "Quel est le devenir du lactate ? À quelle molécule s'associent les ions H+ ?",
+                        options: ["Au Carbone", "Au transporteur NAD", "À l'Oxygène de l'eau"],
+                        correct: 1,
+                        explanation: "L'acide lactique est transformé en Lactate par des transporteurs (Navette NAD) qui prennent en charge les H+.[cite: 12]"
+                    },
+                    {
+                        question: "Combien d'ATP sont synthétisés lors de la lipolyse aérobie d'un triglycéride ?",
+                        options: ["3 ATP", "38 ATP", "130 ATP"],
+                        correct: 2,
+                        explanation: "Dans le système aérobie, la dégradation des triglycérides produit 130 ATP.[cite: 12]"
+                    },
+                    {
+                        question: "En combien de temps l'épuisement total des réserves en glycogène est-il atteint à 80% de VMA ?",
+                        options: ["30 minutes", "1 heure", "2 heures"],
+                        correct: 1,
+                        explanation: "L’épuisement total des réserves en glycogène est réalisé en 1h de travail musculaire à 80% de VMA.[cite: 12]"
+                    },
+                    {
+                        question: "Combien de temps faut-il pour une reconstitution totale (100%) des réserves de glycogène ?",
+                        options: ["5 heures", "24 heures", "46 heures"],
+                        correct: 2,
+                        explanation: "La reconstitution totale (concentration initiale) en glycogène est complète en 46h.[cite: 12]"
+                    },
+                    {
+                        question: "À quelle concentration de lactate sanguin situe-t-on classiquement le Seuil Anaérobie (SL2) ?",
+                        options: ["2 mmol/L", "4 mmol/L", "8 mmol/L"],
+                        correct: 1,
+                        explanation: "Le seuil Anaérobie ou Seuil Lactique 2 (SL2) est ciblé à 4 mmol.l de sang.[cite: 12]"
+                    },
+                    {
+                        question: "Le Seuil Ventilatoire 1 (SV1) correspond à un ratio de la ventilation où :",
+                        options: ["Le CO2 devient dominant", "L'O2 reste dominant (VE/VO2)", "L'O2 et le CO2 s'annulent"],
+                        correct: 1,
+                        explanation: "Le seuil ventilatoire 1 (SV1) correspond à un ratio où l’O2 reste dominant (VE/VO2).[cite: 12]"
+                    },
+                    {
+                        question: "Quelle cavité cardiaque reçoit le sang veineux vicié riche en CO2 ?",
+                        options: ["Ventricule gauche", "Oreillette gauche", "Oreillette droite"],
+                        correct: 2,
+                        explanation: "L’oreillette droite reçoit à sa base la veine cave inférieure et supérieure, ramenant le sang veineux vicié.[cite: 12]"
+                    },
+                    {
+                        question: "Par quelle valve le sang passe-t-il de l'oreillette droite au ventricule droit ?",
+                        options: ["Valve aortique", "Valve mitrale", "Valve tricuspide"],
+                        correct: 2,
+                        explanation: "Le cœur droit a deux cavités reliées par l’orifice tricuspidien géré par les valves tricuspides.[cite: 12]"
+                    },
+                    {
+                        question: "Quel nœud agit comme le pacemaker physiologique du cœur ?",
+                        options: ["Nœud atrio-ventriculaire (NAV)", "Nœud sinusal", "Réseau de Purkinje"],
+                        correct: 1,
+                        explanation: "Le siège de ce courant électrique est situé sur l'oreillette droite : le Nœud Sinusal, pacemaker physiologique.[cite: 12]"
+                    },
+                    {
+                        question: "Sur un ECG, que représente le complexe QRS ?",
+                        options: ["Dépolarisation des oreillettes", "Dépolarisation des ventricules", "Repolarisation des ventricules"],
+                        correct: 1,
+                        explanation: "L'onde QRS correspond au temps de dépolarisation du ventricule droit et gauche (systole ventriculaire).[cite: 12]"
+                    },
+                    {
+                        question: "Quelle est la fonction globale du système parasympathique ?",
+                        options: ["Ergotrope (accélérateur)", "Trophotrope (modérateur et régénérateur)", "Uniquement le contrôle de la respiration"],
+                        correct: 1,
+                        explanation: "Le système Parasympathique est dit TROPHOTROPE : il a un rôle de modérateur avec des fonctions de régénération.[cite: 12]"
+                    },
+                    {
+                        question: "Quel neurotransmetteur est principalement utilisé par le système sympathique (ergotrope) ?",
+                        options: ["Acétylcholine", "Catécholamines (noradrénaline/adrénaline)", "Sérotonine"],
+                        correct: 1,
+                        explanation: "Le système Sympathique agit grâce à l’activation des catécholamines : noradrénaline et adrénaline.[cite: 12]"
+                    },
+                    {
+                        question: "Que provoque le système sympathique sur les vaisseaux sanguins ?",
+                        options: ["Une vasodilatation", "Une vasoconstriction", "Aucun effet"],
+                        correct: 1,
+                        explanation: "Le système sympathique accélère le rythme cardiaque conjointement à une vasoconstriction de l’appareil sanguin.[cite: 12]"
+                    },
+                    {
+                        question: "Comment s'appelle l'augmentation de la FC à intensité d'exercice constante pour compenser l'augmentation de température ?",
+                        options: ["Bradycardie", "Tachycardie", "Dérive cardiaque"],
+                        correct: 2,
+                        explanation: "Durant un effort de longue durée à intensité constante, la variabilité ascendante de la FC due à la thermorégulation est appelée dérive Cardiaque.[cite: 12]"
+                    },
+                    {
+                        question: "Selon Gellish (2007), quelle est la formule de la FCmax théorique ?",
+                        options: ["220 - âge", "206,9 - (0.67 x âge)", "FCres + FCrep"],
+                        correct: 1,
+                        explanation: "La formule de Gellish et Coll (2007) est : FCmax Théorique = 206,9 - (0.67 x âge).[cite: 12]"
+                    },
+                    {
+                        question: "Laquelle de ces formules correspond au pourcentage de FCmax de réserve selon Karvonen ?",
+                        options: ["(FCexe - FCrep) / (FCmax - FCrep)", "FCexe / FCmax", "(FCmax - FCrep) x 0.8"],
+                        correct: 0,
+                        explanation: "Karvonen mesure le pourcentage de FCmax selon : % FCmax = (Fcexe - FCrep) / (FCmax - FCrep).[cite: 12]"
+                    },
+                    {
+                        question: "Comment évolue la FC de repos (FCrep) en hypoxie aiguë (altitude sans acclimatation) ?",
+                        options: ["Elle diminue fortement", "Elle reste stable", "Elle augmente"],
+                        correct: 2,
+                        explanation: "En hypoxie aiguë la fréquence cardiaque de repos augmente de façon proportionnelle au degré d’hypoxie.[cite: 12]"
+                    },
+                    {
+                        question: "Quelle méthode d'entraînement en altitude s'est avérée globalement inefficace selon les études récentes ?",
+                        options: ["LHTH", "LHTL", "IHE (Exposition intermittente hypoxique au repos)"],
+                        correct: 2,
+                        explanation: "Les études récentes ont montré l’inefficacité de la méthode d’exposition intermittente hypoxique (IHE) sur l'adaptation physiologique.[cite: 14]"
+                    },
+                    {
+                        question: "Qu'est-ce qu'une contracture (ou élongation) musculaire ?",
+                        options: ["Une rupture totale du tendon", "Un dépassement des limites physiologiques sans déchirure majeure", "Un hématome intramusculaire"],
+                        correct: 1,
+                        explanation: "L'élongation (contracture) est le dépassement des limites physiologiques des fibres musculaires sans déchirure anatomique majeure.[cite: 15]"
+                    },
+                    {
+                        question: "Lors d'une récupération passive après un exercice lactique épuisant, à quel moment le lactate est-il éliminé à 100% ?",
+                        options: ["20 minutes", "50 minutes", "1h30"],
+                        correct: 2,
+                        explanation: "En récupération passive, 100% du lactate est éliminé en 1h30min (contre 20min en récupération active).[cite: 12]"
+                    },
+                    {
+                        question: "Qu'indique l'onde T sur un tracé ECG ?",
+                        options: ["La contraction des oreillettes", "La dépolarisation des ventricules", "La repolarisation des ventricules"],
+                        correct: 2,
+                        explanation: "L'onde T correspond au temps de repolarisation des ventricules (diastole).[cite: 12]"
+                    },
+                    {
+                        question: "Combien d'énergie libère 1 gramme de lactate ?",
+                        options: ["0.26 kcal", "1 kcal", "23.5 kcal"],
+                        correct: 0,
+                        explanation: "1 mole de lactate = 23,5 kcal, et 1g de lactate = 0,26 kcal.[cite: 12]"
+                    },
+                    {
+                        question: "Quel est l'inconvénient majeur de la phosphorylation Anaérobie Alactique ?",
+                        options: ["Rendement très faible", "Très faible durée d'exercice (20 à 30s max)", "Produit massivement de l'acide métabolique"],
+                        correct: 1,
+                        explanation: "Inconvénients de la phosphorylation Anaérobie Alactique : Très faible durée de l’exercice musculaire < 20 à 30s.[cite: 12]"
+                    },
+                    {
+                        question: "L'acide lactique est composé de :",
+                        options: ["Lactate et ATP", "Pyruvate et ions H+", "Glycogène et O2"],
+                        correct: 1,
+                        explanation: "L’Acide Lactique = Pyruvate + H+ qui donne ensuite le Lactate.[cite: 12]"
+                    },
+                    {
+                        question: "Où se fait l'oxydation énergétique à l'intérieur de la fibre musculaire ?",
+                        options: ["Dans l'endomysium", "Dans le réticulum endoplasmique", "Dans les mitochondries"],
+                        correct: 2,
+                        explanation: "La fibre musculaire possède des mitochondries qui agissent comme transformateur énergétique (oxydation).[cite: 15]"
+                    },
+                    {
+                        question: "Si la température cutanée de l'athlète baisse (froid), l'organisme met en place une thermogenèse sans frisson qui est :",
+                        options: ["Une hyperventilation", "Une vasodilatation", "Une vasoconstriction des vaisseaux sanguins"],
+                        correct: 2,
+                        explanation: "La thermogenèse sans frisson correspond à la vasoconstriction des vaisseaux sanguins diminuant le flux sanguin cutané.[cite: 13]"
+                    },
+                    {
+                        question: "Un athlète a une FCrep de 60 et une FCmax de 200. À quelle FC correspond un effort à 80% selon la formule de Karvonen ?",
+                        options: ["160 bpm", "172 bpm", "180 bpm"],
+                        correct: 1,
+                        explanation: "Calcul: 60 + 0,8 x (200 - 60) = 60 + (0.8 x 140) = 60 + 112 = 172 bpm.[cite: 12]"
+                    },
+                    {
+                        question: "Quel est le but d'un entraînement ciblant la Puissance Anaérobie Lactique (PAL) ?",
+                        options: ["Produire le moins d'acide possible", "Produire le plus d'acide métabolique possible pour générer un max d'énergie", "Développer le système aérobie exclusivement"],
+                        correct: 1,
+                        explanation: "L'entraînement vise à produire le plus possible d’acide métabolique pour produire le plus d’énergie possible (augmenter sa PAL).[cite: 12]"
+                    },
+                    {
+                        question: "À quelle valeur est situé le Seuil Aérobie (SL1) ?",
+                        options: ["2 mmol/L de sang", "4 mmol/L de sang", "8 mmol/L de sang"],
+                        correct: 0,
+                        explanation: "Le seuil Aérobie ou encore seuil lactique (SL1) est ciblé à 2mmol/L de sang.[cite: 12]"
+                    },
+                    {
+                        question: "Comment varie la fréquence cardiaque de repos avec un surentraînement prononcé ?",
+                        options: ["Elle diminue", "Elle augmente massivement", "Elle reste inchangée"],
+                        correct: 0,
+                        explanation: "L’analyse montre que la FCrep diminue lors d’un sur-entraînement (potentiellement lié à un surmenage du parasympathique).[cite: 12]"
+                    },
+                    {
+                        question: "Qu'est-ce qu'une contusion musculaire (béquille) ?",
+                        options: ["Déchirure d'un faisceau", "Lésion traumatique directe provoquant un écrasement des fibres et un hématome", "Désinsertion du tendon"],
+                        correct: 1,
+                        explanation: "La myosite / contusion (béquille) est une lésion traumatique directe provoquant un écrasement des fibres musculaires et un hématome.[cite: 15]"
+                    },
+                    {
+                        question: "Quel type de récupération permet d'éliminer 50% du lactate en seulement 6 minutes ?",
+                        options: ["Récupération passive", "Récupération active", "Massage profond"],
+                        correct: 1,
+                        explanation: "En récupération active, 50% du lactate est éliminé en 6min.[cite: 12]"
+                    },
+                    {
+                        question: "À quelle vitesse le système nerveux autonome réagit-il face à une perturbation ?",
+                        options: ["En quelques heures", "En quelques minutes", "De l'ordre de la milliseconde"],
+                        correct: 2,
+                        explanation: "La voie nerveuse du SNA donne des réponses très rapides voire immédiates (de l’ordre de la milliseconde).[cite: 12]"
+                    },
+                    {
+                        question: "Que se passe-t-il pendant la repolarisation cardiaque ?",
+                        options: ["Les ventricules se contractent", "Le cœur retourne à son niveau électrique initial (diastole)", "Les valves se ferment toutes en même temps"],
+                        correct: 1,
+                        explanation: "Le temps de repolarisation correspond au retour au niveau initial (diastole) des oreillettes ou ventricules.[cite: 12]"
+                    },
+                    {
+                        question: "Quel organe est responsable du contrôle central de la température corporelle (le thermostat) ?",
+                        options: ["Le cœur", "Le thalamus", "L'hypothalamus"],
+                        correct: 2,
+                        explanation: "Pour réguler l’augmentation de chaleur, le corps utilise l’hypothalamus pour jouer un rôle de thermostat (37°).[cite: 13]"
+                    },
+                    {
+                        question: "Comment évolue le métabolisme global sous l'influence du système parasympathique ?",
+                        options: ["Il augmente", "Il diminue", "Il se stabilise à son maximum"],
+                        correct: 1,
+                        explanation: "Le système parasympathique agit sur la diminution du métabolisme et de la fréquence respiratoire.[cite: 12]"
+                    }
+                ],
+                schemas: []
+            },
             sociologie: { nom: "Sociologie", icon: "fa-users", couleur: "text-blue-500", flashcards: [], qcms: [], schemas: [] },
             athletisme: { nom: "Athlétisme", icon: "fa-running", couleur: "text-orange-500", flashcards: [], qcms: [], schemas: [] },
             cirque: { nom: "Cirque", icon: "fa-tent", couleur: "text-purple-500", flashcards: [], qcms: [], schemas: [] },
@@ -841,6 +846,7 @@
 
         let matiereActive = null;
         let indexSchemaActif = 0;
+        let reponsesSchemaAffichees = false;
 
         // ==========================================
         // LOGIQUE D'AFFICHAGE ET DE NAVIGATION
@@ -878,7 +884,7 @@
             
             document.getElementById('vue-dashboard').classList.add('hidden');
             document.getElementById('vue-matiere').classList.remove('hidden');
-            document.getElementById('btn-retour').classList.add('hidden'); // Géré par le header en haut à droite
+            document.getElementById('btn-retour').classList.remove('hidden');
             
             changerOnglet('apprentissage');
             chargerContenuMatiere();
@@ -933,13 +939,24 @@
                 containerFlashcards.innerHTML = htmlFlashcards;
             }
 
-            // QCM
+            // QCM avec tirage aléatoire de 15 questions maximum
             const containerQcms = document.getElementById('container-qcms');
             if (!matiere.qcms || matiere.qcms.length === 0) {
                 containerQcms.innerHTML = "<p class='italic text-gray-400'>Aucun QCM pour le moment.</p>";
             } else {
                 let htmlQcms = '<div class="space-y-6">';
-                matiere.qcms.forEach((qcm, indexQcm) => {
+                
+                // Algorithme de mélange aléatoire (Fisher-Yates)
+                let listeQcms = [...matiere.qcms];
+                for (let i = listeQcms.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [listeQcms[i], listeQcms[j]] = [listeQcms[j], listeQcms[i]];
+                }
+                const qcmsAafficher = listeQcms.slice(0, 15);
+                
+                htmlQcms += `<p class="text-sm font-bold text-indigo-600 dark:text-indigo-400 mb-4"><i class="fa-solid fa-shuffle mr-2"></i> Série aléatoire : ${qcmsAafficher.length} questions sur ${matiere.qcms.length} disponibles.</p>`;
+
+                qcmsAafficher.forEach((qcm, indexQcm) => {
                     htmlQcms += `
                     <div class="bg-gray-50 dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-700">
                         <p class="font-bold text-gray-800 dark:text-gray-200 mb-4 text-lg">${indexQcm + 1}. ${qcm.question}</p>
@@ -1014,7 +1031,65 @@
 
         function changerSchemaActif(index) {
             indexSchemaActif = parseInt(index);
+            reponsesSchemaAffichees = false;
             chargerSchema();
+        }
+
+        function toggleReponsesSchema() {
+            reponsesSchemaAffichees = !reponsesSchemaAffichees;
+            
+            const solutions = document.querySelectorAll('.schema-solution');
+            solutions.forEach(el => {
+                if (reponsesSchemaAffichees) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+            
+            majBoutonsReponses();
+        }
+
+        function majBoutonsReponses() {
+            const texte = reponsesSchemaAffichees ? "Masquer les réponses" : "Afficher les réponses";
+            const icone = reponsesSchemaAffichees ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
+
+            const btnBottom = document.getElementById('btn-reponses-schema');
+            const txtBottom = document.getElementById('texte-btn-reponses');
+            const icoBottom = document.getElementById('icone-btn-reponses');
+            if (txtBottom) txtBottom.textContent = texte;
+            if (icoBottom) icoBottom.className = icone;
+            if (btnBottom) {
+                if (reponsesSchemaAffichees) {
+                    btnBottom.classList.add('bg-indigo-50', 'dark:bg-indigo-900/40');
+                } else {
+                    btnBottom.classList.remove('bg-indigo-50', 'dark:bg-indigo-900/40');
+                }
+            }
+
+            const btnTop = document.getElementById('btn-reponses-schema-top');
+            const txtTop = document.getElementById('texte-btn-reponses-top');
+            const icoTop = document.getElementById('icone-btn-reponses-top');
+            if (txtTop) txtTop.textContent = texte;
+            if (icoTop) icoTop.className = icone;
+            if (btnTop) {
+                if (reponsesSchemaAffichees) {
+                    btnTop.classList.add('bg-indigo-100', 'dark:bg-indigo-900/60');
+                } else {
+                    btnTop.classList.remove('bg-indigo-100', 'dark:bg-indigo-900/60');
+                }
+            }
+        }
+
+        function formaterReponsesValides(reponsesValides) {
+            if (!reponsesValides || reponsesValides.length === 0) return "";
+            const unique = [...new Set(reponsesValides.map(r => r.trim()))];
+            const principale = unique[0];
+            if (unique.length === 1) {
+                return `<strong class="text-emerald-900 dark:text-emerald-300">${principale}</strong>`;
+            }
+            const variantes = unique.slice(1).join(', ');
+            return `<strong class="text-emerald-900 dark:text-emerald-300">${principale}</strong> <span class="text-xs text-emerald-700 dark:text-emerald-400 font-normal">(ou ${variantes})</span>`;
         }
 
         function chargerSchema() {
@@ -1023,16 +1098,21 @@
             const imgSchema = document.getElementById('schema-image');
             const placeholder = document.getElementById('schema-placeholder');
             const btnValider = document.getElementById('btn-valider-schema');
-            const btnAfficher = document.getElementById('btn-afficher-reponses');
+            const btnReponses = document.getElementById('btn-reponses-schema');
+            const btnReponsesTop = document.getElementById('btn-reponses-schema-top');
             const resultatDiv = document.getElementById('schema-resultat');
             
+            reponsesSchemaAffichees = false;
+            majBoutonsReponses();
+
             if (!schemas || schemas.length === 0) {
                 document.getElementById('schema-titre').textContent = "Aucun schéma disponible";
                 imgSchema.classList.add('hidden');
                 placeholder.classList.remove('hidden');
                 containerLegendes.innerHTML = "<p class='text-gray-400 italic'>Les champs de réponse apparaîtront ici.</p>";
                 btnValider.classList.add('hidden');
-                btnAfficher.classList.add('hidden');
+                if (btnReponses) btnReponses.classList.add('hidden');
+                if (btnReponsesTop) btnReponsesTop.classList.add('hidden');
                 resultatDiv.classList.add('hidden');
                 return;
             }
@@ -1044,22 +1124,47 @@
             imgSchema.classList.remove('hidden');
             placeholder.classList.add('hidden');
             btnValider.classList.remove('hidden');
-            btnAfficher.classList.remove('hidden');
+            if (btnReponses) btnReponses.classList.remove('hidden');
+            if (btnReponsesTop) btnReponsesTop.classList.remove('hidden');
             resultatDiv.classList.add('hidden');
             
             containerLegendes.innerHTML = ''; 
 
             schemaData.legendes.forEach(legende => {
                 const div = document.createElement('div');
-                div.className = "flex items-center gap-3";
+                div.className = "flex items-start gap-3";
+                const reponseAffichee = formaterReponsesValides(legende.reponsesValides);
                 div.innerHTML = `
-                    <div class="bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-300 font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 shadow-sm border border-indigo-200 dark:border-indigo-800">
+                    <div class="bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-300 font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 shadow-sm border border-indigo-200 dark:border-indigo-800 mt-1">
                         ${legende.numero}
                     </div>
-                    <input type="text" id="reponse-${legende.numero}" 
-                           class="w-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition" 
-                           placeholder="Légende n°${legende.numero}...">
+                    <div class="flex-grow">
+                        <input type="text" id="reponse-${legende.numero}" 
+                               class="w-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition" 
+                               placeholder="Légende n°${legende.numero}...">
+                        <div id="solution-${legende.numero}" class="schema-solution ${reponsesSchemaAffichees ? '' : 'hidden'} mt-1.5 text-sm bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 rounded-lg px-3 py-1.5 flex items-center justify-between gap-2 shadow-xs">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <i class="fa-solid fa-lightbulb text-amber-500 flex-shrink-0 text-xs"></i>
+                                <span class="text-xs sm:text-sm">Réponse : ${reponseAffichee}</span>
+                            </div>
+                            <button type="button" class="btn-remplir ml-auto text-xs bg-emerald-100 dark:bg-emerald-900/60 hover:bg-emerald-200 dark:hover:bg-emerald-900 text-emerald-800 dark:text-emerald-200 font-medium px-2 py-0.5 rounded transition flex items-center gap-1 flex-shrink-0" title="Remplir ce champ">
+                                <i class="fa-solid fa-pen text-[10px]"></i> Remplir
+                            </button>
+                        </div>
+                    </div>
                 `;
+
+                const btnRemplir = div.querySelector('.btn-remplir');
+                if (btnRemplir) {
+                    btnRemplir.addEventListener('click', () => {
+                        const input = div.querySelector(`#reponse-${legende.numero}`);
+                        if (input) {
+                            input.value = legende.reponsesValides[0];
+                            input.focus();
+                        }
+                    });
+                }
+
                 containerLegendes.appendChild(div);
             });
         }
@@ -1119,43 +1224,4 @@
                 
                 if (estCorrect) {
                     inputElement.classList.remove('border-gray-200', 'dark:border-gray-700', 'border-red-400', 'bg-red-50', 'text-red-800');
-                    inputElement.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-900/30', 'text-green-800', 'dark:text-green-300', 'font-medium');
-                    score++;
-                } else {
-                    inputElement.classList.remove('border-gray-200', 'dark:border-gray-700', 'border-green-500', 'bg-green-50', 'text-green-800');
-                    inputElement.classList.add('border-red-400', 'bg-red-50', 'dark:bg-red-900/30', 'text-red-800', 'dark:text-red-300');
-                }
-            });
-
-            const resultatDiv = document.getElementById('schema-resultat');
-            resultatDiv.classList.remove('hidden', 'bg-green-100', 'dark:bg-green-900/50', 'text-green-800', 'dark:text-green-300', 'bg-orange-100', 'dark:bg-orange-900/50', 'text-orange-800', 'dark:text-orange-300');
-            
-            if(score === schemaData.legendes.length) {
-                resultatDiv.classList.add('bg-green-100', 'dark:bg-green-900/50', 'text-green-800', 'dark:text-green-300');
-                resultatDiv.innerHTML = `<i class="fa-solid fa-trophy mr-2"></i> Parfait ! Vous avez ${score}/${schemaData.legendes.length} bonnes réponses.`;
-            } else {
-                resultatDiv.classList.add('bg-orange-100', 'dark:bg-orange-900/50', 'text-orange-800', 'dark:text-orange-300');
-                resultatDiv.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2"></i> Vous avez ${score}/${schemaData.legendes.length}. Corrigez les cases rouges et validez à nouveau !`;
-            }
-        }
-
-        function afficherReponses() {
-            const schemaData = appData[matiereActive].schemas[indexSchemaActif];
-            if(!schemaData) return;
-
-            schemaData.legendes.forEach(legende => {
-                const inputElement = document.getElementById(`reponse-${legende.numero}`);
-                inputElement.value = legende.reponsesValides[0];
-                
-                inputElement.classList.remove('border-red-400', 'bg-red-50', 'text-red-800', 'border-green-500', 'bg-green-50', 'text-green-800', 'dark:bg-red-900/30', 'dark:bg-green-900/30');
-                inputElement.classList.add('border-blue-300', 'bg-blue-50', 'dark:bg-blue-900/30', 'text-blue-900', 'dark:text-blue-200', 'font-medium');
-            });
-
-            const resultatDiv = document.getElementById('schema-resultat');
-            resultatDiv.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-orange-100', 'text-orange-800', 'dark:bg-green-900/50', 'dark:bg-orange-900/50');
-            resultatDiv.classList.add('bg-blue-100', 'dark:bg-blue-900/50', 'text-blue-900', 'dark:text-blue-200');
-            resultatDiv.innerHTML = `<i class="fa-solid fa-eye mr-2"></i> Les réponses officielles ont été affichées.`;
-        }
-    </script>
-</body>
-</html>
+                    inputElement.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-900
