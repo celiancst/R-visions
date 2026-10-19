@@ -1,32 +1,48 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Révisions STAPS</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        body { font-family: 'Inter', sans-serif; }
         .tab-active { border-bottom: 4px solid #4f46e5; color: #4f46e5; font-weight: bold; }
         .tab-inactive { color: #6b7280; }
         .tab-inactive:hover { color: #374151; }
+        html.dark .tab-active { border-bottom: 4px solid #818cf8; color: #818cf8; }
+        html.dark .tab-inactive { color: #9ca3af; }
+        html.dark .tab-inactive:hover { color: #e5e7eb; }
     </style>
 </head>
-<body class="text-gray-800 h-screen flex flex-col">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 h-screen flex flex-col transition-colors duration-300">
 
     <!-- EN-TÊTE -->
-    <header class="bg-white shadow-sm sticky top-0 z-10">
+    <header class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10 transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="bg-indigo-600 text-white p-2 rounded-lg">
                     <i class="fa-solid fa-graduation-cap text-xl"></i>
                 </div>
-                <h1 class="text-2xl font-bold text-gray-800">STAPS <span class="text-indigo-600">Révisions</span></h1>
+                <h1 class="text-2xl font-bold text-gray-800 dark:text-white">STAPS <span class="text-indigo-600 dark:text-indigo-400">Révisions</span></h1>
             </div>
-            <button id="btn-retour" onclick="afficherDashboard()" class="hidden flex items-center gap-2 text-gray-600 hover:text-indigo-600 font-medium transition">
-                <i class="fa-solid fa-arrow-left"></i> Retour aux matières
-            </button>
+            
+            <div class="flex items-center gap-4">
+                <button id="btn-retour" onclick="afficherDashboard()" class="hidden flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition">
+                    <i class="fa-solid fa-arrow-left"></i> Retour aux matières
+                </button>
+                
+                <!-- BOUTON MODE SOMBRE -->
+                <button onclick="toggleDarkMode()" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-600 transition shadow-sm" title="Changer de mode">
+                    <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -35,7 +51,7 @@
 
         <!-- VUE 1 : DASHBOARD -->
         <div id="vue-dashboard" class="block">
-            <h2 class="text-xl text-gray-500 mb-6 font-medium">Choisissez une matière à réviser :</h2>
+            <h2 class="text-xl text-gray-500 dark:text-gray-400 mb-6 font-medium">Choisissez une matière à réviser :</h2>
             <div id="grille-matieres" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
         </div>
 
@@ -48,7 +64,7 @@
             </div>
 
             <!-- ONGLETS -->
-            <div class="flex border-b border-gray-200 mb-8 overflow-x-auto">
+            <div class="flex border-b border-gray-200 dark:border-gray-700 mb-8 overflow-x-auto">
                 <button onclick="changerOnglet('apprentissage')" id="onglet-apprentissage" class="tab-active px-6 py-3 text-lg transition-colors duration-200 focus:outline-none whitespace-nowrap">
                     <i class="fa-solid fa-book-open mr-2"></i> Apprentissage
                 </button>
@@ -61,14 +77,14 @@
             <div id="contenu-apprentissage" class="block">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Flashcards -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
                         <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-clone text-indigo-500"></i> Lexique & Flashcards</h3>
-                        <div id="container-flashcards" class="text-gray-500 italic"></div>
+                        <div id="container-flashcards" class="text-gray-500 dark:text-gray-400 italic"></div>
                     </div>
                     <!-- QCM -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
                         <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-list-check text-indigo-500"></i> QCM d'entraînement</h3>
-                        <div id="container-qcms" class="text-gray-500 italic"></div>
+                        <div id="container-qcms" class="text-gray-500 dark:text-gray-400 italic"></div>
                     </div>
                 </div>
             </div>
@@ -77,20 +93,20 @@
             <div id="contenu-evaluation" class="hidden">
                 
                 <!-- SÉLECTEUR DE SCHÉMA -->
-                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <label for="select-schema" class="font-bold text-gray-700 flex items-center gap-2">
-                        <i class="fa-solid fa-filter text-indigo-600"></i> Choisir le schéma :
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors">
+                    <label for="select-schema" class="font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                        <i class="fa-solid fa-filter text-indigo-600 dark:text-indigo-400"></i> Choisir le schéma :
                     </label>
-                    <select id="select-schema" onchange="changerSchemaActif(this.value)" class="w-full sm:w-2/3 border-2 border-gray-200 rounded-xl px-4 py-2 font-medium text-gray-700 focus:outline-none focus:border-indigo-500 transition">
+                    <select id="select-schema" onchange="changerSchemaActif(this.value)" class="w-full sm:w-2/3 border-2 border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2 font-medium text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 focus:outline-none focus:border-indigo-500 transition">
                     </select>
                 </div>
 
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4" id="schema-titre">Titre du schéma</h3>
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 transition-colors">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4" id="schema-titre">Titre du schéma</h3>
                     
                     <div class="flex flex-col md:flex-row gap-8">
                         <!-- Zone Image -->
-                        <div class="md:w-1/2 flex justify-center items-start border-2 border-dashed border-gray-200 rounded-xl p-2 bg-gray-50 min-h-[300px] md:sticky md:top-4 self-start">
+                        <div class="md:w-1/2 flex justify-center items-start border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl p-2 bg-gray-50 dark:bg-gray-900 min-h-[300px]">
                             <img id="schema-image" src="" alt="Schéma" class="max-w-full h-auto rounded-lg shadow-sm hidden">
                             <div id="schema-placeholder" class="text-gray-400 flex flex-col items-center justify-center h-full w-full py-20">
                                 <i class="fa-regular fa-image text-4xl mb-2"></i>
@@ -100,12 +116,7 @@
                         
                         <!-- Zone des réponses numérotées -->
                         <div class="md:w-1/2">
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                                <p class="text-gray-500 text-sm"><i class="fa-solid fa-circle-info mr-2"></i>Remplissez les légendes correspondant aux numéros sur le schéma.</p>
-                                <button onclick="toggleReponsesSchema()" id="btn-reponses-schema-top" class="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg border border-indigo-200 transition flex items-center gap-1.5 self-start sm:self-auto whitespace-nowrap">
-                                    <i class="fa-solid fa-eye" id="icone-btn-reponses-top"></i> <span id="texte-btn-reponses-top">Afficher les réponses</span>
-                                </button>
-                            </div>
+                            <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm"><i class="fa-solid fa-circle-info mr-2"></i>Remplissez les légendes correspondant aux numéros sur le schéma.</p>
                             
                             <div id="schema-legendes-container" class="space-y-3 mb-6"></div>
                             
@@ -113,8 +124,8 @@
                                 <button onclick="validerSchema()" id="btn-valider-schema" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition shadow-md flex justify-center items-center gap-2 hidden">
                                     <i class="fa-solid fa-check-circle"></i> Valider mes réponses
                                 </button>
-                                <button onclick="toggleReponsesSchema()" id="btn-reponses-schema" class="flex-1 bg-white hover:bg-indigo-50 text-indigo-600 border-2 border-indigo-600 font-bold py-3 px-4 rounded-xl transition shadow-sm flex justify-center items-center gap-2 hidden">
-                                    <i class="fa-solid fa-eye" id="icone-btn-reponses"></i> <span id="texte-btn-reponses">Afficher les réponses</span>
+                                <button onclick="afficherReponses()" id="btn-afficher-reponses" class="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold py-3 px-4 rounded-xl transition shadow-sm flex justify-center items-center gap-2 hidden">
+                                    <i class="fa-solid fa-eye text-indigo-600 dark:text-indigo-400"></i> Afficher les réponses
                                 </button>
                             </div>
                             <div id="schema-resultat" class="mt-4 text-center font-bold text-lg hidden p-3 rounded-lg"></div>
@@ -127,6 +138,35 @@
     </main>
 
     <script>
+        // ==========================================
+        // GESTION DU MODE SOMBRE
+        // ==========================================
+        document.addEventListener("DOMContentLoaded", () => {
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon').className = "fa-solid fa-sun text-lg";
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('theme-icon').className = "fa-solid fa-moon text-lg";
+            }
+            genererDashboard();
+            afficherDashboard();
+        });
+
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                icon.className = "fa-solid fa-moon text-lg";
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                icon.className = "fa-solid fa-sun text-lg";
+            }
+        }
+
         // ==========================================
         // BASE DE DONNÉES STAPS
         // ==========================================
@@ -157,7 +197,7 @@
                         question: "Lequel de ces muscles est un moteur principal de la flexion de hanche ?",
                         options: ["Le grand glutéal (grand fessier).", "Le droit du fémur.", "Le piriforme."],
                         correct: 1,
-                        explanation: "Le muscle droit du fémur est l'un des moteurs principaux de la flexion de hanche, avec l'ilio-psoas, le sartorius et le TFL."
+                        explanation: "Le muscle droit du fémur est l'un des moteurs principales de la flexion de hanche, avec l'ilio-psoas, le sartorius et le TFL."
                     },
                     {
                         question: "Quel muscle profond de la jambe réalise à la fois une flexion et une rotation médiale (RM) du genou ?",
@@ -454,28 +494,22 @@
 
         let matiereActive = null;
         let indexSchemaActif = 0;
-        let reponsesSchemaAffichees = false;
 
         // ==========================================
         // LOGIQUE D'AFFICHAGE ET DE NAVIGATION
         // ==========================================
-        document.addEventListener("DOMContentLoaded", () => {
-            genererDashboard();
-            afficherDashboard();
-        });
-
         function genererDashboard() {
             const grille = document.getElementById('grille-matieres');
             grille.innerHTML = '';
             for (const [cle, matiere] of Object.entries(appData)) {
                 const carte = document.createElement('div');
-                carte.className = "bg-white p-6 rounded-2xl shadow-sm border border-gray-100 cursor-pointer hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group";
+                carte.className = "bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 cursor-pointer hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group";
                 carte.onclick = () => ouvrirMatiere(cle);
                 carte.innerHTML = `
-                    <div class="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center mb-4 group-hover:bg-indigo-50 transition-colors">
+                    <div class="w-16 h-16 rounded-full bg-gray-50 dark:bg-gray-700 flex items-center justify-center mb-4 group-hover:bg-indigo-50 dark:group-hover:bg-gray-600 transition-colors">
                         <i class="fa-solid ${matiere.icon} text-3xl ${matiere.couleur}"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800">${matiere.nom}</h3>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">${matiere.nom}</h3>
                 `;
                 grille.appendChild(carte);
             }
@@ -497,7 +531,7 @@
             
             document.getElementById('vue-dashboard').classList.add('hidden');
             document.getElementById('vue-matiere').classList.remove('hidden');
-            document.getElementById('btn-retour').classList.remove('hidden');
+            document.getElementById('btn-retour').classList.add('hidden'); // Géré par le header en haut à droite
             
             changerOnglet('apprentissage');
             chargerContenuMatiere();
@@ -538,12 +572,12 @@
                 let htmlFlashcards = '<div class="space-y-3">';
                 matiere.flashcards.forEach((carte) => {
                     htmlFlashcards += `
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 cursor-pointer hover:bg-indigo-50 hover:border-indigo-200 transition" onclick="this.querySelector('.reponse').classList.toggle('hidden')">
-                        <div class="font-bold text-gray-800 flex justify-between items-center">
+                    <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-indigo-50 dark:hover:bg-gray-700 hover:border-indigo-200 transition" onclick="this.querySelector('.reponse').classList.toggle('hidden')">
+                        <div class="font-bold text-gray-800 dark:text-gray-200 flex justify-between items-center">
                             <span>${carte.front}</span>
                             <i class="fa-solid fa-chevron-down text-gray-400"></i>
                         </div>
-                        <div class="reponse hidden mt-3 pt-3 border-t border-gray-200 text-indigo-700 font-medium leading-relaxed">
+                        <div class="reponse hidden mt-3 pt-3 border-t border-gray-200 dark:border-gray-700 text-indigo-600 dark:text-indigo-400 font-medium leading-relaxed">
                             ${carte.back}
                         </div>
                     </div>`;
@@ -560,22 +594,22 @@
                 let htmlQcms = '<div class="space-y-6">';
                 matiere.qcms.forEach((qcm, indexQcm) => {
                     htmlQcms += `
-                    <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
-                        <p class="font-bold text-gray-800 mb-4 text-lg">${indexQcm + 1}. ${qcm.question}</p>
+                    <div class="bg-gray-50 dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-700">
+                        <p class="font-bold text-gray-800 dark:text-gray-200 mb-4 text-lg">${indexQcm + 1}. ${qcm.question}</p>
                         <div class="space-y-2">`;
                     
                     qcm.options.forEach((opt, indexOpt) => {
                         const explicationEscaped = qcm.explanation.replace(/'/g, "\\'");
                         htmlQcms += `
                             <button onclick="verifierQCM(this, ${qcm.correct === indexOpt}, '${explicationEscaped}')" 
-                                    class="w-full text-left px-5 py-3 rounded-xl border-2 border-gray-200 hover:bg-indigo-50 hover:border-indigo-300 transition bg-white text-gray-700">
+                                    class="w-full text-left px-5 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-800 hover:border-indigo-300 transition bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300">
                                 ${opt}
                             </button>`;
                     });
                     
                     htmlQcms += `
                         </div>
-                        <div class="explication hidden mt-4 p-4 bg-blue-50 border border-blue-100 text-blue-800 rounded-xl text-sm leading-relaxed"></div>
+                        <div class="explication hidden mt-4 p-4 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 text-blue-800 dark:text-blue-300 rounded-xl text-sm leading-relaxed"></div>
                     </div>`;
                 });
                 htmlQcms += '</div>';
@@ -593,12 +627,12 @@
                 b.classList.add('opacity-60', 'cursor-not-allowed');
             });
 
-            btnElement.classList.remove('opacity-60', 'border-gray-200');
+            btnElement.classList.remove('opacity-60', 'border-gray-200', 'dark:border-gray-700');
             if (isCorrect) {
-                btnElement.classList.add('bg-green-100', 'border-green-500', 'text-green-900', 'font-bold');
+                btnElement.classList.add('bg-green-100', 'dark:bg-green-900/40', 'border-green-500', 'text-green-900', 'dark:text-green-300', 'font-bold');
                 btnElement.innerHTML = '<i class="fa-solid fa-check mr-2"></i> ' + btnElement.innerHTML;
             } else {
-                btnElement.classList.add('bg-red-100', 'border-red-400', 'text-red-900');
+                btnElement.classList.add('bg-red-100', 'dark:bg-red-900/40', 'border-red-400', 'text-red-900', 'dark:text-red-300');
                 btnElement.innerHTML = '<i class="fa-solid fa-xmark mr-2"></i> ' + btnElement.innerHTML;
             }
 
@@ -633,65 +667,7 @@
 
         function changerSchemaActif(index) {
             indexSchemaActif = parseInt(index);
-            reponsesSchemaAffichees = false;
             chargerSchema();
-        }
-
-        function toggleReponsesSchema() {
-            reponsesSchemaAffichees = !reponsesSchemaAffichees;
-            
-            const solutions = document.querySelectorAll('.schema-solution');
-            solutions.forEach(el => {
-                if (reponsesSchemaAffichees) {
-                    el.classList.remove('hidden');
-                } else {
-                    el.classList.add('hidden');
-                }
-            });
-            
-            majBoutonsReponses();
-        }
-
-        function majBoutonsReponses() {
-            const texte = reponsesSchemaAffichees ? "Masquer les réponses" : "Afficher les réponses";
-            const icone = reponsesSchemaAffichees ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
-
-            const btnBottom = document.getElementById('btn-reponses-schema');
-            const txtBottom = document.getElementById('texte-btn-reponses');
-            const icoBottom = document.getElementById('icone-btn-reponses');
-            if (txtBottom) txtBottom.textContent = texte;
-            if (icoBottom) icoBottom.className = icone;
-            if (btnBottom) {
-                if (reponsesSchemaAffichees) {
-                    btnBottom.classList.add('bg-indigo-50');
-                } else {
-                    btnBottom.classList.remove('bg-indigo-50');
-                }
-            }
-
-            const btnTop = document.getElementById('btn-reponses-schema-top');
-            const txtTop = document.getElementById('texte-btn-reponses-top');
-            const icoTop = document.getElementById('icone-btn-reponses-top');
-            if (txtTop) txtTop.textContent = texte;
-            if (icoTop) icoTop.className = icone;
-            if (btnTop) {
-                if (reponsesSchemaAffichees) {
-                    btnTop.classList.add('bg-indigo-100');
-                } else {
-                    btnTop.classList.remove('bg-indigo-100');
-                }
-            }
-        }
-
-        function formaterReponsesValides(reponsesValides) {
-            if (!reponsesValides || reponsesValides.length === 0) return "";
-            const unique = [...new Set(reponsesValides.map(r => r.trim()))];
-            const principale = unique[0];
-            if (unique.length === 1) {
-                return `<strong class="text-emerald-900">${principale}</strong>`;
-            }
-            const variantes = unique.slice(1).join(', ');
-            return `<strong class="text-emerald-900">${principale}</strong> <span class="text-xs text-emerald-700 font-normal">(ou ${variantes})</span>`;
         }
 
         function chargerSchema() {
@@ -700,21 +676,16 @@
             const imgSchema = document.getElementById('schema-image');
             const placeholder = document.getElementById('schema-placeholder');
             const btnValider = document.getElementById('btn-valider-schema');
-            const btnReponses = document.getElementById('btn-reponses-schema');
-            const btnReponsesTop = document.getElementById('btn-reponses-schema-top');
+            const btnAfficher = document.getElementById('btn-afficher-reponses');
             const resultatDiv = document.getElementById('schema-resultat');
             
-            reponsesSchemaAffichees = false;
-            majBoutonsReponses();
-
             if (!schemas || schemas.length === 0) {
                 document.getElementById('schema-titre').textContent = "Aucun schéma disponible";
                 imgSchema.classList.add('hidden');
                 placeholder.classList.remove('hidden');
                 containerLegendes.innerHTML = "<p class='text-gray-400 italic'>Les champs de réponse apparaîtront ici.</p>";
                 btnValider.classList.add('hidden');
-                if (btnReponses) btnReponses.classList.add('hidden');
-                if (btnReponsesTop) btnReponsesTop.classList.add('hidden');
+                btnAfficher.classList.add('hidden');
                 resultatDiv.classList.add('hidden');
                 return;
             }
@@ -726,47 +697,22 @@
             imgSchema.classList.remove('hidden');
             placeholder.classList.add('hidden');
             btnValider.classList.remove('hidden');
-            if (btnReponses) btnReponses.classList.remove('hidden');
-            if (btnReponsesTop) btnReponsesTop.classList.remove('hidden');
+            btnAfficher.classList.remove('hidden');
             resultatDiv.classList.add('hidden');
             
             containerLegendes.innerHTML = ''; 
 
             schemaData.legendes.forEach(legende => {
                 const div = document.createElement('div');
-                div.className = "flex items-start gap-3";
-                const reponseAffichee = formaterReponsesValides(legende.reponsesValides);
+                div.className = "flex items-center gap-3";
                 div.innerHTML = `
-                    <div class="bg-indigo-100 text-indigo-800 font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 shadow-sm border border-indigo-200 mt-1">
+                    <div class="bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-300 font-bold rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 shadow-sm border border-indigo-200 dark:border-indigo-800">
                         ${legende.numero}
                     </div>
-                    <div class="flex-grow">
-                        <input type="text" id="reponse-${legende.numero}" 
-                               class="w-full border-2 border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition" 
-                               placeholder="Légende n°${legende.numero}...">
-                        <div id="solution-${legende.numero}" class="schema-solution ${reponsesSchemaAffichees ? '' : 'hidden'} mt-1.5 text-sm bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg px-3 py-1.5 flex items-center justify-between gap-2 shadow-xs">
-                            <div class="flex items-center gap-2 min-w-0">
-                                <i class="fa-solid fa-lightbulb text-amber-500 flex-shrink-0 text-xs"></i>
-                                <span class="text-xs sm:text-sm">Réponse : ${reponseAffichee}</span>
-                            </div>
-                            <button type="button" class="btn-remplir ml-auto text-xs bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-medium px-2 py-0.5 rounded transition flex items-center gap-1 flex-shrink-0" title="Remplir ce champ">
-                                <i class="fa-solid fa-pen text-[10px]"></i> Remplir
-                            </button>
-                        </div>
-                    </div>
+                    <input type="text" id="reponse-${legende.numero}" 
+                           class="w-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition" 
+                           placeholder="Légende n°${legende.numero}...">
                 `;
-
-                const btnRemplir = div.querySelector('.btn-remplir');
-                if (btnRemplir) {
-                    btnRemplir.addEventListener('click', () => {
-                        const input = div.querySelector(`#reponse-${legende.numero}`);
-                        if (input) {
-                            input.value = legende.reponsesValides[0];
-                            input.focus();
-                        }
-                    });
-                }
-
                 containerLegendes.appendChild(div);
             });
         }
@@ -825,32 +771,43 @@
                 });
                 
                 if (estCorrect) {
-                    inputElement.classList.remove('border-gray-200', 'border-red-400', 'focus:border-indigo-500', 'focus:ring-indigo-200');
-                    inputElement.classList.add('border-green-500', 'bg-green-50', 'text-green-800', 'font-medium');
+                    inputElement.classList.remove('border-gray-200', 'dark:border-gray-700', 'border-red-400', 'bg-red-50', 'text-red-800');
+                    inputElement.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-900/30', 'text-green-800', 'dark:text-green-300', 'font-medium');
                     score++;
                 } else {
-                    inputElement.classList.remove('border-gray-200', 'border-green-500', 'focus:border-indigo-500', 'focus:ring-indigo-200');
-                    inputElement.classList.add('border-red-400', 'bg-red-50', 'text-red-800');
+                    inputElement.classList.remove('border-gray-200', 'dark:border-gray-700', 'border-green-500', 'bg-green-50', 'text-green-800');
+                    inputElement.classList.add('border-red-400', 'bg-red-50', 'dark:bg-red-900/30', 'text-red-800', 'dark:text-red-300');
                 }
             });
 
             const resultatDiv = document.getElementById('schema-resultat');
-            resultatDiv.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-orange-100', 'text-orange-800');
+            resultatDiv.classList.remove('hidden', 'bg-green-100', 'dark:bg-green-900/50', 'text-green-800', 'dark:text-green-300', 'bg-orange-100', 'dark:bg-orange-900/50', 'text-orange-800', 'dark:text-orange-300');
             
             if(score === schemaData.legendes.length) {
-                resultatDiv.classList.add('bg-green-100', 'text-green-800');
+                resultatDiv.classList.add('bg-green-100', 'dark:bg-green-900/50', 'text-green-800', 'dark:text-green-300');
                 resultatDiv.innerHTML = `<i class="fa-solid fa-trophy mr-2"></i> Parfait ! Vous avez ${score}/${schemaData.legendes.length} bonnes réponses.`;
             } else {
-                resultatDiv.classList.add('bg-orange-100', 'text-orange-800');
-                resultatDiv.innerHTML = `
-                    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-                        <span><i class="fa-solid fa-triangle-exclamation mr-2"></i> Vous avez ${score}/${schemaData.legendes.length}. Corrigez les cases rouges ou vérifiez les solutions !</span>
-                        <button onclick="if(!reponsesSchemaAffichees) toggleReponsesSchema()" class="text-sm bg-orange-200 hover:bg-orange-300 text-orange-900 font-bold px-3 py-1.5 rounded-lg transition whitespace-nowrap flex items-center gap-1.5">
-                            <i class="fa-solid fa-eye text-xs"></i> Voir les réponses
-                        </button>
-                    </div>
-                `;
+                resultatDiv.classList.add('bg-orange-100', 'dark:bg-orange-900/50', 'text-orange-800', 'dark:text-orange-300');
+                resultatDiv.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2"></i> Vous avez ${score}/${schemaData.legendes.length}. Corrigez les cases rouges et validez à nouveau !`;
             }
+        }
+
+        function afficherReponses() {
+            const schemaData = appData[matiereActive].schemas[indexSchemaActif];
+            if(!schemaData) return;
+
+            schemaData.legendes.forEach(legende => {
+                const inputElement = document.getElementById(`reponse-${legende.numero}`);
+                inputElement.value = legende.reponsesValides[0];
+                
+                inputElement.classList.remove('border-red-400', 'bg-red-50', 'text-red-800', 'border-green-500', 'bg-green-50', 'text-green-800', 'dark:bg-red-900/30', 'dark:bg-green-900/30');
+                inputElement.classList.add('border-blue-300', 'bg-blue-50', 'dark:bg-blue-900/30', 'text-blue-900', 'dark:text-blue-200', 'font-medium');
+            });
+
+            const resultatDiv = document.getElementById('schema-resultat');
+            resultatDiv.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-orange-100', 'text-orange-800', 'dark:bg-green-900/50', 'dark:bg-orange-900/50');
+            resultatDiv.classList.add('bg-blue-100', 'dark:bg-blue-900/50', 'text-blue-900', 'dark:text-blue-200');
+            resultatDiv.innerHTML = `<i class="fa-solid fa-eye mr-2"></i> Les réponses officielles ont été affichées.`;
         }
     </script>
 </body>
