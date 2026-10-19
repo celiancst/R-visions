@@ -19,6 +19,12 @@
         html.dark .tab-active { border-bottom: 4px solid #818cf8; color: #818cf8; }
         html.dark .tab-inactive { color: #9ca3af; }
         html.dark .tab-inactive:hover { color: #e5e7eb; }
+
+        /* Classes personnalisées pour l'effet 3D des Flashcards */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 h-screen flex flex-col transition-colors duration-300">
@@ -79,7 +85,7 @@
                     <!-- Flashcards -->
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
                         <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-clone text-indigo-500"></i> Lexique & Flashcards</h3>
-                        <div id="container-flashcards" class="text-gray-500 dark:text-gray-400 italic"></div>
+                        <div id="container-flashcards" class="text-gray-500 dark:text-gray-400 italic min-h-[300px]"></div>
                     </div>
                     <!-- QCM -->
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
@@ -173,7 +179,7 @@
         }
 
         // ==========================================
-        // BASE DE DONNÉES STAPS
+        // BASE DE DONNÉES STAPS (65 FLASHCARDS)
         // ==========================================
         const appData = {
             anatomie: {
@@ -183,7 +189,27 @@
                     { front: "Contre-nutation", back: "Bascule du sacrum où le promontoire sacré s'élève et la pointe du coccyx part en bas et en avant." },
                     { front: "Flexion de hanche", back: "Mouvement dans le plan sagittal qui réduit l'angle entre la cuisse et le tronc." },
                     { front: "Rotation Médiale (RM)", back: "Mouvement dans le plan horizontal où la face antérieure du membre regarde vers l'intérieur." },
-                    { front: "Voûte plantaire", back: "La structure arquée sous le pied qui agit comme un amortisseur." }
+                    { front: "Voûte plantaire", back: "La structure arquée sous le pied qui agit comme un amortisseur." },
+                    { front: "Os Coxal", back: "Os plat et pair du bassin, formé par la soudure de l'ilion, l'ischion et le pubis." },
+                    { front: "Fémur", back: "Os de la cuisse, c'est l'os le plus long, le plus lourd et le plus résistant du corps humain." },
+                    { front: "Patella (Rotule)", back: "Os sésamoïde volumineux situé à la partie antérieure du genou." },
+                    { front: "Tibia", back: "Os long, volumineux et médial de la jambe, qui supporte le poids du corps." },
+                    { front: "Fibula (Péroné)", back: "Os long, fin et latéral de la jambe, servant principalement d'insertion musculaire." },
+                    { front: "Talus (Astragale)", back: "Os supérieur du tarse qui s'articule avec le tibia et la fibula pour former la cheville." },
+                    { front: "Calcanéus", back: "Os du talon, c'est le plus volumineux des os du tarse." },
+                    { front: "Quadriceps fémoral", back: "Groupe musculaire antérieur de la cuisse (4 chefs) : principal extenseur du genou." },
+                    { front: "Ischio-jambiers", back: "Groupe musculaire postérieur de la cuisse (3 muscles) : fléchisseurs du genou et extenseurs de la hanche." },
+                    { front: "Triceps sural", back: "Muscles postérieurs du mollet (gastrocnémiens + soléaire) : principal fléchisseur plantaire de la cheville." },
+                    { front: "Grand glutéal (Fessier)", back: "Le plus puissant muscle extenseur et rotateur latéral de la hanche." },
+                    { front: "Moyen glutéal", back: "Principal muscle abducteur de la hanche, indispensable à la stabilisation du bassin à la marche." },
+                    { front: "Sartorius", back: "Muscle le plus long du corps, fléchisseur, abducteur et rotateur latéral de la hanche (muscle du tailleur)." },
+                    { front: "Gracile", back: "Muscle long et fin logé à la face médiale de la cuisse, appartient aux adducteurs." },
+                    { front: "Ilio-psoas", back: "Puissant fléchisseur de la hanche, s'insérant sur le petit trochanter du fémur." },
+                    { front: "Tenseur du Fascia Lata (TFL)", back: "Muscle abducteur et rotateur médial de la hanche, stabilisateur latéral du genou." },
+                    { front: "Articulation Coxo-fémorale", back: "Articulation de la hanche, de type énarthrose (sphéroïde), très stable." },
+                    { front: "Articulation Fémoro-tibiale", back: "Articulation principale du genou, de type bicondylaire." },
+                    { front: "Articulation Talocrurale", back: "Articulation de la cheville, de type ginglyme (trochléenne)." },
+                    { front: "Ligaments Croisés", back: "Ligaments du genou (LCA et LCP) assurant la stabilité antéro-postérieure de l'articulation." }
                 ],
                 qcms: [
                     {
@@ -193,110 +219,64 @@
                         explanation: "Le mouvement de Flexion / Extension s'effectue toujours dans le plan sagittal (la vue de profil) et s'articule autour d'un axe transversal."
                     },
                     {
-                        question: "Lors d'un atterrissage lourd, le sacrum effectue un mouvement de contre-nutation. Quelle en est la conséquence anatomique sur le bassin ?",
-                        options: ["Le diamètre du détroit supérieur diminue.", "Les ailes iliaques se rapprochent.", "Le diamètre du détroit supérieur augmente."],
-                        correct: 2,
-                        explanation: "La contre-nutation est le mouvement inverse de la nutation. Le sacrum bascule en arrière et en haut. En conséquence, les ailes iliaques s'éloignent."
-                    },
-                    {
                         question: "Lequel de ces muscles est un moteur principal de la flexion de hanche ?",
                         options: ["Le grand glutéal (grand fessier).", "Le droit du fémur.", "Le piriforme."],
                         correct: 1,
                         explanation: "Le muscle droit du fémur est l'un des moteurs principaux de la flexion de hanche, avec l'ilio-psoas, le sartorius et le TFL."
-                    },
-                    {
-                        question: "Quel muscle profond de la jambe réalise à la fois une flexion et une rotation médiale (RM) du genou ?",
-                        options: ["Le muscle tibial postérieur.", "Le muscle poplité.", "Le muscle plantaire."],
-                        correct: 1,
-                        explanation: "Le muscle poplité est le seul à agir directement sur le genou en effectuant une flexion couplée à une rotation médiale (RM)."
                     }
                 ],
-                schemas: [
-                    {
-                        titre: "Os coxal (vue antérieure)",
-                        imageUrl: "images/1.png",
-                        legendes: [
-                            { numero: 1, reponsesValides: ["crête iliaque"] },
-                            { numero: 2, reponsesValides: ["fosse iliaque"] },
-                            { numero: 3, reponsesValides: ["épine iliaque antéro-sup", "épine iliaque antéro-supérieure"] },
-                            { numero: 4, reponsesValides: ["épine iliaque antéro-inf", "épine iliaque antéro-inférieure"] },
-                            { numero: 5, reponsesValides: ["acétabulum"] },
-                            { numero: 6, reponsesValides: ["fémur"] }
-                        ]
-                    }
-                ]
+                schemas: []
             },
             physiologie: {
                 nom: "Physiologie", icon: "fa-heartbeat", couleur: "text-pink-500",
                 flashcards: [
-                    { front: "Homéostasie", back: "Capacité d’un organisme à maintenir son environnement interne stable." }
+                    { front: "Physiologie", back: "Étude du fonctionnement normal d’un organisme vivant et de ses processus chimiques et physiques." },
+                    { front: "Homéostasie", back: "Capacité d’un organisme à maintenir son environnement interne stable face à la variabilité extérieure." },
+                    { front: "Principe de la thermodynamique", back: "100% Énergie Chimique = 25% Énergie mécanique + 75% Énergie thermique (chaleur endogène)." },
+                    { front: "Gradient thermique", back: "Échange de chaleur réalisé selon une différence de température allant toujours du plus chaud au moins chaud." },
+                    { front: "Rayonnement", back: "Perte de chaleur sans contact direct (ex: infrarouge). Représente 60% de la perte de chaleur au repos à 21°C." },
+                    { front: "Convection", back: "Échange de chaleur avec un fluide (air, eau). L’échange est 25 fois plus important dans l’eau que dans l’air." },
+                    { front: "Évaporation", back: "Passage de l'état liquide à gazeux (sudation). Représente 80% des pertes de chaleur à l'exercice." },
+                    { front: "Déshydratation et Performance", back: "Une perte de 2% d'eau entraîne une perte de 20% de performance sur un exercice de plus de 30 min." },
+                    { front: "Frisson thermique", back: "Contractions musculaires involontaires convertissant 100% de l'énergie chimique en chaleur." },
+                    { front: "LHTH (Live High Train High)", back: "Vivre et s'entraîner en altitude (1500m-2500m) pendant 2 à 4 semaines." },
+                    { front: "LHTL (Live High Train Low)", back: "Vivre à 2500m (pour l'EPO) et s'entraîner à moins de 1500m pour conserver l'intensité." },
+                    { front: "Tendon", back: "Structure reliant l'os au muscle, d'une résistance 4 fois supérieure à celle du muscle." },
+                    { front: "Épimysium", back: "Membrane entourant le muscle entier, dans le prolongement du tissu tendineux." },
+                    { front: "Périmysium", back: "Membrane qui entoure spécifiquement un faisceau musculaire." },
+                    { front: "Endomysium", back: "Membrane qui entoure individuellement la fibre musculaire (cellule)." },
+                    { front: "Unité Motrice", back: "Un nerf moteur (motoneurone) et l'ensemble des fibres musculaires qu'il innerve." },
+                    { front: "Fibres Lentes (Type I)", back: "Fibres aérobies, rouges, riches en mitochondries et glycogène, innervées par de petits motoneurones." },
+                    { front: "Fibres Rapides (Type II)", back: "Fibres anaérobies, pour les sports de force, riches en composés phosphate, innervées par de gros motoneurones." },
+                    { front: "Rôle du Calcium (Ca2+)", back: "Il se fixe sur la troponine pour démasquer le site actif de l'actine et permettre l'accroche de la myosine." },
+                    { front: "Rôles de l'ATP", back: "1. Libérer la myosine. 2. Déplacer la myosine. 3. Fournir l'énergie (hydrolyse) pour tracter l'actine." },
+                    { front: "Anaérobie Alactique (Durée)", back: "Travail en puissance de 3 à 5s, travail en capacité inférieur à 20-30s. Utilise la phosphocréatine." },
+                    { front: "Anaérobie Lactique (Rendement)", back: "Dégradation d'1 mole de glycogène = 3 ATP + 2 moles de lactate." },
+                    { front: "Filière Aérobie (Rendement ATP)", back: "Glucose = 38 ATP. Lipides > 45 ATP. Triglycérides = 130 ATP." },
+                    { front: "Épuisement du glycogène", back: "Épuisement total en 1h à 80% de VMA, ou 1h30 à 2h à 75% de VMA." },
+                    { front: "Reconstitution du glycogène", back: "50% reconstitués dès la 5ème heure. Reconstitution totale complète en 46h." },
+                    { front: "Seuil Lactique 1 (SL1)", back: "Seuil aérobie ciblé à 2 mmol/L de sang." },
+                    { front: "Seuil Lactique 2 (SL2)", back: "Seuil anaérobie ciblé à 4 mmol/L de sang. Accumulation d'acide métabolique." },
+                    { front: "Cœur Droit", back: "Gère la petite circulation (pulmonaire). Reçoit le sang vicié par les veines caves et l'éjecte via l'artère pulmonaire." },
+                    { front: "Cœur Gauche", back: "Gère la grande circulation (systémique). Reçoit le sang oxygéné et l'éjecte via l'aorte." },
+                    { front: "Nœud Sinusal", back: "Le pacemaker physiologique du cœur, situé sur l'oreillette droite." },
+                    { front: "Onde P (ECG)", back: "Correspond à la dépolarisation et la contraction (systole) des oreillettes." },
+                    { front: "Complexe QRS (ECG)", back: "Correspond à la dépolarisation des ventricules via le réseau de Purkinje." },
+                    { front: "Onde T (ECG)", back: "Correspond à la repolarisation des ventricules (diastole)." },
+                    { front: "VFC (Variabilité FC)", back: "Variation des intervalles R-R, reflet de l'activité antagoniste du système sympatho-vagal." },
+                    { front: "Système Parasympathique", back: "Système Trophotrope : modérateur, freinateur, diminue la FC, utilise l'acétylcholine." },
+                    { front: "Système Sympathique", back: "Système Ergotrope : accélérateur, augmente la FC, prépare à l'action, utilise les catécholamines." },
+                    { front: "Dérive cardiaque", back: "Augmentation de la FC à intensité constante due à la thermorégulation (vasodilatation cutanée)." },
+                    { front: "FC Max Théorique (Astrand)", back: "Formule théorique : FCmax T = 220 - âge du sujet." },
+                    { front: "FC Max Théorique (Gellish)", back: "Formule théorique révisée : FCmax = 206,9 - (0.67 x âge)." },
+                    { front: "Formule de Karvonen", back: "% FCmax = (FC exercice - FCrepos) / (FCmax - FCrepos)." }
                 ],
                 qcms: [
-                    {
-                        question: "Lors d'un exercice, quelle proportion de l'énergie chimique est transformée en chaleur endogène (énergie thermique) ?",
-                        options: ["25%", "50%", "75%", "100%"],
-                        correct: 2,
-                        explanation: "Le principe de la thermodynamique stipule que 100% d'NRJ Chimique = 25% NRJ mécanique + 75% NRJ thermique (chaleur endogène)."
-                    },
-                    {
-                        question: "Quel processus d'échange de chaleur représente environ 80% des pertes thermiques lors d'un exercice physique ?",
-                        options: ["Le rayonnement", "La conduction", "La convection", "L'évaporation"],
-                        correct: 3,
-                        explanation: "En exercice près de 80% des pertes de chaleurs sont dues à l’évaporation (sudation)."
-                    },
                     {
                         question: "Combien de fois l'échange de chaleur par convection est-il plus important dans l'eau que dans l'air ?",
                         options: ["5 fois", "10 fois", "25 fois", "50 fois"],
                         correct: 2,
                         explanation: "L’échange de chaleur est 25 fois plus important dans l’eau que dans l’air."
-                    },
-                    {
-                        question: "Quel est l'effet principal d'une hygrométrie supérieure à 70% sur la performance sportive ?",
-                        options: ["Elle favorise l'évaporation", "Chaque palier de 5% d'humidité enlève 5% de performance", "Elle améliore la conduction nerveuse", "Elle réduit la fréquence cardiaque"],
-                        correct: 1,
-                        explanation: "Pour un air sec au-delà de 70% d’humidité dans l’air, pour chaque palier supplémentaire de 5%, il faut enlever 5% de performance."
-                    },
-                    {
-                        question: "Quelle proportion d'énergie le frisson thermique convertit-il en chaleur ?",
-                        options: ["25%", "50%", "75%", "100%"],
-                        correct: 3,
-                        explanation: "Le frisson thermique convertit 100% d’énergie chimique en énergie thermique pour réchauffer l'organisme."
-                    },
-                    {
-                        question: "Pourquoi la performance baisse-t-elle fortement dans un milieu chaud au niveau cardio-vasculaire ?",
-                        options: ["Le sang devient trop visqueux", "Le cœur ralentit par sécurité", "L'organisme privilégie la vasodilatation cutanée au détriment des muscles"],
-                        correct: 2,
-                        explanation: "Le système circulatoire donne la priorité à la thermorégulation, créant une vasodilatation cutanée au détriment des muscles actifs."
-                    },
-                    {
-                        question: "La méthode d'entraînement LHTL consiste à :",
-                        options: ["Vivre à 2500m et s'entraîner à 2500m", "Vivre à 2500m et s'entraîner à moins de 1500m", "Vivre en plaine et s'entraîner à 2500m"],
-                        correct: 1,
-                        explanation: "LHTL = S’entraîner bas et vivre haut. On vit entre 2000m et 3000m et on s'entraîne à une altitude inférieure à 1500m."
-                    },
-                    {
-                        question: "Quelle est la résistance du tendon par rapport au muscle ?",
-                        options: ["Égale", "2 fois supérieure", "4 fois supérieure"],
-                        correct: 2,
-                        explanation: "La résistance du tendon est bien supérieure au muscle (avec le tendon 4x supérieur au muscle)."
-                    },
-                    {
-                        question: "Comment nomme-t-on la membrane qui entoure un faisceau musculaire ?",
-                        options: ["Épimysium", "Endomysium", "Périmysium"],
-                        correct: 2,
-                        explanation: "Le périmysium correspond à la membrane qui entoure un faisceau musculaire."
-                    },
-                    {
-                        question: "Quelles sont les caractéristiques des fibres de Type I (Lentes) ?",
-                        options: ["Métabolisme anaérobie, forte puissance, grande taille", "Métabolisme aérobie, riches en mitochondries, innervées par de petits motoneurones", "Pauvres en mitochondries, forte fatigabilité"],
-                        correct: 1,
-                        explanation: "Les fibres lentes (Type I) sont riches en glycogène et en enzymes du métabolisme aérobie (mitochondries ++)."
-                    },
-                    {
-                        question: "Dans le sarcomère, quel élément masque initialement le site actif de l'actine ?",
-                        options: ["La myosine", "Le Calcium", "La troponine"],
-                        correct: 2,
-                        explanation: "Le site actif de réception sur l'actine est masqué par la troponine."
                     },
                     {
                         question: "Quelle enzyme présente sur la tête de myosine permet l'hydrolyse de l'ATP ?",
@@ -316,6 +296,9 @@
         let matiereActive = null;
         let indexSchemaActif = 0;
         let reponsesSchemaAffichees = false;
+        
+        // --- VARIABLES FLASHCARDS ---
+        let indexFlashcardActive = 0;
 
         // ==========================================
         // LOGIQUE D'AFFICHAGE ET DE NAVIGATION
@@ -386,38 +369,137 @@
         function chargerContenuMatiere() {
             const matiere = appData[matiereActive];
             
-            // Flashcards
-            const containerFlashcards = document.getElementById('container-flashcards');
-            if (!matiere.flashcards || matiere.flashcards.length === 0) {
-                containerFlashcards.innerHTML = "<p class='italic text-gray-400'>Aucune flashcard pour le moment.</p>";
-            } else {
-                let htmlFlashcards = '<div class="space-y-3">';
-                matiere.flashcards.forEach((carte) => {
-                    htmlFlashcards += `
-                    <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-indigo-50 dark:hover:bg-gray-700 hover:border-indigo-200 transition" onclick="this.querySelector('.reponse').classList.toggle('hidden')">
-                        <div class="font-bold text-gray-800 dark:text-gray-200 flex justify-between items-center">
-                            <span>${carte.front}</span>
-                            <i class="fa-solid fa-chevron-down text-gray-400"></i>
-                        </div>
-                        <div class="reponse hidden mt-3 pt-3 border-t border-gray-200 dark:border-gray-700 text-indigo-700 dark:text-indigo-400 font-medium leading-relaxed">
-                            ${carte.back}
-                        </div>
-                    </div>`;
-                });
-                htmlFlashcards += '</div>';
-                containerFlashcards.innerHTML = htmlFlashcards;
-            }
+            // Lancer le lecteur de Flashcards avec menu
+            chargerFlashcards(matiere);
 
             // QCM - Afficher l'écran d'accueil du mode QCM
             const containerQcms = document.getElementById('container-qcms');
             if (!matiere.qcms || matiere.qcms.length === 0) {
-                containerQcms.innerHTML = "<p class='italic text-gray-400'>Aucun QCM pour le moment.</p>";
+                containerQcms.innerHTML = "<p class='italic text-gray-400 mt-6'>Aucun QCM pour le moment.</p>";
             } else {
                 afficherAccueilQCM(matiere);
             }
         }
 
-        // --- NOUVELLES FONCTIONS POUR LE MODE QCM 10 QUESTIONS ---
+        // --- NOUVELLE FONCTIONNALITÉ : LECTEUR DE FLASHCARDS & MENU ---
+
+        function chargerFlashcards(matiere) {
+            const container = document.getElementById('container-flashcards');
+
+            if (!matiere.flashcards || matiere.flashcards.length === 0) {
+                container.innerHTML = "<p class='italic text-gray-400 mt-6'>Aucune flashcard pour le moment.</p>";
+                return;
+            }
+
+            indexFlashcardActive = 0;
+
+            // Création des options pour le menu déroulant
+            let optionsMenu = matiere.flashcards.map((carte, index) => 
+                `<option value="${index}">Carte ${index + 1} : ${carte.front}</option>`
+            ).join('');
+
+            // Création de l'interface complète (Menu + Carte + Boutons)
+            container.innerHTML = `
+                <div class="flex flex-col gap-5">
+                    
+                    <!-- MENU DÉROULANT POUR CHOISIR SA CARTE -->
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-3 bg-gray-50 dark:bg-gray-900 p-3 rounded-xl border border-gray-200 dark:border-gray-700">
+                        <label for="menu-flashcards" class="text-sm font-bold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                            <i class="fa-solid fa-bars text-indigo-500 mr-2"></i>Navigation :
+                        </label>
+                        <select id="menu-flashcards" onchange="allerAFlashcard(this.value)" class="w-full bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200 font-medium rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500 transition">
+                            ${optionsMenu}
+                        </select>
+                    </div>
+
+                    <!-- CARTE INTERACTIVE 3D -->
+                    <div class="perspective-1000 w-full h-64 sm:h-72 cursor-pointer" onclick="retournerFlashcard()">
+                        <div id="flashcard-inner" class="relative w-full h-full transition-transform duration-500 transform-style-preserve-3d shadow-sm hover:shadow-md rounded-2xl">
+                            
+                            <!-- RECTO -->
+                            <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-800 border-2 border-indigo-100 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-500 rounded-2xl text-center transition-colors">
+                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-500 mb-4">Terme / Question</span>
+                                <h4 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white" id="fc-front-text"></h4>
+                                <p class="text-gray-400 text-sm mt-8 animate-pulse"><i class="fa-solid fa-hand-pointer mr-1"></i> Cliquez pour retourner</p>
+                            </div>
+                            
+                            <!-- VERSO -->
+                            <div class="absolute w-full h-full backface-hidden rotate-y-180 flex flex-col items-center justify-center p-6 bg-indigo-50 dark:bg-indigo-900/40 border-2 border-indigo-500 rounded-2xl text-center">
+                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-4">Définition / Réponse</span>
+                                <p class="text-lg sm:text-xl font-medium text-indigo-900 dark:text-indigo-200 leading-relaxed" id="fc-back-text"></p>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- CONTRÔLES (Précédent / Suivant) -->
+                    <div class="flex items-center justify-between mt-1">
+                        <button onclick="flashcardPrecedente()" class="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:bg-indigo-50 hover:border-indigo-300 dark:hover:bg-gray-700 transition text-gray-600 dark:text-gray-300 shadow-sm">
+                            <i class="fa-solid fa-chevron-left text-lg"></i>
+                        </button>
+                        
+                        <div class="bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded-lg font-bold text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+                            <span id="flashcard-compteur"></span>
+                        </div>
+                        
+                        <button onclick="flashcardSuivante()" class="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:bg-indigo-50 hover:border-indigo-300 dark:hover:bg-gray-700 transition text-gray-600 dark:text-gray-300 shadow-sm">
+                            <i class="fa-solid fa-chevron-right text-lg"></i>
+                        </button>
+                    </div>
+
+                </div>
+            `;
+
+            afficherFlashcardInterface();
+        }
+
+        function afficherFlashcardInterface() {
+            const matiere = appData[matiereActive];
+            const carte = matiere.flashcards[indexFlashcardActive];
+            
+            document.getElementById('fc-front-text').textContent = carte.front;
+            document.getElementById('fc-back-text').innerHTML = carte.back;
+            document.getElementById('flashcard-compteur').textContent = `${indexFlashcardActive + 1} / ${matiere.flashcards.length}`;
+            
+            // Met à jour la sélection du menu
+            document.getElementById('menu-flashcards').value = indexFlashcardActive;
+
+            // S'assure que la carte montre toujours le recto au changement
+            const inner = document.getElementById('flashcard-inner');
+            inner.classList.remove('rotate-y-180');
+        }
+
+        function retournerFlashcard() {
+            const inner = document.getElementById('flashcard-inner');
+            inner.classList.toggle('rotate-y-180');
+        }
+
+        function allerAFlashcard(indexStr) {
+            indexFlashcardActive = parseInt(indexStr);
+            afficherFlashcardInterface();
+        }
+
+        function flashcardPrecedente() {
+            const matiere = appData[matiereActive];
+            if (indexFlashcardActive > 0) {
+                indexFlashcardActive--;
+            } else {
+                indexFlashcardActive = matiere.flashcards.length - 1; // Boucle à la fin
+            }
+            afficherFlashcardInterface();
+        }
+
+        function flashcardSuivante() {
+            const matiere = appData[matiereActive];
+            if (indexFlashcardActive < matiere.flashcards.length - 1) {
+                indexFlashcardActive++;
+            } else {
+                indexFlashcardActive = 0; // Boucle au début
+            }
+            afficherFlashcardInterface();
+        }
+
+        // --- FONCTIONS DU MODE QCM 10 QUESTIONS ---
 
         function afficherAccueilQCM(matiere) {
             const containerQcms = document.getElementById('container-qcms');
@@ -442,13 +524,9 @@
             const matiere = appData[matiereActive];
             const containerQcms = document.getElementById('container-qcms');
             
-            // 1. Mélanger toutes les questions de la matière
             let qcmsMelanges = [...matiere.qcms].sort(() => 0.5 - Math.random());
-            
-            // 2. Sélectionner seulement le nombre demandé (max 10)
             let qcmsSelectionnes = qcmsMelanges.slice(0, nombreDeQuestions);
             
-            // 3. Générer le HTML pour ces questions
             let htmlQcms = '<div class="space-y-6">';
             
             htmlQcms += `
@@ -478,7 +556,6 @@
                 </div>`;
             });
             
-            // Bouton pour terminer la série et revenir à l'écran d'accueil QCM
             htmlQcms += `
                 <div class="pt-6 mt-6 border-t border-gray-200 dark:border-gray-700 text-center">
                     <button onclick="afficherAccueilQCM(appData[matiereActive])" class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-bold py-3 px-6 rounded-xl transition shadow-sm flex justify-center items-center gap-2 mx-auto">
@@ -488,7 +565,6 @@
             `;
             htmlQcms += '</div>';
             
-            // 4. Injecter dans le conteneur
             containerQcms.innerHTML = htmlQcms;
         }
 
