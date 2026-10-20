@@ -20,7 +20,6 @@
         html.dark .tab-inactive { color: #9ca3af; }
         html.dark .tab-inactive:hover { color: #e5e7eb; }
 
-        /* Classes personnalisées pour l'effet 3D des Flashcards */
         .perspective-1000 { perspective: 1000px; }
         .transform-style-preserve-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
@@ -44,7 +43,6 @@
                     <i class="fa-solid fa-arrow-left"></i> Retour aux matières
                 </button>
                 
-                <!-- BOUTON MODE SOMBRE -->
                 <button onclick="toggleDarkMode()" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-600 transition shadow-sm" title="Changer de mode">
                     <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
                 </button>
@@ -55,13 +53,11 @@
     <!-- CONTENU PRINCIPAL -->
     <main class="flex-grow overflow-y-auto p-4 md:p-8 max-w-6xl mx-auto w-full">
 
-        <!-- VUE 1 : DASHBOARD -->
         <div id="vue-dashboard" class="block">
             <h2 class="text-xl text-gray-500 dark:text-gray-400 mb-6 font-medium">Choisissez une matière à réviser :</h2>
             <div id="grille-matieres" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
         </div>
 
-        <!-- VUE 2 : MATIÈRE -->
         <div id="vue-matiere" class="hidden">
             
             <div class="flex items-center gap-4 mb-8">
@@ -69,7 +65,6 @@
                 <h2 id="matiere-titre" class="text-3xl font-bold capitalize">Titre Matière</h2>
             </div>
 
-            <!-- ONGLETS -->
             <div class="flex border-b border-gray-200 dark:border-gray-700 mb-8 overflow-x-auto">
                 <button onclick="changerOnglet('apprentissage')" id="onglet-apprentissage" class="tab-active px-6 py-3 text-lg transition-colors duration-200 focus:outline-none whitespace-nowrap">
                     <i class="fa-solid fa-book-open mr-2"></i> Apprentissage
@@ -81,6 +76,16 @@
 
             <!-- ONGLET 1 : APPRENTISSAGE -->
             <div id="contenu-apprentissage" class="block">
+                
+                <!-- FILTRE PAR CHAPITRE -->
+                <div id="container-filtre-chapitre" class="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 mb-6 flex flex-col sm:flex-row items-center gap-4 transition-colors hidden">
+                    <label for="select-chapitre" class="font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-list text-indigo-600 dark:text-indigo-400"></i> Choisir le chapitre à réviser :
+                    </label>
+                    <select id="select-chapitre" onchange="changerChapitre(this.value)" class="w-full border-2 border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2 font-medium text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 focus:outline-none focus:border-indigo-500 transition">
+                    </select>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Flashcards -->
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
@@ -97,21 +102,16 @@
 
             <!-- ONGLET 2 : ÉVALUATION (Schémas Numérotés) -->
             <div id="contenu-evaluation" class="hidden">
-                
-                <!-- SÉLECTEUR DE SCHÉMA -->
                 <div class="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors">
                     <label for="select-schema" class="font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2">
                         <i class="fa-solid fa-filter text-indigo-600 dark:text-indigo-400"></i> Choisir le schéma :
                     </label>
-                    <select id="select-schema" onchange="changerSchemaActif(this.value)" class="w-full sm:w-2/3 border-2 border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2 font-medium text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 focus:outline-none focus:border-indigo-500 transition">
-                    </select>
+                    <select id="select-schema" onchange="changerSchemaActif(this.value)" class="w-full sm:w-2/3 border-2 border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2 font-medium text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 focus:outline-none focus:border-indigo-500 transition"></select>
                 </div>
 
                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 transition-colors">
                     <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4" id="schema-titre">Titre du schéma</h3>
-                    
                     <div class="flex flex-col md:flex-row gap-8">
-                        <!-- Zone Image -->
                         <div class="md:w-1/2 flex justify-center items-start border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl p-2 bg-gray-50 dark:bg-gray-900 min-h-[300px] md:sticky md:top-4 self-start">
                             <img id="schema-image" src="" alt="Schéma" class="max-w-full h-auto rounded-lg shadow-sm hidden">
                             <div id="schema-placeholder" class="text-gray-400 flex flex-col items-center justify-center h-full w-full py-20">
@@ -120,7 +120,6 @@
                             </div>
                         </div>
                         
-                        <!-- Zone des réponses numérotées -->
                         <div class="md:w-1/2">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                                 <p class="text-gray-500 dark:text-gray-400 text-sm"><i class="fa-solid fa-circle-info mr-2"></i>Remplissez les légendes correspondant aux numéros sur le schéma.</p>
@@ -179,7 +178,7 @@
         }
 
         // ==========================================
-        // BASE DE DONNÉES STAPS
+        // BASE DE DONNÉES STAPS COMPLÈTE
         // ==========================================
         const appData = {
             anatomie: {
@@ -197,48 +196,344 @@
                         options: ["Plan frontal, axe antéropostérieur.", "Plan sagittal, axe transversal.", "Plan transversal, axe longitudinal."],
                         correct: 1,
                         explanation: "Le mouvement de Flexion / Extension s'effectue toujours dans le plan sagittal (la vue de profil) et s'articule autour d'un axe transversal."
+                    },
+                    {
+                        question: "Lors d'un atterrissage lourd, le sacrum effectue un mouvement de contre-nutation. Quelle en est la conséquence anatomique sur le bassin ?",
+                        options: ["Le diamètre du détroit supérieur diminue.", "Les ailes iliaques se rapprochent.", "Le diamètre du détroit supérieur augmente."],
+                        correct: 2,
+                        explanation: "La contre-nutation est le mouvement inverse de la nutation. Le sacrum bascule en arrière et en haut. En conséquence, les ailes iliaques s'éloignent."
+                    },
+                    {
+                        question: "Lequel de ces muscles est un moteur principal de la flexion de hanche ?",
+                        options: ["Le grand glutéal (grand fessier).", "Le droit du fémur.", "Le piriforme."],
+                        correct: 1,
+                        explanation: "Le muscle droit du fémur est l'un des moteurs principaux de la flexion de hanche, avec l'ilio-psoas, le sartorius et le TFL."
+                    },
+                    {
+                        question: "Quel muscle profond de la jambe réalise à la fois une flexion et une rotation médiale (RM) du genou ?",
+                        options: ["Le muscle tibial postérieur.", "Le muscle poplité.", "Le muscle plantaire."],
+                        correct: 1,
+                        explanation: "Le muscle poplité est le seul à agir directement sur le genou en effectuant une flexion couplée à une rotation médiale (RM)."
                     }
                 ],
-                schemas: []
+                schemas: [
+                    {
+                        titre: "Os coxal (vue antérieure)",
+                        imageUrl: "images/1.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["crête iliaque"] },
+                            { numero: 2, reponsesValides: ["fosse iliaque"] },
+                            { numero: 3, reponsesValides: ["épine iliaque antéro-sup", "épine iliaque antéro-supérieure"] },
+                            { numero: 4, reponsesValides: ["épine iliaque antéro-inf", "épine iliaque antéro-inférieure"] },
+                            { numero: 5, reponsesValides: ["acétabulum"] },
+                            { numero: 6, reponsesValides: ["fémur"] },
+                            { numero: 7, reponsesValides: ["tubérosité iliaque"] },
+                            { numero: 8, reponsesValides: ["surface auriculaire"] },
+                            { numero: 9, reponsesValides: ["éminence ilio-pectinée"] },
+                            { numero: 10, reponsesValides: ["branche sup. du pubis", "branche supérieure du pubis"] },
+                            { numero: 11, reponsesValides: ["pecten du pubis"] },
+                            { numero: 12, reponsesValides: ["tubercule du pubis"] },
+                            { numero: 13, reponsesValides: ["branche inf. du pubis", "branche inférieure du pubis"] },
+                            { numero: 14, reponsesValides: ["crête obturatrice"] },
+                            { numero: 15, reponsesValides: ["foramen obturé"] },
+                            { numero: 16, reponsesValides: ["branche de l'ischium"] }
+                        ]
+                    },
+                    {
+                        titre: "Os coxal (vue postérieure)",
+                        imageUrl: "images/2.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["crête iliaque"] },
+                            { numero: 2, reponsesValides: ["épine iliaque postéro-sup", "épine iliaque postéro-supérieure"] },
+                            { numero: 3, reponsesValides: ["ligne glutéale post", "ligne glutéale postérieure", "ligne glutéale post."] },
+                            { numero: 4, reponsesValides: ["épine iliaque postéro-inf", "épine iliaque postéro-inférieure"] },
+                            { numero: 5, reponsesValides: ["grande incisure ischiatique"] },
+                            { numero: 6, reponsesValides: ["épine ischiatique"] },
+                            { numero: 7, reponsesValides: ["branche sup. du pubis", "branche supérieure du pubis"] },
+                            { numero: 8, reponsesValides: ["surface symphysaire"] },
+                            { numero: 9, reponsesValides: ["branche inf. du pubis", "branche inférieure du pubis"] },
+                            { numero: 10, reponsesValides: ["tubercule iliaque"] },
+                            { numero: 11, reponsesValides: ["ligne glutéale ant", "ligne glutéale antérieure", "ligne glutéale ant."] },
+                            { numero: 12, reponsesValides: ["ligne glutéale inf", "ligne glutéale inférieure", "ligne glutéale inf."] },
+                            { numero: 13, reponsesValides: ["col du fémur"] },
+                            { numero: 14, reponsesValides: ["tubérosité ischiatique"] },
+                            { numero: 15, reponsesValides: ["foramen obturé"] }
+                        ]
+                    },
+                    {
+                        titre: "Fémur in situ (vue postérieure)",
+                        imageUrl: "images/3.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["tête"] },
+                            { numero: 2, reponsesValides: ["fovéa capitis"] },
+                            { numero: 3, reponsesValides: ["petit trochanter"] },
+                            { numero: 4, reponsesValides: ["ligne pectinée"] },
+                            { numero: 5, reponsesValides: ["ligne spirale"] },
+                            { numero: 6, reponsesValides: ["foramen nourricier"] },
+                            { numero: 7, reponsesValides: ["tubercule de l'adducteur"] },
+                            { numero: 8, reponsesValides: ["tubercule supracondylaire"] },
+                            { numero: 9, reponsesValides: ["condyle médial"] },
+                            { numero: 10, reponsesValides: ["tibia"] },
+                            { numero: 11, reponsesValides: ["os coxal"] },
+                            { numero: 12, reponsesValides: ["grand trochanter"] },
+                            { numero: 13, reponsesValides: ["col"] },
+                            { numero: 14, reponsesValides: ["crête intertrochantérique"] },
+                            { numero: 15, reponsesValides: ["tubercule carré"] },
+                            { numero: 16, reponsesValides: ["tubérosité glutéale"] },
+                            { numero: 17, reponsesValides: ["ligne âpre"] },
+                            { numero: 18, reponsesValides: ["surface poplitée"] },
+                            { numero: 19, reponsesValides: ["ligne intercondylaire"] },
+                            { numero: 20, reponsesValides: ["fosse intercondylaire"] },
+                            { numero: 21, reponsesValides: ["condyle latéral"] },
+                            { numero: 22, reponsesValides: ["fibula"] }
+                        ]
+                    },
+                    {
+                        titre: "Bassin osseux féminin (vue antéro-supérieure)",
+                        imageUrl: "images/4.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["articulation sacro-iliaque"] },
+                            { numero: 2, reponsesValides: ["sacrum"] },
+                            { numero: 3, reponsesValides: ["os coxal"] },
+                            { numero: 4, reponsesValides: ["coccyx"] },
+                            { numero: 5, reponsesValides: ["fémur"] },
+                            { numero: 6, reponsesValides: ["branche inf. du pubis", "branche inférieure du pubis"] },
+                            { numero: 7, reponsesValides: ["branche sup. du pubis", "branche supérieure du pubis"] },
+                            { numero: 8, reponsesValides: ["symphyse pubienne"] },
+                            { numero: 9, reponsesValides: ["ligne terminale du pubis"] }
+                        ]
+                    },
+                    {
+                        titre: "Parties de l'os coxal",
+                        imageUrl: "images/5.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["aile"] },
+                            { numero: 2, reponsesValides: ["corps"] },
+                            { numero: 3, reponsesValides: ["branche sup.", "branche supérieure"] },
+                            { numero: 4, reponsesValides: ["corps"] },
+                            { numero: 5, reponsesValides: ["branche inf.", "branche inférieure"] },
+                            { numero: 6, reponsesValides: ["branche"] },
+                            { numero: 7, reponsesValides: ["corps"] }
+                        ]
+                    },
+                    {
+                        titre: "Articulation synoviale",
+                        imageUrl: "images/8.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["périoste"] },
+                            { numero: 2, reponsesValides: ["membrane fibreuse", "membrane fibreuse de la capsule articulaire"] },
+                            { numero: 3, reponsesValides: ["membrane synoviale", "membrane synoviale de la capsule articulaire"] },
+                            { numero: 4, reponsesValides: ["surface articulaire"] },
+                            { numero: 5, reponsesValides: ["cavité articulaire"] },
+                            { numero: 6, reponsesValides: ["métaphyse"] }
+                        ]
+                    },
+                    {
+                        titre: "Fémur in situ (vue antérieure)",
+                        imageUrl: "images/9.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["tête fémorale"] },
+                            { numero: 2, reponsesValides: ["col"] },
+                            { numero: 3, reponsesValides: ["grand trochanter"] },
+                            { numero: 4, reponsesValides: ["ligne intertrochantérique"] },
+                            { numero: 5, reponsesValides: ["corps du fémur"] },
+                            { numero: 6, reponsesValides: ["condyle latéral du fémur", "condyle latéral"] },
+                            { numero: 7, reponsesValides: ["surface patellaire"] },
+                            { numero: 8, reponsesValides: ["fibula"] },
+                            { numero: 9, reponsesValides: ["os coxal"] },
+                            { numero: 10, reponsesValides: ["fovéa capitis"] },
+                            { numero: 11, reponsesValides: ["petit trochanter"] },
+                            { numero: 12, reponsesValides: ["patella", "rotule"] },
+                            { numero: 13, reponsesValides: ["tubercule de l'adducteur"] },
+                            { numero: 14, reponsesValides: ["condyle médial"] },
+                            { numero: 15, reponsesValides: ["tubérosité du tibia"] },
+                            { numero: 16, reponsesValides: ["tibia"] }
+                        ]
+                    },
+                    {
+                        titre: "Os coxal (face externe)",
+                        imageUrl: "images/7.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["m. grand dorsal", "muscle grand dorsal", "grand dorsal"] },
+                            { numero: 2, reponsesValides: ["m. moyen fessier", "muscle moyen fessier", "moyen fessier"] },
+                            { numero: 3, reponsesValides: ["m. grand fessier", "muscle grand fessier", "grand fessier"] },
+                            { numero: 4, reponsesValides: ["ligne glutéale post.", "ligne glutéale postérieure"] },
+                            { numero: 5, reponsesValides: ["ligne glutéale ant.", "ligne glutéale antérieure"] },
+                            { numero: 6, reponsesValides: ["lig. sacro-tubéral", "ligament sacro-tubéral"] },
+                            { numero: 7, reponsesValides: ["m. piriforme", "muscle piriforme", "piriforme"] },
+                            { numero: 8, reponsesValides: ["ligne glutéale inf.", "ligne glutéale inférieure"] },
+                            { numero: 9, reponsesValides: ["lig. sacro-épineux", "ligament sacro-épineux"] },
+                            { numero: 10, reponsesValides: ["m. jumeau sup.", "muscle jumeau supérieur", "jumeau supérieur"] },
+                            { numero: 11, reponsesValides: ["lig. ischio-fémoral", "ligament ischio-fémoral"] },
+                            { numero: 12, reponsesValides: ["m. jumeau inf.", "muscle jumeau inférieur", "jumeau inférieur"] },
+                            { numero: 13, reponsesValides: ["m. carré fémoral", "muscle carré fémoral", "carré fémoral"] },
+                            { numero: 14, reponsesValides: ["m. semi-membraneux", "muscle semi-membraneux", "semi-membraneux"] },
+                            { numero: 15, reponsesValides: ["m. biceps fémoral", "muscle biceps fémoral", "biceps fémoral"] },
+                            { numero: 16, reponsesValides: ["m. semi-tendineux", "muscle semi-tendineux", "semi-tendineux"] },
+                            { numero: 17, reponsesValides: ["m. oblique ext.", "muscle oblique externe", "oblique externe"] },
+                            { numero: 18, reponsesValides: ["m. oblique int.", "muscle oblique interne", "oblique interne"] },
+                            { numero: 19, reponsesValides: ["m. petit fessier", "muscle petit fessier", "petit fessier"] },
+                            { numero: 20, reponsesValides: ["m. tenseur du fascia lata", "muscle tenseur du fascia lata", "tenseur du fascia lata"] },
+                            { numero: 21, reponsesValides: ["lig. inguinal", "ligament inguinal"] },
+                            { numero: 22, reponsesValides: ["m. sartorius", "muscle sartorius", "sartorius"] },
+                            { numero: 23, reponsesValides: ["m. droit fémoral", "muscle droit fémoral", "droit fémoral"] },
+                            { numero: 24, reponsesValides: ["lig. ilio-fémoral", "ligament ilio-fémoral"] },
+                            { numero: 25, reponsesValides: ["lig. pubo-fémoral", "ligament pubo-fémoral"] },
+                            { numero: 26, reponsesValides: ["lig. pectiné", "ligament pectiné"] },
+                            { numero: 27, reponsesValides: ["m. pectiné", "muscle pectiné", "pectiné"] },
+                            { numero: 28, reponsesValides: ["m. long adducteur", "muscle long adducteur", "long adducteur"] },
+                            { numero: 29, reponsesValides: ["m. court adducteur", "muscle court adducteur", "court adducteur"] },
+                            { numero: 30, reponsesValides: ["m. gracile", "muscle gracile", "gracile"] },
+                            { numero: 31, reponsesValides: ["m. obturateur ext.", "muscle obturateur externe", "obturateur externe"] },
+                            { numero: 32, reponsesValides: ["m. grand adducteur", "muscle grand adducteur", "grand adducteur"] }
+                        ]
+                    },
+                    {
+                        titre: "Os coxal (face interne)",
+                        imageUrl: "images/10.png",
+                        legendes: [
+                            { numero: "A", reponsesValides: ["fosse iliaque"] },
+                            { numero: "B", reponsesValides: ["surface quadrilatère"] },
+                            { numero: 1, reponsesValides: ["m. iliaque", "muscle iliaque", "iliaque"] },
+                            { numero: 2, reponsesValides: ["m. transverse", "muscle transverse", "transverse"] },
+                            { numero: 3, reponsesValides: ["m. oblique int.", "muscle oblique interne", "oblique interne"] },
+                            { numero: 4, reponsesValides: ["lig. inguinal", "ligament inguinal"] },
+                            { numero: 5, reponsesValides: ["m. petit psoas et ligne arquée", "petit psoas", "ligne arquée"] },
+                            { numero: 6, reponsesValides: ["éminence ilio-pubienne"] },
+                            { numero: 7, reponsesValides: ["lig. pectiné", "ligament pectiné"] },
+                            { numero: 8, reponsesValides: ["lig. lacunaire", "ligament lacunaire"] },
+                            { numero: 9, reponsesValides: ["angle du pubis"] },
+                            { numero: 10, reponsesValides: ["surface symphysaire"] },
+                            { numero: 11, reponsesValides: ["m. élévateur de l'anus", "muscle élévateur de l'anus", "élévateur de l'anus"] },
+                            { numero: 12, reponsesValides: ["membrane obturatrice"] },
+                            { numero: 13, reponsesValides: ["corps caverneux"] },
+                            { numero: 14, reponsesValides: ["m. ischio-caverneux", "muscle ischio-caverneux"] },
+                            { numero: 15, reponsesValides: ["m. transverse profond", "muscle transverse profond"] },
+                            { numero: 16, reponsesValides: ["m. transverse superficiel", "muscle transverse superficiel"] },
+                            { numero: 17, reponsesValides: ["lig. sacro-tubéral", "ligament sacro-tubéral"] },
+                            { numero: 18, reponsesValides: ["m. carré des lombes", "muscle carré des lombes", "carré des lombes"] },
+                            { numero: 19, reponsesValides: ["lig. ilio-lombaire", "ligament ilio-lombaire"] },
+                            { numero: 20, reponsesValides: ["mm. érecteurs du rachis", "muscles érecteurs du rachis"] },
+                            { numero: 21, reponsesValides: ["lig. sacro-iliaque interosseux", "ligament sacro-iliaque interosseux"] },
+                            { numero: 22, reponsesValides: ["tubérosité iliaque et ligg. sacro-iliaques dorsaux", "tubérosité iliaque"] },
+                            { numero: 23, reponsesValides: ["surface auriculaire"] },
+                            { numero: 24, reponsesValides: ["ligg. sacro-iliaques ventraux", "ligaments sacro-iliaques ventraux"] },
+                            { numero: 25, reponsesValides: ["m. coccygien", "muscle coccygien", "coccygien"] },
+                            { numero: 26, reponsesValides: ["lig. sacro-épineux", "ligament sacro-épineux"] },
+                            { numero: 27, reponsesValides: ["m. obturateur int.", "muscle obturateur interne", "obturateur interne"] }
+                        ]
+                    },
+                    {
+                        titre: "Épiphyse proximale du fémur (vue supérieure)",
+                        imageUrl: "images/11.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["fovéa capitis et lig. de la tête fémorale", "fovéa capitis", "ligament de la tête fémorale"] },
+                            { numero: 2, reponsesValides: ["tête fémorale"] },
+                            { numero: 3, reponsesValides: ["col", "col fémoral"] },
+                            { numero: 4, reponsesValides: ["lig. ischio-fémoral", "ligament ischio-fémoral"] },
+                            { numero: 5, reponsesValides: ["lig. ilio-fémoral", "ligament ilio-fémoral"] },
+                            { numero: 6, reponsesValides: ["mm. obturateur int. et jumeaux", "muscle obturateur interne et jumeaux", "obturateur interne"] },
+                            { numero: 7, reponsesValides: ["m. piriforme", "muscle piriforme", "piriforme"] },
+                            { numero: 8, reponsesValides: ["m. petit fessier", "muscle petit fessier", "petit fessier"] },
+                            { numero: 9, reponsesValides: ["grand trochanter"] },
+                            { numero: 10, reponsesValides: ["m. moyen fessier", "muscle moyen fessier", "moyen fessier"] },
+                            { numero: 11, reponsesValides: ["fosse trochantérique et m. obturateur ext.", "fosse trochantérique", "muscle obturateur externe"] },
+                            { numero: 12, reponsesValides: ["petit trochanter et m. grand psoas", "petit trochanter", "muscle grand psoas"] }
+                        ]
+                    },
+                    {
+                        titre: "Fémur (Vue postérieure & insertions)",
+                        imageUrl: "images/12.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["fovéa capitis et lig. de la tête fémorale", "fovéa capitis"] },
+                            { numero: 2, reponsesValides: ["tête", "tête fémorale"] },
+                            { numero: 3, reponsesValides: ["col", "col fémoral"] },
+                            { numero: 4, reponsesValides: ["crête intertrochantérique et m. carré fémoral", "crête intertrochantérique", "muscle carré fémoral"] },
+                            { numero: 5, reponsesValides: ["m. grand psoas", "muscle grand psoas", "grand psoas"] },
+                            { numero: 6, reponsesValides: ["ligne et m. pectinés", "muscle pectiné", "ligne pectinée"] },
+                            { numero: 7, reponsesValides: ["ligne spirale"] },
+                            { numero: 8, reponsesValides: ["m. court adducteur", "muscle court adducteur", "court adducteur"] },
+                            { numero: 9, reponsesValides: ["m. vaste médial", "muscle vaste médial", "vaste médial"] },
+                            { numero: 10, reponsesValides: ["m. long adducteur", "muscle long adducteur", "long adducteur"] },
+                            { numero: 11, reponsesValides: ["m. grand adducteur et ligne supracondylaire médiale", "muscle grand adducteur"] },
+                            { numero: 12, reponsesValides: ["tubercule de l'adducteur et m. grand adducteur", "tubercule de l'adducteur"] },
+                            { numero: 13, reponsesValides: ["tubercule supracondylaire médial et m. gastrocnémien", "tubercule supracondylaire médial"] },
+                            { numero: 14, reponsesValides: ["ligne intercondylaire"] },
+                            { numero: 15, reponsesValides: ["condyle médial"] },
+                            { numero: 16, reponsesValides: ["lig. croisé post.", "ligament croisé postérieur"] },
+                            { numero: 17, reponsesValides: ["lig. croisé ant.", "ligament croisé antérieur"] },
+                            { numero: 18, reponsesValides: ["m. poplité", "muscle poplité", "poplité"] },
+                            { numero: 19, reponsesValides: ["m. moyen fessier", "muscle moyen fessier", "moyen fessier"] },
+                            { numero: 20, reponsesValides: ["tubérosité glutéale et m. grand fessier", "tubérosité glutéale", "muscle grand fessier"] },
+                            { numero: 21, reponsesValides: ["m. biceps fémoral", "muscle biceps fémoral", "biceps fémoral"] },
+                            { numero: 22, reponsesValides: ["m. vaste latéral", "muscle vaste latéral", "vaste latéral"] },
+                            { numero: 23, reponsesValides: ["m. vaste intermédiaire", "muscle vaste intermédiaire", "vaste intermédiaire"] },
+                            { numero: 24, reponsesValides: ["ligne supracondylaire latérale"] },
+                            { numero: 25, reponsesValides: ["surface poplitée"] },
+                            { numero: 26, reponsesValides: ["m. plantaire", "muscle plantaire", "plantaire"] },
+                            { numero: 27, reponsesValides: ["tubercule supracondylaire latéral et m. gastrocnémien", "tubercule supracondylaire latéral"] },
+                            { numero: 28, reponsesValides: ["condyle latéral"] }
+                        ]
+                    },
+                    {
+                        titre: "Fémur (vue antérieure - insertions musculaires)",
+                        imageUrl: "images/6.png",
+                        legendes: [
+                            { numero: 1, reponsesValides: ["m. piriforme", "muscle piriforme", "piriforme"] },
+                            { numero: 2, reponsesValides: ["m. petit fessier", "muscle petit fessier", "petit fessier"] },
+                            { numero: 3, reponsesValides: ["m. vaste latéral", "muscle vaste latéral", "vaste latéral"] },
+                            { numero: 4, reponsesValides: ["m. vaste intermédiaire", "muscle vaste intermédiaire", "vaste intermédiaire"] },
+                            { numero: 5, reponsesValides: ["m. articulaire du genou", "muscle articulaire du genou"] },
+                            { numero: 6, reponsesValides: ["surface patellaire"] },
+                            { numero: 7, reponsesValides: ["tête fémorale", "tête"] },
+                            { numero: 8, reponsesValides: ["col", "col fémoral"] },
+                            { numero: 9, reponsesValides: ["lig. ilio-fémoral", "ligament ilio-fémoral"] },
+                            { numero: 10, reponsesValides: ["lig. pubo-fémoral", "ligament pubo-fémoral"] },
+                            { numero: 11, reponsesValides: ["petit trochanter", "m. grand psoas", "muscle grand psoas"] },
+                            { numero: 12, reponsesValides: ["m. vaste médial", "muscle vaste médial", "vaste médial"] }
+                        ]
+                    }
+                ]
             },
+
             physiologie: {
                 nom: "Physiologie", icon: "fa-heartbeat", couleur: "text-pink-500",
                 flashcards: [
                     // CHAPITRE 1
-                    { front: "[Ch. 1 - Énergie] L'Unité Motrice", back: "C'est le nerf moteur (motoneurone) et l'ensemble des fibres musculaires qu'il innerve (ex: 3000 fibres/motoneurone)[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Rôle du Calcium (Ca2+)", back: "Il entre grâce à l'influx nerveux et démasque le site actif de réception sur l'actine (masqué par la troponine) pour permettre l'accroche de la myosine[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Rôles de l'ATP", back: "1. Libérer la tête de myosine. 2. Déplacer la tête de myosine. 3. Fournir l'énergie (hydrolyse) pour faire basculer la myosine et tracter l'actine[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Anaérobie Alactique (Durée)", back: "Travail en puissance de 3 à 5s. Travail en capacité inférieur à 20/30s. Utilise la phosphorylcréatine[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Acide Lactique", back: "L'acide lactique « n’existe pas » réellement dans le muscle, c'est une congestion en Acide Métabolique (Pyruvate + H+ qui donne du Lactate)[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Rendement de la Glycolyse (Anaérobie Lactique)", back: "Une mole de glycogène permet la synthèse de 3 ATP et s’accompagne de la formation de 2 moles de lactate[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Élimination du Lactate (Récupération Active)", back: "50% en 6 min, 75% en 12 min, 100% en 20 min[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Élimination du Lactate (Récupération Passive)", back: "50% en 25 min, 75% en 50 min, 100% en 1h30[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Rendement Aérobie", back: "Glucose = 38 ATP. Lipides = >45 ATP. Triglycérides = 130 ATP[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Épuisement du Glycogène", back: "Épuisement total en 1h à 80% de VMA, ou en 1h30 à 2h à 75% de VMA. Reconstitution totale en 46h[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Seuil Lactique 1 (SL1)", back: "Le système aérobie ne produit pas de lactate entravant son système. Ciblé à 2 mmol/L de sang[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Seuil Lactique 2 (SL2)", back: "Le système aérobie n’arrive plus à convertir la lactatémie en ATP (accumulation). Ciblé à > 4 mmol/L de sang[cite: 12]." },
-                    { front: "[Ch. 1 - Énergie] Seuils Ventilatoires (SV1 et SV2)", back: "SV1 : l'O2 reste dominant (VE/VO2). SV2 : le CO2 devient dominant (VE/VCO2)[cite: 12]." },
+                    { front: "[Ch. 1 - Énergie] L'Unité Motrice", back: "C'est le nerf moteur (motoneurone) et l'ensemble des fibres musculaires qu'il innerve (ex: 3000 fibres/motoneurone)." },
+                    { front: "[Ch. 1 - Énergie] Rôle du Calcium (Ca2+)", back: "Il entre grâce à l'influx nerveux et démasque le site actif de réception sur l'actine (masqué par la troponine) pour permettre l'accroche de la myosine." },
+                    { front: "[Ch. 1 - Énergie] Rôles de l'ATP", back: "1. Libérer la tête de myosine. 2. Déplacer la tête de myosine. 3. Fournir l'énergie (hydrolyse) pour faire basculer la myosine et tracter l'actine." },
+                    { front: "[Ch. 1 - Énergie] Anaérobie Alactique (Durée)", back: "Travail en puissance de 3 à 5s. Travail en capacité inférieur à 20/30s. Utilise la phosphorylcréatine." },
+                    { front: "[Ch. 1 - Énergie] Acide Lactique", back: "L'acide lactique « n’existe pas » réellement dans le muscle, c'est une congestion en Acide Métabolique (Pyruvate + H+ qui donne du Lactate)." },
+                    { front: "[Ch. 1 - Énergie] Rendement de la Glycolyse (Anaérobie Lactique)", back: "Une mole de glycogène permet la synthèse de 3 ATP et s’accompagne de la formation de 2 moles de lactate." },
+                    { front: "[Ch. 1 - Énergie] Élimination du Lactate (Récupération Active)", back: "50% en 6 min, 75% en 12 min, 100% en 20 min." },
+                    { front: "[Ch. 1 - Énergie] Élimination du Lactate (Récupération Passive)", back: "50% en 25 min, 75% en 50 min, 100% en 1h30." },
+                    { front: "[Ch. 1 - Énergie] Rendement Aérobie", back: "Glucose = 38 ATP. Lipides = >45 ATP. Triglycérides = 130 ATP." },
+                    { front: "[Ch. 1 - Énergie] Épuisement du Glycogène", back: "Épuisement total en 1h à 80% de VMA, ou en 1h30 à 2h à 75% de VMA. Reconstitution totale en 46h." },
+                    { front: "[Ch. 1 - Énergie] Seuil Lactique 1 (SL1)", back: "Le système aérobie ne produit pas de lactate entravant son système. Ciblé à 2 mmol/L de sang." },
+                    { front: "[Ch. 1 - Énergie] Seuil Lactique 2 (SL2)", back: "Le système aérobie n’arrive plus à convertir la lactatémie en ATP (accumulation). Ciblé à > 4 mmol/L de sang." },
+                    { front: "[Ch. 1 - Énergie] Seuils Ventilatoires (SV1 et SV2)", back: "SV1 : l'O2 reste dominant (VE/VO2). SV2 : le CO2 devient dominant (VE/VCO2)." },
                     
                     // CHAPITRE 2
-                    { front: "[Ch. 2 - Le Cœur] Rôle du Cœur Droit", back: "Gère la petite circulation (pulmonaire). Reçoit le sang veineux vicié (riche en CO2) par les veines caves et l'éjecte dans l'artère pulmonaire[cite: 12]." },
-                    { front: "[Ch. 2 - Le Cœur] Valves du Cœur Droit", back: "Valves tricuspides (entre oreillette et ventricule droits) et valve pulmonaire[cite: 12]." },
-                    { front: "[Ch. 2 - Le Cœur] Rôle du Cœur Gauche", back: "Gère la grande circulation (systémique). Reçoit le sang oxygéné par les 4 veines pulmonaires et l'expulse via l'aorte[cite: 12]." },
-                    { front: "[Ch. 2 - Le Cœur] Nœud Sinusal", back: "Situé sur l'oreillette droite, c'est le pace maker physiologique du cœur[cite: 12]." },
-                    { front: "[Ch. 2 - Le Cœur] Onde P (ECG)", back: "Correspond au temps de la dépolarisation, c'est-à-dire la contraction (systole) de l’oreillette droite et gauche[cite: 12]." },
-                    { front: "[Ch. 2 - Le Cœur] Onde QRS (ECG)", back: "Correspond au temps de repolarisation du ventricule droit et gauche via le réseau de Purkinje[cite: 12]." },
-                    { front: "[Ch. 2 - Le Cœur] Onde T (ECG)", back: "Correspond au temps de repolarisation des ventricules (diastole)[cite: 12]." },
+                    { front: "[Ch. 2 - Le Cœur] Rôle du Cœur Droit", back: "Gère la petite circulation (pulmonaire). Reçoit le sang veineux vicié (riche en CO2) par les veines caves et l'éjecte dans l'artère pulmonaire." },
+                    { front: "[Ch. 2 - Le Cœur] Valves du Cœur Droit", back: "Valves tricuspides (entre oreillette et ventricule droits) et valve pulmonaire." },
+                    { front: "[Ch. 2 - Le Cœur] Rôle du Cœur Gauche", back: "Gère la grande circulation (systémique). Reçoit le sang oxygéné par les 4 veines pulmonaires et l'expulse via l'aorte." },
+                    { front: "[Ch. 2 - Le Cœur] Nœud Sinusal", back: "Situé sur l'oreillette droite, c'est le pace maker physiologique du cœur." },
+                    { front: "[Ch. 2 - Le Cœur] Onde P (ECG)", back: "Correspond au temps de la dépolarisation, c'est-à-dire la contraction (systole) de l’oreillette droite et gauche." },
+                    { front: "[Ch. 2 - Le Cœur] Onde QRS (ECG)", back: "Correspond au temps de repolarisation du ventricule droit et gauche via le réseau de Purkinje." },
+                    { front: "[Ch. 2 - Le Cœur] Onde T (ECG)", back: "Correspond au temps de repolarisation des ventricules (diastole)." },
                     
                     // CHAPITRE 3
-                    { front: "[Ch. 3 - SNA] Système Parasympathique", back: "Système TROPHOTROPE. Modérateur, freinateur, restaure l'énergie. Diminue la FC et la ventilation, utilise l'acétylcholine[cite: 12]." },
-                    { front: "[Ch. 3 - SNA] Système Sympathique", back: "Système ERGOTROPE. Accélérateur, prépare à l'action. Augmente la FC et le métabolisme, utilise les catécholamines (noradrénaline/adrénaline)[cite: 12]." },
-                    { front: "[Ch. 3 - SNA] Variabilité de la Fréquence Cardiaque (VFC)", back: "Traduit la variation des intervalles R-R séparant deux contractions cardiaques, reflet de l'activité antagoniste du système sympatho-vagal[cite: 12]." },
-                    { front: "[Ch. 3 - SNA] Lecture VFC (Lf et Hl)", back: "Lf = travail sympathique (dominante si la FC augmente). Hl = travail parasympathique (dominante si la FC diminue)[cite: 12]." },
+                    { front: "[Ch. 3 - SNA] Système Parasympathique", back: "Système TROPHOTROPE. Modérateur, freinateur, restaure l'énergie. Diminue la FC et la ventilation, utilise l'acétylcholine." },
+                    { front: "[Ch. 3 - SNA] Système Sympathique", back: "Système ERGOTROPE. Accélérateur, prépare à l'action. Augmente la FC et le métabolisme, utilise les catécholamines (noradrénaline/adrénaline)." },
+                    { front: "[Ch. 3 - SNA] Variabilité de la Fréquence Cardiaque (VFC)", back: "Traduit la variation des intervalles R-R séparant deux contractions cardiaques, reflet de l'activité antagoniste du système sympatho-vagal." },
+                    { front: "[Ch. 3 - SNA] Lecture VFC (Lf et Hl)", back: "Lf = travail sympathique (dominante si la FC augmente). Hl = travail parasympathique (dominante si la FC diminue)." },
                     
                     // CHAPITRE 4
-                    { front: "[Ch. 4 - FC] Dérive Cardiaque", back: "Variabilité ascendante de la FC durant un effort à intensité constante, due à la thermorégulation et la dérive du débit sanguin vers la peau[cite: 12]." },
-                    { front: "[Ch. 4 - FC] FC Max Théorique (Formules)", back: "Astrand: 220 - âge. Gellish (2007): 206,9 - (0.67 x âge)[cite: 12]." },
-                    { front: "[Ch. 4 - FC] FC de Repos (FCrep) en Hypoxie", back: "En hypoxie aiguë (altitude, ex: 2500m), la FCrep augmente de façon proportionnelle au degré d'hypoxie[cite: 12]." },
-                    { front: "[Ch. 4 - FC] Formule de Karvonen (FC Réserve)", back: "% FCmax = (FC exercice - FCrep) / (FCmax - FCrep). Plus pertinente pour individualiser l'intensité car elle prend en compte la FC utile[cite: 12]." }
+                    { front: "[Ch. 4 - FC] Dérive Cardiaque", back: "Variabilité ascendante de la FC durant un effort à intensité constante, due à la thermorégulation et la dérive du débit sanguin vers la peau." },
+                    { front: "[Ch. 4 - FC] FC Max Théorique (Formules)", back: "Astrand: 220 - âge. Gellish (2007): 206,9 - (0.67 x âge)." },
+                    { front: "[Ch. 4 - FC] FC de Repos (FCrep) en Hypoxie", back: "En hypoxie aiguë (altitude, ex: 2500m), la FCrep augmente de façon proportionnelle au degré d'hypoxie." },
+                    { front: "[Ch. 4 - FC] Formule de Karvonen (FC Réserve)", back: "% FCmax = (FC exercice - FCrep) / (FCmax - FCrep). Plus pertinente pour individualiser l'intensité car elle prend en compte la FC utile." }
                 ],
                 qcms: [
                     // CHAPITRE 1 : THERMORÉGULATION
@@ -554,10 +849,10 @@
         };
 
         let matiereActive = null;
+        let matiereFiltree = null; 
+        let chapitreActif = 'tous'; 
         let indexSchemaActif = 0;
         let reponsesSchemaAffichees = false;
-        
-        // --- VARIABLES FLASHCARDS ---
         let indexFlashcardActive = 0;
 
         // ==========================================
@@ -585,6 +880,7 @@
             document.getElementById('vue-matiere').classList.add('hidden');
             document.getElementById('btn-retour').classList.add('hidden');
             matiereActive = null;
+            matiereFiltree = null;
         }
 
         function ouvrirMatiere(cle) {
@@ -624,45 +920,98 @@
         }
 
         // ==========================================
-        // GESTION DU CONTENU (Flashcards & QCM)
+        // GESTION DU FILTRE PAR CHAPITRE
         // ==========================================
-        function chargerContenuMatiere() {
-            const matiere = appData[matiereActive];
+        function extraireChapitres(matiere) {
+            let chapitres = new Map();
+            const regex = /\[Ch\. (\d+) - ([^\]]+)\]/;
             
-            // Lancer le lecteur de Flashcards avec menu
-            chargerFlashcards(matiere);
+            if(matiere.flashcards) {
+                matiere.flashcards.forEach(f => {
+                    let match = f.front.match(regex);
+                    if (match) chapitres.set(match[1], match[2]);
+                });
+            }
+            if(matiere.qcms) {
+                matiere.qcms.forEach(q => {
+                    let match = q.question.match(regex);
+                    if (match) chapitres.set(match[1], match[2]);
+                });
+            }
+            return Array.from(chapitres.entries()).sort((a,b) => parseInt(a[0]) - parseInt(b[0]));
+        }
 
-            // QCM - Afficher l'écran d'accueil du mode QCM
-            const containerQcms = document.getElementById('container-qcms');
-            if (!matiere.qcms || matiere.qcms.length === 0) {
-                containerQcms.innerHTML = "<p class='italic text-gray-400 mt-6'>Aucun QCM pour le moment.</p>";
+        function changerChapitre(valeur) {
+            chapitreActif = valeur;
+            appliquerFiltreChapitre();
+        }
+
+        function appliquerFiltreChapitre() {
+            const matiereOriginale = appData[matiereActive];
+            
+            if (chapitreActif === 'tous') {
+                matiereFiltree = { ...matiereOriginale };
             } else {
-                afficherAccueilQCM(matiere);
+                const prefix = `[Ch. ${chapitreActif} -`;
+                matiereFiltree = { 
+                    ...matiereOriginale,
+                    flashcards: matiereOriginale.flashcards.filter(f => f.front.includes(prefix)),
+                    qcms: matiereOriginale.qcms.filter(q => q.question.includes(prefix))
+                };
+            }
+
+            chargerFlashcards();
+            
+            const containerQcms = document.getElementById('container-qcms');
+            if (!matiereFiltree.qcms || matiereFiltree.qcms.length === 0) {
+                containerQcms.innerHTML = "<p class='italic text-gray-400 mt-6 text-center w-full py-10'>Aucun QCM pour ce chapitre.</p>";
+            } else {
+                afficherAccueilQCM();
             }
         }
 
-        // --- NOUVELLE FONCTIONNALITÉ : LECTEUR DE FLASHCARDS & MENU ---
+        function chargerContenuMatiere() {
+            const matiere = appData[matiereActive];
+            
+            const chapitres = extraireChapitres(matiere);
+            const containerFiltre = document.getElementById('container-filtre-chapitre');
+            
+            if (chapitres.length > 0) {
+                let options = '<option value="tous">Tous les chapitres (Mix global)</option>';
+                chapitres.forEach(([num, nom]) => {
+                    options += `<option value="${num}">Chapitre ${num} : ${nom}</option>`;
+                });
+                document.getElementById('select-chapitre').innerHTML = options;
+                document.getElementById('select-chapitre').value = 'tous';
+                chapitreActif = 'tous';
+                containerFiltre.classList.remove('hidden');
+            } else {
+                containerFiltre.classList.add('hidden');
+                chapitreActif = 'tous';
+            }
 
-        function chargerFlashcards(matiere) {
+            appliquerFiltreChapitre();
+        }
+
+        // ==========================================
+        // GESTION DU CONTENU (Flashcards & QCM)
+        // ==========================================
+        function chargerFlashcards() {
             const container = document.getElementById('container-flashcards');
 
-            if (!matiere.flashcards || matiere.flashcards.length === 0) {
-                container.innerHTML = "<p class='italic text-gray-400 mt-6'>Aucune flashcard pour le moment.</p>";
+            if (!matiereFiltree.flashcards || matiereFiltree.flashcards.length === 0) {
+                container.innerHTML = "<p class='italic text-gray-400 mt-6 text-center py-10'>Aucune flashcard pour ce chapitre.</p>";
                 return;
             }
 
             indexFlashcardActive = 0;
 
-            // Création des options pour le menu déroulant
-            let optionsMenu = matiere.flashcards.map((carte, index) => 
+            let optionsMenu = matiereFiltree.flashcards.map((carte, index) => 
                 `<option value="${index}">${index + 1}. ${carte.front}</option>`
             ).join('');
 
-            // Création de l'interface complète (Menu + Carte + Boutons)
             container.innerHTML = `
                 <div class="flex flex-col gap-5">
-                    
-                    <!-- MENU DÉROULANT POUR CHOISIR SA CARTE -->
                     <div class="flex flex-col sm:flex-row sm:items-center gap-3 bg-gray-50 dark:bg-gray-900 p-3 rounded-xl border border-gray-200 dark:border-gray-700">
                         <label for="menu-flashcards" class="text-sm font-bold text-gray-700 dark:text-gray-300 whitespace-nowrap">
                             <i class="fa-solid fa-bars text-indigo-500 mr-2"></i>Sujet :
@@ -672,27 +1021,25 @@
                         </select>
                     </div>
 
-                    <!-- CARTE INTERACTIVE 3D -->
                     <div class="perspective-1000 w-full h-64 sm:h-72 cursor-pointer" onclick="retournerFlashcard()">
                         <div id="flashcard-inner" class="relative w-full h-full transition-transform duration-500 transform-style-preserve-3d shadow-sm hover:shadow-md rounded-2xl">
                             
                             <!-- RECTO -->
                             <div class="absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-800 border-2 border-indigo-100 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-500 rounded-2xl text-center transition-colors">
-                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-500 mb-4">Question</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-500 mb-4">Question / Terme</span>
                                 <h4 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white" id="fc-front-text"></h4>
                                 <p class="text-gray-400 text-sm mt-8 animate-pulse"><i class="fa-solid fa-hand-pointer mr-1"></i> Cliquez pour retourner</p>
                             </div>
                             
                             <!-- VERSO -->
                             <div class="absolute w-full h-full backface-hidden rotate-y-180 flex flex-col items-center justify-center p-6 bg-indigo-50 dark:bg-indigo-900/40 border-2 border-indigo-500 rounded-2xl text-center overflow-y-auto">
-                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-4">Réponse</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-4">Réponse / Définition</span>
                                 <p class="text-base sm:text-lg font-medium text-indigo-900 dark:text-indigo-200 leading-relaxed" id="fc-back-text"></p>
                             </div>
                             
                         </div>
                     </div>
 
-                    <!-- CONTRÔLES (Précédent / Suivant) -->
                     <div class="flex items-center justify-between mt-1">
                         <button onclick="flashcardPrecedente()" class="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:bg-indigo-50 hover:border-indigo-300 dark:hover:bg-gray-700 transition text-gray-600 dark:text-gray-300 shadow-sm">
                             <i class="fa-solid fa-chevron-left text-lg"></i>
@@ -706,7 +1053,6 @@
                             <i class="fa-solid fa-chevron-right text-lg"></i>
                         </button>
                     </div>
-
                 </div>
             `;
 
@@ -714,17 +1060,14 @@
         }
 
         function afficherFlashcardInterface() {
-            const matiere = appData[matiereActive];
-            const carte = matiere.flashcards[indexFlashcardActive];
+            const carte = matiereFiltree.flashcards[indexFlashcardActive];
             
             document.getElementById('fc-front-text').textContent = carte.front;
             document.getElementById('fc-back-text').innerHTML = carte.back;
-            document.getElementById('flashcard-compteur').textContent = `${indexFlashcardActive + 1} / ${matiere.flashcards.length}`;
+            document.getElementById('flashcard-compteur').textContent = `${indexFlashcardActive + 1} / ${matiereFiltree.flashcards.length}`;
             
-            // Met à jour la sélection du menu
             document.getElementById('menu-flashcards').value = indexFlashcardActive;
 
-            // S'assure que la carte montre toujours le recto au changement
             const inner = document.getElementById('flashcard-inner');
             inner.classList.remove('rotate-y-180');
         }
@@ -740,40 +1083,38 @@
         }
 
         function flashcardPrecedente() {
-            const matiere = appData[matiereActive];
             if (indexFlashcardActive > 0) {
                 indexFlashcardActive--;
             } else {
-                indexFlashcardActive = matiere.flashcards.length - 1; // Boucle à la fin
+                indexFlashcardActive = matiereFiltree.flashcards.length - 1; 
             }
             afficherFlashcardInterface();
         }
 
         function flashcardSuivante() {
-            const matiere = appData[matiereActive];
-            if (indexFlashcardActive < matiere.flashcards.length - 1) {
+            if (indexFlashcardActive < matiereFiltree.flashcards.length - 1) {
                 indexFlashcardActive++;
             } else {
-                indexFlashcardActive = 0; // Boucle au début
+                indexFlashcardActive = 0; 
             }
             afficherFlashcardInterface();
         }
 
-        // --- FONCTIONS DU MODE QCM 10 QUESTIONS ---
+        // --- MODE QCM ---
 
-        function afficherAccueilQCM(matiere) {
+        function afficherAccueilQCM() {
             const containerQcms = document.getElementById('container-qcms');
             containerQcms.innerHTML = `
                 <div class="text-center py-10 bg-gray-50 dark:bg-gray-900 rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-700">
                     <i class="fa-solid fa-list-ol text-5xl text-indigo-400 dark:text-indigo-600 mb-4"></i>
                     <h4 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Mode Entraînement</h4>
-                    <p class="mb-6 text-gray-600 dark:text-gray-400">Cette matière contient <strong>${matiere.qcms.length}</strong> questions dans la base de données.</p>
+                    <p class="mb-6 text-gray-600 dark:text-gray-400">Cette sélection contient <strong>${matiereFiltree.qcms.length}</strong> questions.</p>
                     
                     <button onclick="lancerSerieQCM(10)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-md flex justify-center items-center gap-2 mx-auto w-full max-w-sm mb-4">
                         <i class="fa-solid fa-play"></i> Lancer 10 questions aléatoires
                     </button>
                     
-                    <button onclick="lancerSerieQCM(${matiere.qcms.length})" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium text-sm transition">
+                    <button onclick="lancerSerieQCM(${matiereFiltree.qcms.length})" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium text-sm transition">
                         Ou afficher toutes les questions d'un coup
                     </button>
                 </div>
@@ -781,10 +1122,9 @@
         }
 
         function lancerSerieQCM(nombreDeQuestions) {
-            const matiere = appData[matiereActive];
             const containerQcms = document.getElementById('container-qcms');
             
-            let qcmsMelanges = [...matiere.qcms].sort(() => 0.5 - Math.random());
+            let qcmsMelanges = [...matiereFiltree.qcms].sort(() => 0.5 - Math.random());
             let qcmsSelectionnes = qcmsMelanges.slice(0, nombreDeQuestions);
             
             let htmlQcms = '<div class="space-y-6">';
@@ -818,7 +1158,7 @@
             
             htmlQcms += `
                 <div class="pt-6 mt-6 border-t border-gray-200 dark:border-gray-700 text-center">
-                    <button onclick="afficherAccueilQCM(appData[matiereActive])" class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-bold py-3 px-6 rounded-xl transition shadow-sm flex justify-center items-center gap-2 mx-auto">
+                    <button onclick="appliquerFiltreChapitre()" class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-bold py-3 px-6 rounded-xl transition shadow-sm flex justify-center items-center gap-2 mx-auto">
                         <i class="fa-solid fa-rotate-right"></i> Terminer et relancer une série
                     </button>
                 </div>
