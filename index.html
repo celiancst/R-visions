@@ -1,11 +1,54 @@
 <!DOCTYPE html>
 <html lang="fr" class="">
 <head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Révisions STAPS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+	let chartInstance = null;
+let totalErreursCount = 0;
+let historiqueReussite = [];
+
+function initChart() {
+    const ctx = document.getElementById('progressionChart').getContext('2d');
+    chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Réussite (%)',
+                data: [],
+                borderColor: '#60a5fa',
+                backgroundColor: 'rgba(96, 165, 250, 0.15)',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 4,
+                pointHoverRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { min: 0, max: 100, grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: '#94a3b8' } },
+                x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } }
+            },
+            plugins: { legend: { display: false } }
+        }
+    });
+}
+
+function enregistrerResultat(tauxReussite, nombreErreurs) {
+    totalErreursCount += nombreErreurs;
+    document.getElementById('errorCountDisplay').textContent = totalErreursCount;
+
+    historiqueReussite.push(Math.round(tauxReussite));
+    chartInstance.data.labels.push(`Session ${historiqueReussite.length}`);
+    chartInstance.data.datasets[0].data.push(Math.round(tauxReussite));
+    chartInstance.update();
+}
         tailwind.config = {
             darkMode: 'class',
         }
@@ -143,7 +186,26 @@
                     </div>
                 </div>
             </div>
+<!-- Bloc Graphique de Progression -->
+<div class="bg-slate-800/90 p-5 rounded-2xl border border-slate-700/80 mt-6 shadow-xl backdrop-blur">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 id="chartTitle" class="text-base font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-chart-line text-blue-400"></i>
+                <span id="chartTitleText">Progression globale</span>
+            </h3>
+            <p id="chartSubtitle" class="text-xs text-slate-400 mt-0.5">Évolution du taux de réussite (%)</p>
+        </div>
+        <div class="flex items-center gap-2 bg-red-500/10 border border-red-500/20 text-red-400 px-3 py-1.5 rounded-xl text-xs font-semibold">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Erreurs totales : <strong id="errorCountDisplay" class="text-red-300">0</strong></span>
+        </div>
+    </div>
 
+    <div class="relative h-60 w-full">
+        <canvas id="progressionChart"></canvas>
+    </div>
+</div>
         </div>
     </main>
 
@@ -161,6 +223,7 @@
             }
             genererDashboard();
             afficherDashboard();
+	    initChart();
         });
 
         function toggleDarkMode() {
